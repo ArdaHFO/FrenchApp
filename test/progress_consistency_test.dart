@@ -871,11 +871,36 @@ void main() {
         await show(tester, app, MediaQuery(data: MediaQueryData(
             size: Size(width, 900), textScaler: TextScaler.linear(scale)),
             child: const AboutScreen()));
+        // show() supplies a default phone; apply this case's actual constraints.
+        tester.view.physicalSize = Size(width, 900);
+        tester.view.devicePixelRatio = 1;
+        await tester.pump();
         await tester.drag(find.byType(ListView), const Offset(0, -250));
         await tester.pump(const Duration(seconds: 1));
         expect(tester.takeException(), isNull);
       });
     }
+  }
+
+  for (final kind in ['sentence', 'song', 'story']) {
+    testWidgets('Sweep narrow large-text $kind remains usable', (tester) async {
+      final app = (await tester.runAsync(boot))!;
+      const song = LearningSong(id: 'layout', title: 'Layout', artist: '', level: CefrLevel.a1,
+        duration: Duration.zero, audioUrl: '', sourcePageUrl: '', licenseLabel: '', attribution: '',
+        colorValue: 0xff224466, lyrics: [SongLyricLine(start: Duration.zero,
+          words: [SongWord('bonjour', 'merhaba')], translationTr: '')]);
+      final Widget screen = switch (kind) {
+        'sentence' => const SentencePracticeScreen(level: CefrLevel.a1),
+        'song' => const SongQuizScreen(song: song),
+        _ => const StoryAdventureScreen(story: sweepStory),
+      };
+      await show(tester, app, MediaQuery(data: const MediaQueryData(
+        size: Size(320, 800), textScaler: TextScaler.linear(2)), child: screen));
+      tester.view.physicalSize = const Size(320, 800);
+      tester.view.devicePixelRatio = 1;
+      await tester.pump(const Duration(seconds: 1));
+      expect(tester.takeException(), isNull);
+    });
   }
 
   for (final kind in ['sentence', 'song', 'arena', 'station', 'story', 'quiz', 'flag', 'star']) {

@@ -152,14 +152,15 @@ class _SentencePracticeScreenState extends State<SentencePracticeScreen> with Pr
           height: 9,
         ),
         const SizedBox(height: 18),
-        Row(
+        Wrap(
+          spacing: 12,
+          runSpacing: 8,
           children: <Widget>[
             GamePill(
               icon: Icons.translate_rounded,
               label: widget.level.code,
               color: color,
             ),
-            const Spacer(),
             AnimatedSwitcher(
               duration: MotionTokens.rewardPop,
               transitionBuilder: (Widget child, Animation<double> animation) =>
@@ -209,14 +210,14 @@ class _SentencePracticeScreenState extends State<SentencePracticeScreen> with Pr
                     ),
                   ),
                   const SizedBox(width: 11),
-                  Text(
+                  Expanded(child: Text(
                     'GÜNÜN GÖREVİ',
                     style: theme.textTheme.labelLarge?.copyWith(
                       color: color,
                       fontWeight: FontWeight.w900,
                       letterSpacing: 0.9,
                     ),
-                  ),
+                  )),
                 ],
               ),
               const SizedBox(height: 14),
