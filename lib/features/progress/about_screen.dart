@@ -171,17 +171,17 @@ class _SourceTile extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Row(
+        Wrap(
+          spacing: 8,
+          runSpacing: 4,
           children: <Widget>[
-            Expanded(
-              child: Text(
+            Text(
                 source.name,
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w700,
                   color: theme.colorScheme.onSurface,
                 ),
-              ),
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),

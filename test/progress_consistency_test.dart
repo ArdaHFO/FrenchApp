@@ -28,6 +28,7 @@ import 'package:french_app/domain/level.dart';
 import 'package:french_app/domain/srs/box_scheduler.dart';
 import 'package:french_app/domain/srs/srs_card.dart';
 import 'package:french_app/features/progress/backup_screen.dart';
+import 'package:french_app/features/progress/about_screen.dart';
 import 'package:french_app/features/progress/progress_screen.dart';
 import 'package:french_app/features/onboarding/level_select_screen.dart';
 import 'package:french_app/features/quiz/quiz_screen.dart';
@@ -719,7 +720,7 @@ void main() {
         await tester.tap(find.text('Right')); await tester.pumpAndSettle();
       } else {
         await tester.ensureVisible(find.text('Continue choice'));
-        await tester.tap(find.text('Continue choice')); await tester.pumpAndSettle();
+        await tester.tap(find.text('Continue choice')); await tester.pump(const Duration(milliseconds: 400));
       }
       final button = find.text(completion ? 'Sonucu gör' : 'Hikâyeye devam et');
       final before = await tester.runAsync(() => completionSnapshot(app));
@@ -858,6 +859,102 @@ void main() {
     expect(find.text('Bu şarkı için soru bulunamadı.'), findsOneWidget);
     expect(app.game.profile.totalAnswers, 0);
   });
+
+  for (final width in [320.0, 390.0, 430.0]) {
+    for (final scale in [1.0, 1.5, 2.0]) {
+      testWidgets('BUG-009 About attribution fits width $width scale $scale', (tester) async {
+        tester.view.physicalSize = Size(width, 900);
+        tester.view.devicePixelRatio = 1;
+        addTearDown(tester.view.resetPhysicalSize);
+        addTearDown(tester.view.resetDevicePixelRatio);
+        final app = (await tester.runAsync(boot))!;
+        await show(tester, app, MediaQuery(data: MediaQueryData(
+            size: Size(width, 900), textScaler: TextScaler.linear(scale)),
+            child: const AboutScreen()));
+        await tester.drag(find.byType(ListView), const Offset(0, -250));
+        await tester.pump(const Duration(seconds: 1));
+        expect(tester.takeException(), isNull);
+      });
+    }
+  }
+
+  for (final kind in ['sentence', 'song', 'arena', 'station', 'story', 'quiz', 'flag', 'star']) {
+    testWidgets('Sweep stale $kind route cannot mutate restored progress', (tester) async {
+      final app = (await tester.runAsync(() async {
+        if (kind == 'arena') {
+          final content = await databaseFactoryFfi.openDatabase('${temp.path}/synthetic-content.db');
+          await content.execute('ALTER TABLE verbs ADD COLUMN is_reflexive INTEGER DEFAULT 1');
+          await content.close();
+        }
+        return bootFreeQuiz();
+      }))!;
+      const song = LearningSong(id: 'stale', title: 'Stale', artist: '', level: CefrLevel.a1,
+          duration: Duration.zero, audioUrl: '', sourcePageUrl: '', licenseLabel: '', attribution: '',
+          colorValue: 0xff224466, lyrics: [SongLyricLine(start: Duration.zero,
+              words: [SongWord('essai', 'deneme')], translationTr: '')]);
+      const station = JourneyStation(id: 'stale', level: CefrLevel.a1,
+          indexInLevel: 0, kind: StationKind.verbs, title: 'Stale',
+          wordIds: [], verbRefIds: [], questionCount: 1);
+      final Widget screen = switch (kind) {
+        'sentence' => const SentencePracticeScreen(level: CefrLevel.a1),
+        'song' => const SongQuizScreen(song: song),
+        'arena' => const ReflexiveArenaScreen(tense: VerbTense.present),
+        'station' => const StationQuizScreen(station: station),
+        'story' => const StoryAdventureScreen(story: sweepStory),
+        'quiz' => const QuizScreen(),
+        'star' => const SongPlayerScreen(song: song),
+        _ => const SwipeSessionScreen(title: 'Stale', candidateIds: ['word-probe']),
+      };
+      await show(tester, app, const SizedBox.shrink());
+      await tester.pumpWidget(AppScope(state: app, child: MaterialApp(home: screen)));
+      if (kind == 'arena') await driveUntil(tester, () => find.textContaining('için doğru çekimi seç').evaluate().isNotEmpty);
+      if (kind == 'station') await driveUntil(tester, () => find.textContaining('tester ·').evaluate().isNotEmpty);
+      if (kind == 'quiz') {
+        await tester.tap(find.text('Başla')); await tester.pump();
+        await driveUntil(tester, () => find.textContaining('tester ·').evaluate().isNotEmpty);
+      }
+      if (kind == 'star') {
+        await tester.ensureVisible(find.text('essai').first);
+        await tester.tap(find.text('essai').first); await tester.pumpAndSettle();
+      }
+      if (kind == 'story') {
+        await tester.ensureVisible(find.text('Continue choice'));
+        await tester.tap(find.text('Continue choice')); await tester.pump(const Duration(milliseconds: 400));
+      }
+      final backup = (await tester.runAsync(app.exportProgress))!;
+      await tester.runAsync(() => app.restoreProgress(backup));
+      final before = await tester.runAsync(app.exportProgress);
+      final beforeCaches = completionCaches(app);
+      if (kind == 'sentence') {
+        await tester.enterText(find.byKey(const ValueKey('sentence_input')), promptsForLevel(CefrLevel.a1).first.modelAnswer);
+        await tester.ensureVisible(find.byKey(const ValueKey('check_sentence')));
+        await tester.tap(find.byKey(const ValueKey('check_sentence')));
+      } else if (kind == 'song') {
+        await tester.tap(find.text('deneme')); await tester.pump();
+        await tester.ensureVisible(find.byKey(const ValueKey('song_quiz_next')));
+        await tester.tap(find.byKey(const ValueKey('song_quiz_next')));
+      } else if (kind == 'flag') {
+        tester.widget<WordCard>(find.byType(WordCard).first).onFlag!();
+      } else if (kind == 'star' || kind == 'story') {
+        final button = find.text(kind == 'star' ? 'Kelime desteme ekle' : 'Hikâyeye devam et');
+        await tester.ensureVisible(button); await tester.tap(button);
+      } else if (kind == 'arena') {
+        final label = tester.widget<Text>(find.textContaining('için doğru çekimi seç')).data!;
+        final person = label.split('“')[1].split('”')[0];
+        final form = {'je':'teste','tu':'testes','nous':'testons','vous':'testez'}[person]!;
+        await tester.tap(find.text(conjugationDisplay(person, form, tense: VerbTense.present)));
+      } else {
+        final person = tester.widget<Text>(find.textContaining('tester ·')).data!.split(' · ').last;
+        await tester.tap(find.text({'je':'teste','tu':'testes','nous':'testons','vous':'testez'}[person]!));
+      }
+      await tester.pump(const Duration(seconds: 2));
+      await tester.runAsync(() => app.progress.run(() async {}));
+      final after = (jsonDecode((await tester.runAsync(app.exportProgress))!) as Map)..remove('exported_at');
+      expect(after, (jsonDecode(before!) as Map)..remove('exported_at'));
+      expect(completionCaches(app), beforeCaches);
+      expect(tester.takeException(), isNull);
+    });
+  }
 
   for (final kind in ['sentence', 'song', 'arena']) {
     testWidgets('Step10 $kind persistence failure retains attempt and retries once', (tester) async {
