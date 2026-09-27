@@ -21,6 +21,7 @@ import 'package:french_app/domain/verb.dart';
 import 'package:french_app/features/practice/sentence_practice_screen.dart';
 import 'package:french_app/features/practice/story_adventure_screen.dart';
 import 'package:french_app/features/songs/song_quiz_screen.dart';
+import 'package:french_app/features/songs/song_player_screen.dart';
 import 'package:french_app/features/verbs/reflexive_arena_screen.dart';
 import 'package:french_app/features/journey/station_quiz_screen.dart';
 import 'package:french_app/domain/level.dart';
@@ -764,6 +765,35 @@ void main() {
     expect(app.flags.isFlagged('word-probe'), isTrue);
   });
 
+    testWidgets('BUG-003 player song star failure offers retry', (tester) async {
+      final app = (await tester.runAsync(boot))!;
+      const word = SongWord('essai', 'deneme');
+      const song = LearningSong(id: 'test', title: 'Song', artist: '', level: CefrLevel.a1,
+          duration: Duration.zero, audioUrl: '', sourcePageUrl: '', licenseLabel: '', attribution: '',
+          colorValue: 0xff224466, lyrics: [SongLyricLine(start: Duration.zero, words: [word], translationTr: '')]);
+      await show(tester, app, const SongPlayerScreen(song: song));
+      await tester.ensureVisible(find.text('essai').first);
+      await tester.tap(find.text('essai').first); await tester.pumpAndSettle();
+      await tester.runAsync(() => app.db.progress.execute(
+          "CREATE TRIGGER sweep_star BEFORE INSERT ON card_state BEGIN SELECT RAISE(ABORT,'BUG003'); END"));
+      final button = find.text('Kelime desteme ekle');
+      await tester.tap(button);
+      var drained = false;
+      unawaited(app.progress.run(() async {}).then((_) => drained = true));
+      await driveUntil(tester, () => drained); await tester.pump();
+      expect(app.cards.stateFor('word-probe').starred, isFalse);
+      expect(tester.takeException(), isNull);
+      expect(find.text('Sonuç kaydedilemedi. Tekrar deneyin.'), findsOneWidget);
+      await tester.runAsync(() => app.db.progress.execute('DROP TRIGGER sweep_star'));
+      await tester.tap(button); await tester.tap(button);
+      drained = false;
+      unawaited(app.progress.run(() async {}).then((_) => drained = true));
+      await driveUntil(tester, () => drained); await tester.pump();
+      expect(app.cards.stateFor('word-probe').starred, isTrue);
+      expect(app.game.profile.totalAnswers, 0);
+      expect(app.rewardSerial, 0);
+      expect(tester.takeException(), isNull);
+    });
   testWidgets('BUG-005 empty song quiz is an empty state without reward', (tester) async {
     final app = (await tester.runAsync(boot))!;
     const song = LearningSong(id: 'empty', title: 'Empty', artist: '', level: CefrLevel.a1,

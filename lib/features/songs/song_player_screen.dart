@@ -560,6 +560,8 @@ void _showWordSheet(BuildContext context, SongWord token, Color color) {
     }
   }
   final Word? matchedWord = dictionaryWord;
+  bool saving = false;
+  bool saveFailed = false;
 
   showModalBottomSheet<void>(
     context: context,
@@ -622,17 +624,24 @@ void _showWordSheet(BuildContext context, SongWord token, Color color) {
                     ),
                   ),
                   const SizedBox(height: 18),
+                  if (saveFailed) const Text('Sonuç kaydedilemedi. Tekrar deneyin.'),
                   SizedBox(
                     width: double.infinity,
                     child: FilledButton.icon(
                       key: const ValueKey<String>('save_song_word'),
-                      onPressed: saved
+                      onPressed: saved || saving
                           ? null
                           : () async {
-                              if (!allowProgress(context, app, generation)) return;
-                              await app.cards.star(matchedWord.id);
-                              app.notifyProgressChanged();
-                              if (context.mounted) setSheetState(() {});
+                              if (saving || !allowProgress(context, app, generation)) return;
+                              setSheetState(() { saving = true; saveFailed = false; });
+                              try {
+                                await app.cards.star(matchedWord.id);
+                                app.notifyProgressChanged();
+                              } catch (_) {
+                                if (context.mounted) setSheetState(() => saveFailed = true);
+                              } finally {
+                                if (context.mounted) setSheetState(() => saving = false);
+                              }
                             },
                       icon: Icon(saved
                           ? Icons.check_circle_rounded

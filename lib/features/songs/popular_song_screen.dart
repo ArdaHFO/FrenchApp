@@ -403,6 +403,8 @@ void _showFocusWord(BuildContext context, SongWord token, Color color) {
     }
   }
   final Word? matchedWord = dictionaryWord;
+  bool saving = false;
+  bool saveFailed = false;
 
   showModalBottomSheet<void>(
     context: context,
@@ -446,16 +448,23 @@ void _showFocusWord(BuildContext context, SongWord token, Color color) {
                     style: TextStyle(color: color, fontWeight: FontWeight.w700),
                   ),
                   const SizedBox(height: 18),
+                  if (saveFailed) const Text('Sonuç kaydedilemedi. Tekrar deneyin.'),
                   SizedBox(
                     width: double.infinity,
                     child: FilledButton.icon(
-                      onPressed: saved
+                      onPressed: saved || saving
                           ? null
                           : () async {
-                              if (!allowProgress(context, app, generation)) return;
-                              await app.cards.star(matchedWord.id);
-                              app.notifyProgressChanged();
-                              if (context.mounted) setSheetState(() {});
+                              if (saving || !allowProgress(context, app, generation)) return;
+                              setSheetState(() { saving = true; saveFailed = false; });
+                              try {
+                                await app.cards.star(matchedWord.id);
+                                app.notifyProgressChanged();
+                              } catch (_) {
+                                if (context.mounted) setSheetState(() => saveFailed = true);
+                              } finally {
+                                if (context.mounted) setSheetState(() => saving = false);
+                              }
                             },
                       icon: Icon(saved
                           ? Icons.check_circle_rounded
