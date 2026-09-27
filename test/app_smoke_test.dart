@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:convert';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,8 @@ import 'package:french_app/features/songs/song_library_screen.dart';
 import 'package:french_app/features/songs/song_player_screen.dart';
 import 'package:french_app/features/vocab/deck_select_screen.dart';
 import 'package:french_app/features/vocab/word_card.dart';
+import 'package:french_app/features/vocab/lexical_detail_screen.dart';
+import 'package:french_app/services/lexical/lexical_models.dart';
 import 'package:french_app/main.dart';
 import 'package:french_app/motion/card_stack.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
@@ -32,6 +35,15 @@ import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 /// gezinir. Elimizde telefon olmadan çalışma zamanı hatalarını yakalamanın
 /// tek yolu bu: `flutter analyze` derleme hatalarını görür ama
 /// "push edilen sayfa InheritedWidget'ı göremiyor" gibi hataları göremez.
+class OfflineLexicalProvider implements LexicalProvider {
+  int calls = 0;
+  @override
+  Future<LexicalOutcome> lookup(LexicalLookupKey key) async {
+    calls++;
+    return const LexicalOutcome(LexicalStatus.transientFailure);
+  }
+}
+
 void main() {
   late Directory tempDir;
 
@@ -221,6 +233,37 @@ void main() {
     await tester.tap(find.text('Ders Yolculuğu'));
     await settle(tester, rounds: 10);
   }
+
+  testWidgets('offline enrichment failure leaves real-content core navigation and progress intact', (tester) async {
+    await phone(tester);
+    await boot(tester);
+    await passOnboarding(tester);
+    final scope = tester.widget<AppScope>(find.byType(AppScope).first);
+    final app = scope.notifier!;
+    final before = await tester.runAsync(app.exportProgress);
+    final provider = OfflineLexicalProvider();
+    final context = tester.element(find.byType(DeckSelectScreen).first);
+    Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) =>
+        LexicalDetailScreen(lemma: 'chat', provider: provider)));
+    await settle(tester);
+    expect(find.textContaining('Yerel sözlük kullanılabilir'), findsOneWidget);
+    expect(provider.calls, 1);
+    final after = await tester.runAsync(app.exportProgress);
+    expect((jsonDecode(after!) as Map)..remove('exported_at'),
+        (jsonDecode(before!) as Map)..remove('exported_at'));
+    await tester.pageBack(); await settle(tester);
+    await tester.tap(find.text('Oturumu başlat')); await settle(tester);
+    expect(find.byType(WordCard), findsWidgets);
+    await tester.pageBack(); await settle(tester);
+    await tester.tap(find.text('Fiiller').last); await settle(tester);
+    expect(find.text('Fiil çekimi'), findsOneWidget);
+    await tester.tap(find.text('Dilbilgisi').last); await settle(tester);
+    expect(find.textContaining('ders.'), findsOneWidget);
+    await openJourney(tester);
+    expect(find.textContaining('durak geçildi'), findsOneWidget);
+    expect(provider.calls, 1);
+    expect(tester.takeException(), isNull);
+  });
 
   testWidgets('v1 içerik kimliği doğru v2 karta taşınır',
       (WidgetTester tester) async {

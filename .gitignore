@@ -66,3 +66,5 @@ credentials.json
 service-account*.json
 # Optional runtime enrichment cache (never learner source or backup data).
 lexical_cache.db*
+# Generated test coverage, not authored source.
+coverage/

@@ -8,6 +8,31 @@ import 'package:french_app/domain/srs/srs_card.dart';
 void main() {
   final DateTime now = DateTime(2026, 8, 9, 12);
 
+  test('sweep scheduler invariants across boxes, flags and answer sequences', () {
+    for (int box = 0; box <= 5; box++) {
+      for (final starred in [false, true]) {
+        var current = SrsCard(refId: 'invariant', box: box, starred: starred,
+            timesSeen: 10, timesRight: 7, lapses: 2,
+            status: BoxScheduler.statusForBox(box));
+        for (int i = 0; i < 100; i++) {
+          final before = current;
+          current = BoxScheduler.apply(current, SwipeAction.values[i % 4], now: now);
+          expect(current.box, inInclusiveRange(0, 5));
+          expect(current.timesSeen, before.timesSeen + 1);
+          expect(current.timesRight, inInclusiveRange(0, current.timesSeen));
+          expect(current.lapses, greaterThanOrEqualTo(before.lapses));
+          if (current.status == CardStatus.archived) {
+            expect(current.dueAt, isNull);
+            expect(BoxScheduler.applyQuizResult(current, correct: true, now: now), same(current));
+            expect(BoxScheduler.applyQuizResult(current, correct: false, now: now), same(current));
+          } else {
+            expect(current.dueAt!.isBefore(now), isFalse);
+          }
+        }
+      }
+    }
+  });
+
   SrsCard card({
     int box = 0,
     bool starred = false,
