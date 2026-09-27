@@ -18,9 +18,11 @@ import '../../ui/game_ui.dart';
 import 'song_quiz_screen.dart';
 
 class SongPlayerScreen extends StatefulWidget {
-  const SongPlayerScreen({super.key, required this.song});
+  const SongPlayerScreen({super.key, required this.song, this.player});
 
   final LearningSong song;
+  /// Optional owned player for deterministic platform-failure tests.
+  final AudioPlayer? player;
 
   @override
   State<SongPlayerScreen> createState() => _SongPlayerScreenState();
@@ -28,7 +30,7 @@ class SongPlayerScreen extends StatefulWidget {
 
 class _SongPlayerScreenState extends State<SongPlayerScreen>
     with SingleTickerProviderStateMixin {
-  final AudioPlayer _player = AudioPlayer();
+  late final AudioPlayer _player = widget.player ?? AudioPlayer();
   late final AnimationController _coverController = AnimationController(
     vsync: this,
     duration: const Duration(seconds: 8),
@@ -41,6 +43,7 @@ class _SongPlayerScreenState extends State<SongPlayerScreen>
   final ValueNotifier<int> _activeLyric = ValueNotifier<int>(0);
   bool _loaded = false;
   bool _loading = false;
+  bool _commandPending = false;
   String? _loadError;
 
   @override
@@ -52,6 +55,7 @@ class _SongPlayerScreenState extends State<SongPlayerScreen>
       maxPeriod: MotionTokens.mediaPositionUpdate,
     )
         .listen((Duration position) {
+      if (!mounted) return;
       _position.value = position;
       final int active = _activeLine(position);
       if (_activeLyric.value != active) _activeLyric.value = active;
@@ -79,7 +83,9 @@ class _SongPlayerScreenState extends State<SongPlayerScreen>
     _position.dispose();
     _activeLyric.dispose();
     _coverController.dispose();
-    _player.dispose();
+    unawaited(_player.dispose().catchError((Object error) {
+      debugPrint('Audio disposal failed: $error');
+    }));
     super.dispose();
   }
 
@@ -108,7 +114,39 @@ class _SongPlayerScreenState extends State<SongPlayerScreen>
     }
   }
 
+  void _mediaError() {
+    if (!mounted) return;
+    setState(() => _loadError = 'Ses oynatılamadı. Tekrar deneyin.');
+  }
+
+  Future<bool> _mediaCommand(Future<void> Function() action) async {
+    if (_commandPending || !mounted) return false;
+    setState(() { _commandPending = true; _loadError = null; });
+    try {
+      await action();
+      return mounted;
+    } catch (_) {
+      _mediaError();
+      return false;
+    } finally {
+      if (mounted) setState(() => _commandPending = false);
+    }
+  }
+
+  Future<void> _playSafely() async {
+    try {
+      await _player.play(); // Completes when playback stops, not when it starts.
+    } catch (_) {
+      _mediaError();
+    }
+  }
+
+  Future<void> _seek(Duration position) async {
+    await _mediaCommand(() => _player.seek(position));
+  }
+
   Future<void> _togglePlayback(PlayerState state) async {
+    await _mediaCommand(() async {
     if (state.playing) {
       await _player.pause();
       return;
@@ -117,13 +155,16 @@ class _SongPlayerScreenState extends State<SongPlayerScreen>
     if (_player.processingState == ProcessingState.completed) {
       await _player.seek(Duration.zero);
     }
-    unawaited(_player.play());
+    if (mounted) unawaited(_playSafely());
+    });
   }
 
   Future<void> _jumpTo(Duration position) async {
+    await _mediaCommand(() async {
     if (!await _ensureLoaded()) return;
     await _player.seek(position);
-    if (!_player.playing) unawaited(_player.play());
+    if (mounted && !_player.playing) unawaited(_playSafely());
+    });
   }
 
   int _activeLine(Duration position) {
@@ -180,7 +221,7 @@ class _SongPlayerScreenState extends State<SongPlayerScreen>
                               max: max,
                               activeColor: color,
                               onChanged: _loaded
-                                  ? (double value) => _player.seek(
+                                  ? (double value) => _seek(
                                         Duration(milliseconds: value.round()),
                                       )
                                   : null,
@@ -208,7 +249,7 @@ class _SongPlayerScreenState extends State<SongPlayerScreen>
                           AsyncSnapshot<PlayerState> snapshot) {
                         final PlayerState state = snapshot.data ??
                             PlayerState(false, ProcessingState.idle);
-                        final bool busy = _loading ||
+                        final bool busy = _loading || _commandPending ||
                             state.processingState == ProcessingState.loading ||
                             state.processingState == ProcessingState.buffering;
                         return Row(
@@ -217,7 +258,7 @@ class _SongPlayerScreenState extends State<SongPlayerScreen>
                             IconButton.filledTonal(
                               tooltip: '10 saniye geri',
                               onPressed: _loaded
-                                  ? () => _player.seek(
+                                  ? () => _seek(
                                         Duration(
                                           milliseconds:
                                               (position.inMilliseconds - 10000)
@@ -263,7 +304,7 @@ class _SongPlayerScreenState extends State<SongPlayerScreen>
                             IconButton.filledTonal(
                               tooltip: '10 saniye ileri',
                               onPressed: _loaded
-                                  ? () => _player.seek(
+                                  ? () => _seek(
                                         Duration(
                                           milliseconds:
                                               (position.inMilliseconds + 10000)
@@ -282,6 +323,7 @@ class _SongPlayerScreenState extends State<SongPlayerScreen>
                       const SizedBox(height: 10),
                       Text(
                         _loadError!,
+                        key: const ValueKey('song_media_error'),
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                           color: GameColors.coral,
@@ -349,7 +391,7 @@ class _SongPlayerScreenState extends State<SongPlayerScreen>
                 padding: const EdgeInsets.symmetric(vertical: 15),
               ),
               onPressed: () async {
-                await _player.pause();
+                if (!await _mediaCommand(_player.pause)) return;
                 if (!context.mounted) return;
                 await Navigator.of(context).push(
                   fadeSlideRoute<void>(SongQuizScreen(song: song)),
