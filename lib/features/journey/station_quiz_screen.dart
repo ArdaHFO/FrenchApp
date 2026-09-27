@@ -412,6 +412,9 @@ class _StationQuizScreenState extends State<StationQuizScreen> with ProgressSess
                       _saveFailed = false;
                       _index = 0;
                       _correct = 0;
+                      _combo = 0;
+                      _bestCombo = 0;
+                      _wrongTick = 0;
                       _picked = null;
                       _loading = true;
                     });

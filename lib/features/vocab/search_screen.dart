@@ -123,6 +123,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                   tooltip: 'Aramayı temizle',
                                   icon: const Icon(Icons.clear_rounded),
                                   onPressed: () {
+                                    _searchTimer?.cancel();
                                     _controller.clear();
                                     _search('');
                                   },

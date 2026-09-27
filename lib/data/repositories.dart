@@ -543,6 +543,8 @@ class SqliteCardStateStore with CoordinatedProgressStore implements CardStateSto
   @override
   SrsCard stateFor(String refId) => _states[refId] ?? SrsCard(refId: refId);
 
+  /// Full-row replacement for fixtures/import-style callers. Never submit a
+  /// stale UI snapshot; interactive mutations must read inside their transaction.
   @override
   Future<void> save(SrsCard card) => coordinate(() async {
     await writeState(_db, card, now: DateTime.now());
@@ -1410,7 +1412,7 @@ class PracticeStore with CoordinatedProgressStore {
   }
 
   Future<void> writeStory(
-      DatabaseExecutor executor, StoryProgress progress) async {
+      DatabaseExecutor executor, StoryProgress progress, {DateTime? now}) async {
     await executor.insert(
       'story_progress',
       <String, Object?>{
@@ -1419,7 +1421,7 @@ class PracticeStore with CoordinatedProgressStore {
         'completed': progress.completed ? 1 : 0,
         'best_correct': progress.bestCorrect,
         'best_total': progress.bestTotal,
-        'updated_at': DateTime.now().millisecondsSinceEpoch,
+        'updated_at': (now ?? DateTime.now()).millisecondsSinceEpoch,
       },
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
@@ -1456,7 +1458,7 @@ class PracticeStore with CoordinatedProgressStore {
   }
 
   Future<void> writeSentence(
-      DatabaseExecutor executor, SentenceProgress next) async {
+      DatabaseExecutor executor, SentenceProgress next, {DateTime? now}) async {
     await executor.insert(
       'sentence_progress',
       <String, Object?>{
@@ -1464,7 +1466,7 @@ class PracticeStore with CoordinatedProgressStore {
         'attempts': next.attempts,
         'solved': next.solved ? 1 : 0,
         'best_score': next.bestScore,
-        'updated_at': DateTime.now().millisecondsSinceEpoch,
+        'updated_at': (now ?? DateTime.now()).millisecondsSinceEpoch,
       },
       conflictAlgorithm: ConflictAlgorithm.replace,
     );

@@ -485,8 +485,10 @@ class AppState extends ChangeNotifier {
     required String nodeId,
     required int correct,
     required int total,
-  }) =>
-      _enqueueProgressWrite(() async {
+    DateTime? now,
+  }) {
+    final at = (now ?? DateTime.now()).toLocal();
+    return _enqueueProgressWrite(() async {
         final plan = practice.prepareStoryCompletion(
           storyId: storyId,
           nodeId: nodeId,
@@ -494,12 +496,11 @@ class AppState extends ChangeNotifier {
           total: total,
         );
         final result = await game.transaction((txn) async {
-          await practice.writeStory(txn, plan.next);
-          final at = DateTime.now().toLocal();
+          await practice.writeStory(txn, plan.next, now: at);
           final daily = await DailyStatsStore.writeAdd(txn,
               now: at, quizTotal: total, quizCorrect: correct);
           final update = await GameStore.writeRecord(txn,
-            now: DateTime.now().toLocal(),
+            now: at,
             quizTotal: total,
             quizCorrect: correct,
             bonusXp: plan.firstCompletion ? 40 : 0,
@@ -512,26 +513,28 @@ class AppState extends ChangeNotifier {
         game.publish(result.$3.snapshot);
         _publishReward(result.$3.reward);
       });
+  }
 
   Future<void> recordSentenceAttempt({
     required String promptId,
     required bool correct,
     required int score,
     required int combo,
-  }) =>
-      _enqueueProgressWrite(() async {
+    DateTime? now,
+  }) {
+    final at = (now ?? DateTime.now()).toLocal();
+    return _enqueueProgressWrite(() async {
         final plan = practice.prepareSentenceRecord(
           promptId: promptId,
           solved: correct,
           score: score,
         );
         final result = await game.transaction((txn) async {
-          await practice.writeSentence(txn, plan.next);
-          final at = DateTime.now().toLocal();
+          await practice.writeSentence(txn, plan.next, now: at);
           final daily = await DailyStatsStore.writeAdd(txn,
               now: at, quizTotal: 1, quizCorrect: correct ? 1 : 0);
           final update = await GameStore.writeRecord(txn,
-            now: DateTime.now().toLocal(),
+            now: at,
             quizTotal: 1,
             quizCorrect: correct ? 1 : 0,
             combo: combo,
@@ -545,6 +548,7 @@ class AppState extends ChangeNotifier {
         game.publish(result.$3.snapshot);
         _publishReward(result.$3.reward);
       });
+  }
 
   Future<String> exportProgress() =>
       _enqueueProgressWrite(() => ProgressBackup.export(db.progress));

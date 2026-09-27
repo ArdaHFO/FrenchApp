@@ -28,6 +28,7 @@ import 'package:french_app/features/progress/backup_screen.dart';
 import 'package:french_app/features/quiz/quiz_screen.dart';
 import 'package:french_app/features/verbs/verb_screens.dart';
 import 'package:french_app/features/vocab/swipe_session_screen.dart';
+import 'package:french_app/features/vocab/search_screen.dart';
 import 'package:french_app/motion/card_stack.dart';
 import 'package:french_app/motion/swipe_direction.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
@@ -772,6 +773,64 @@ void main() {
       aligned((await tester.runAsync(() => snapshot(app)))!);
     });
   }
+
+  for (final story in [true, false]) {
+    test('Step11 ${story ? "story" : "sentence"} uses one event day across midnight', () async {
+      final app = await boot();
+      for (final at in [DateTime(2026, 9, 26, 23, 59, 59, 999), DateTime(2026, 9, 27)]) {
+        final boundary = gate();
+        probes[app]!.transactionGate = boundary;
+        final action = story
+            ? app.completeStory(storyId: 'clock', nodeId: 'end', correct: 1, total: 1, now: at)
+            : app.recordSentenceAttempt(promptId: 'clock', correct: true, score: 100, combo: 1, now: at);
+        await boundary.entered.future;
+        boundary.release();
+        await action;
+        final day = DailyStatsStore.keyFor(at);
+        expect((await app.db.progress.query('daily_stats', where: 'day = ?', whereArgs: [day])).single['quiz_total'], 1);
+        expect((await app.db.progress.query('daily_quests', where: 'day = ? AND kind = ?', whereArgs: [day, 'quiz'])).single['progress'], 1);
+        expect((await app.db.progress.query('game_profile')).single['updated_at'], at.millisecondsSinceEpoch);
+        expect((await app.db.progress.query(story ? 'story_progress' : 'sentence_progress')).single['updated_at'], at.millisecondsSinceEpoch);
+      }
+      expect(app.game.profile.totalAnswers, 2);
+    });
+  }
+
+  testWidgets('Step11 full station replay starts a new combo', (tester) async {
+    final app = (await tester.runAsync(bootFreeQuiz))!;
+    const station = JourneyStation(id: 'd2-station', level: CefrLevel.a1,
+        indexInLevel: 0, kind: StationKind.verbs, title: 'Replay',
+        wordIds: [], verbRefIds: [], questionCount: 1);
+    await show(tester, app, const SizedBox.shrink());
+    await tester.pumpWidget(AppScope(state: app, child: const MaterialApp(
+        home: StationQuizScreen(station: station))));
+    for (var attempt = 0; attempt < 2; attempt++) {
+      await driveUntil(tester, () => find.textContaining('tester ·').evaluate().isNotEmpty);
+      final person = tester.widget<Text>(find.textContaining('tester ·')).data!.split(' · ').last;
+      final answer = {'je': 'teste', 'tu': 'testes', 'nous': 'testons', 'vous': 'testez'}[person]!;
+      await tester.tap(find.text(answer));
+      await tester.pump(const Duration(seconds: 2));
+      await driveUntil(tester, () => find.text('Durak geçildi').evaluate().isNotEmpty);
+      if (attempt == 0) {
+        await tester.tap(find.text('Tekrar dene'));
+        await tester.pump();
+      }
+    }
+    expect(app.game.profile.totalAnswers, 2);
+    expect(app.game.profile.bestCombo, 1, reason: 'a replay is a new attempt');
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('Step11 clearing search cancels pending query', (tester) async {
+    final app = (await tester.runAsync(boot))!;
+    await show(tester, app, const SearchScreen());
+    await tester.enterText(find.byKey(const ValueKey('dictionary_search')), 'essai');
+    await tester.pump();
+    await tester.tap(find.byTooltip('Aramayı temizle'));
+    await tester.pump(const Duration(milliseconds: 200));
+    expect(find.text('essai'), findsNothing);
+    expect(tester.takeException(), isNull);
+  });
 
   test('Step09 normal success preserves station and quiz reward events', () async {
     final app = await boot();
