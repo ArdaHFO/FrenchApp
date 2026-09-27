@@ -34,6 +34,14 @@ class _StoryAdventureScreenState extends State<StoryAdventureScreen> with Progre
   int? _quizPick;
   bool _completionSaved = false;
   bool _savingCompletion = false;
+  bool _savingNode = false;
+
+  void _saveError() {
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      content: Text('Sonuç kaydedilemedi. Tekrar deneyin.'),
+    ));
+  }
 
   StoryNode get _node => widget.story.node(_nodeId);
 
@@ -61,11 +69,19 @@ class _StoryAdventureScreenState extends State<StoryAdventureScreen> with Progre
   }
 
   Future<void> _continueChoice() async {
-    if (!progressReady) return;
+    if (_savingNode || !progressReady) return;
     final StoryChoice? choice = _choice;
     if (choice == null) return;
-    await _app!.saveStoryNode(widget.story.id, choice.nextNodeId);
-    if (!mounted) return;
+    setState(() => _savingNode = true);
+    try {
+      await _app!.saveStoryNode(widget.story.id, choice.nextNodeId);
+    } catch (_) {
+      _saveError();
+      return;
+    } finally {
+      if (mounted) setState(() => _savingNode = false);
+    }
+    if (!progressReady) return;
     setState(() {
       _nodeId = choice.nextNodeId;
       _choice = null;
@@ -113,11 +129,14 @@ class _StoryAdventureScreenState extends State<StoryAdventureScreen> with Progre
           total: widget.story.quiz.length,
         );
         _completionSaved = true;
+      } catch (_) {
+        _saveError();
+        return;
       } finally {
         if (mounted) setState(() => _savingCompletion = false);
       }
     }
-    if (!mounted) return;
+    if (!progressReady) return;
     setState(() => _resultMode = true);
   }
 
@@ -408,7 +427,7 @@ class _StoryAdventureScreenState extends State<StoryAdventureScreen> with Progre
             Text(choice.coach),
             const SizedBox(height: 12),
             FilledButton.icon(
-              onPressed: _continueChoice,
+              onPressed: _savingNode ? null : _continueChoice,
               icon: const Icon(Icons.arrow_forward_rounded),
               label: const Text('Hikâyeye devam et'),
               style: FilledButton.styleFrom(backgroundColor: color),

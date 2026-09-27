@@ -13,11 +13,13 @@ import 'package:french_app/data/backup.dart';
 import 'package:french_app/data/progress_coordinator.dart';
 import 'package:french_app/data/repositories.dart';
 import 'package:french_app/domain/game.dart';
+import 'package:french_app/domain/adventure.dart';
 import 'package:french_app/domain/journey.dart';
 import 'package:french_app/domain/sentence_practice.dart';
 import 'package:french_app/domain/song.dart';
 import 'package:french_app/domain/verb.dart';
 import 'package:french_app/features/practice/sentence_practice_screen.dart';
+import 'package:french_app/features/practice/story_adventure_screen.dart';
 import 'package:french_app/features/songs/song_quiz_screen.dart';
 import 'package:french_app/features/verbs/reflexive_arena_screen.dart';
 import 'package:french_app/features/journey/station_quiz_screen.dart';
@@ -29,6 +31,7 @@ import 'package:french_app/features/quiz/quiz_screen.dart';
 import 'package:french_app/features/verbs/verb_screens.dart';
 import 'package:french_app/features/vocab/swipe_session_screen.dart';
 import 'package:french_app/features/vocab/search_screen.dart';
+import 'package:french_app/features/vocab/word_card.dart';
 import 'package:french_app/motion/card_stack.dart';
 import 'package:french_app/motion/swipe_direction.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
@@ -694,6 +697,83 @@ void main() {
     await app.completeStationQuiz(stationId: 'd2-station', stars: 3,
         correct: 8, total: 8, combo: 8);
   }
+
+  const sweepStory = StoryAdventure(id: 'sweep-story', level: CefrLevel.a1,
+      title: 'Story', subtitle: '', startNodeId: 'a', nodes: [
+        StoryNode(id: 'a', speaker: 'A', text: 'Bonjour', translation: '', choices: [
+          StoryChoice(label: 'Continue choice', nextNodeId: 'b', coach: 'OK')]),
+        StoryNode(id: 'b', speaker: 'B', text: 'End node', translation: '')],
+      quiz: [StoryQuizQuestion(prompt: 'Question', options: ['Right', 'Wrong'], correctIndex: 0, explanation: 'OK')]);
+
+  for (final completion in [false, true]) {
+    testWidgets('BUG-001 story ${completion ? "completion" : "node"} failure is surfaced and retryable', (tester) async {
+      final app = (await tester.runAsync(boot))!;
+      if (completion) await tester.runAsync(() => app.saveStoryNode('sweep-story', 'b'));
+      await show(tester, app, const StoryAdventureScreen(story: sweepStory));
+      if (completion) {
+        await tester.ensureVisible(find.text('Bölüm sınavına geç'));
+        await tester.tap(find.text('Bölüm sınavına geç')); await tester.pumpAndSettle();
+        await tester.tap(find.text('Right')); await tester.pumpAndSettle();
+      } else {
+        await tester.ensureVisible(find.text('Continue choice'));
+        await tester.tap(find.text('Continue choice')); await tester.pumpAndSettle();
+      }
+      final button = find.text(completion ? 'Sonucu gör' : 'Hikâyeye devam et');
+      final before = await tester.runAsync(() => completionSnapshot(app));
+      await tester.runAsync(() => app.db.progress.execute(completion
+          ? "CREATE TRIGGER sweep_fail BEFORE UPDATE ON game_profile BEGIN SELECT RAISE(ABORT,'BUG001'); END"
+          : "CREATE TRIGGER sweep_fail BEFORE INSERT ON story_progress BEGIN SELECT RAISE(ABORT,'BUG001'); END"));
+      await tester.ensureVisible(button); await tester.tap(button);
+      var drained = false;
+      unawaited(app.progress.run(() async {}).then((_) => drained = true));
+      await driveUntil(tester, () => drained); await tester.pump();
+      expect(await tester.runAsync(() => completionSnapshot(app)), before);
+      expect(tester.takeException(), isNull);
+      expect(find.text('Sonuç kaydedilemedi. Tekrar deneyin.'), findsOneWidget);
+      await tester.runAsync(() => app.db.progress.execute('DROP TRIGGER sweep_fail'));
+      await tester.tap(button); await tester.tap(button);
+      drained = false;
+      unawaited(app.progress.run(() async {}).then((_) => drained = true));
+      await driveUntil(tester, () => drained); await tester.pumpAndSettle();
+      expect(app.practice.story('sweep-story')!.nodeId, 'b');
+      expect(app.practice.story('sweep-story')!.completed, completion);
+      expect(app.game.profile.totalAnswers, completion ? 1 : 0);
+      expect(tester.takeException(), isNull);
+    });
+  }
+
+  testWidgets('BUG-002 flag failure is surfaced without detached error', (tester) async {
+    final app = (await tester.runAsync(boot))!;
+    await show(tester, app, const SwipeSessionScreen(title: 'Flags', candidateIds: ['word-probe']));
+    await tester.runAsync(() => app.db.progress.execute(
+        "CREATE TRIGGER sweep_flag BEFORE INSERT ON flagged_cards BEGIN SELECT RAISE(ABORT,'BUG002'); END"));
+    tester.widget<WordCard>(find.byType(WordCard).first).onFlag!();
+    var drained = false;
+    unawaited(app.progress.run(() async {}).then((_) => drained = true));
+    await driveUntil(tester, () => drained); await tester.pump();
+    expect(app.flags.isFlagged('word-probe'), isFalse);
+    expect(await tester.runAsync(() => app.db.progress.query('flagged_cards')), isEmpty);
+    expect(tester.takeException(), isNull);
+    expect(find.text('Sonuç kaydedilemedi. Tekrar deneyin.'), findsOneWidget);
+    await tester.runAsync(() => app.db.progress.execute('DROP TRIGGER sweep_flag'));
+    final callback = tester.widget<WordCard>(find.byType(WordCard).first).onFlag!;
+    callback(); callback();
+    drained = false;
+    unawaited(app.progress.run(() async {}).then((_) => drained = true));
+    await driveUntil(tester, () => drained); await tester.pump();
+    expect(app.flags.isFlagged('word-probe'), isTrue);
+  });
+
+  testWidgets('BUG-005 empty song quiz is an empty state without reward', (tester) async {
+    final app = (await tester.runAsync(boot))!;
+    const song = LearningSong(id: 'empty', title: 'Empty', artist: '', level: CefrLevel.a1,
+      duration: Duration.zero, audioUrl: '', sourcePageUrl: '', licenseLabel: '', attribution: '',
+      colorValue: 0xff224466, lyrics: []);
+    await show(tester, app, const SongQuizScreen(song: song));
+    expect(tester.takeException(), isNull);
+    expect(find.text('Bu şarkı için soru bulunamadı.'), findsOneWidget);
+    expect(app.game.profile.totalAnswers, 0);
+  });
 
   for (final kind in ['sentence', 'song', 'arena']) {
     testWidgets('Step10 $kind persistence failure retains attempt and retries once', (tester) async {

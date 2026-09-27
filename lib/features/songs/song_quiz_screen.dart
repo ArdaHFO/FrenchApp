@@ -73,7 +73,9 @@ class _SongQuizScreenState extends State<SongQuizScreen> with ProgressSession<So
       appBar: AppBar(title: Text('${widget.song.title} · Oyun')),
       body: GameBackdrop(
         accent: color,
-        child: _finished
+        child: _questions.isEmpty
+            ? const Center(child: Text('Bu şarkı için soru bulunamadı.'))
+            : _finished
             ? _Result(
                 app: app,
                 song: widget.song,

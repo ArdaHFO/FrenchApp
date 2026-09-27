@@ -51,6 +51,21 @@ class _SwipeSessionScreenState extends State<SwipeSessionScreen> with ProgressSe
   int _startCoins = 0;
   TtsService? _tts;
   bool _ttsRequested = false;
+  final Set<String> _flagPending = {};
+
+  Future<void> _toggleFlag(Word word) async {
+    if (!progressReady || !_flagPending.add(word.id)) return;
+    try {
+      await _app.toggleFlag(refId: word.id, cardType: 'word', lemma: word.lemma);
+    } catch (_) {
+      if (mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Sonuç kaydedilemedi. Tekrar deneyin.'),
+      ));
+    } finally {
+      _flagPending.remove(word.id);
+      if (mounted) setState(() {});
+    }
+  }
 
   @override
   void didChangeDependencies() {
@@ -207,15 +222,7 @@ class _SwipeSessionScreenState extends State<SwipeSessionScreen> with ProgressSe
                             showSentenceOnFront: _app.showSentenceOnFront,
                             onSpeak: (String text) => _tts?.speak(text),
                             isFlagged: _app.flags.isFlagged(word.id),
-                            onFlag: () {
-                              if (!progressReady) return;
-                              _app.toggleFlag(
-                                refId: word.id,
-                                cardType: 'word',
-                                lemma: word.lemma,
-                              );
-                              setState(() {});
-                            },
+                            onFlag: () => _toggleFlag(word),
                           );
                         },
                       ),
