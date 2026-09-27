@@ -84,6 +84,21 @@ LexicalHttpResponse fixture(Uri uri, {String? word}) {
 }
 
 void main() {
+  test('BUG-006 no-cache forbids fresh and stale reuse without validation', () async {
+    final transport = FakeTransport((uri) {
+      final r = fixture(uri);
+      return LexicalHttpResponse(r.status, {'cache-control': 'no-cache, max-age=86400'}, r.body);
+    });
+    final result = await WiktApiProvider(transport: transport).lookup(LexicalLookupKey('chat'));
+    expect(result.maxAge, Duration.zero);
+    expect(result.staleAge, Duration.zero);
+  });
+  test('BUG-006 malformed Retry-After retains rate-limited outcome', () async {
+    final result = await WiktApiProvider(transport: FakeTransport((_) =>
+      const LexicalHttpResponse(429, {'retry-after': 'not a date'}, []))).lookup(LexicalLookupKey('chat'));
+    expect(result.status, LexicalStatus.rateLimited);
+    expect(result.retryAt, isNotNull);
+  });
   test(
       'normalization retains POS groups tags provenance and optional sound metadata',
       () async {

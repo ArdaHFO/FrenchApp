@@ -69,6 +69,12 @@ void main() {
     expect(result.data!.senses.single.pos, 'noun');
     expect(provider.calls, 1);
   });
+  test('BUG-006 no-store refresh removes an older cached representation', () async {
+    await service.lookup(key);
+    provider.respond = (_) => const LexicalOutcome(LexicalStatus.notFound, cacheable: false);
+    expect((await service.lookupWithPolicy(key, refresh: true)).status, LexicalStatus.notFound);
+    expect(await cache.read(key, now), isNull);
+  });
   test('identical concurrent lookups single flight across POS hints', () async {
     final gate = Completer<LexicalOutcome>();
     provider.respond = (_) => gate.future;

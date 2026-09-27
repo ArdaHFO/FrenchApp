@@ -77,8 +77,11 @@ class LexicalCache {
 
   Future<void> write(
       LexicalLookupKey key, LexicalOutcome outcome, DateTime now) async {
-    if (!outcome.cacheable ||
-        (outcome.status != LexicalStatus.found &&
+    if (!outcome.cacheable) {
+      await _db.delete('lexical_entries', where: 'cache_key = ?', whereArgs: [key.cacheKey]);
+      return;
+    }
+    if ((outcome.status != LexicalStatus.found &&
             outcome.status != LexicalStatus.notFound)) {
       return;
     }

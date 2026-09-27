@@ -78,7 +78,7 @@ class WiktApiProvider implements LexicalProvider {
         // Definitions remain usable; the explicit flag exposes partial enrichment.
         pronunciationUnavailable = true;
       }
-      final cache = response.headers['cache-control'] ?? '';
+      final cache = (response.headers['cache-control'] ?? '').toLowerCase();
       return LexicalOutcome(LexicalStatus.found,
           data: LexicalEnrichment(
               word: root['word'] as String,
@@ -94,8 +94,8 @@ class WiktApiProvider implements LexicalProvider {
                           fragment: 'French')
                       .toString(),
                   retrievedAt: _clock().toUtc())),
-          maxAge: _duration(cache, 'max-age', const Duration(hours: 24)),
-          staleAge: _duration(
+          maxAge: cache.contains('no-cache') ? Duration.zero : _duration(cache, 'max-age', const Duration(hours: 24)),
+          staleAge: cache.contains('no-cache') || cache.contains('must-revalidate') ? Duration.zero : _duration(
               cache, 'stale-while-revalidate', const Duration(days: 7)),
           cacheable: !cache.contains('no-store'),
           pronunciationUnavailable: pronunciationUnavailable);
@@ -117,9 +117,9 @@ class WiktApiProvider implements LexicalProvider {
   LexicalOutcome? _failure(LexicalHttpResponse r) {
     if (r.status == 200) return null;
     if (r.status == 404) {
-      final cache = r.headers['cache-control'] ?? '';
+      final cache = (r.headers['cache-control'] ?? '').toLowerCase();
       return LexicalOutcome(LexicalStatus.notFound,
-          maxAge: _duration(cache, 'max-age', const Duration(hours: 4)),
+          maxAge: cache.contains('no-cache') ? Duration.zero : _duration(cache, 'max-age', const Duration(hours: 4)),
           staleAge: Duration.zero,
           cacheable: !cache.contains('no-store'));
     }
@@ -130,6 +130,7 @@ class WiktApiProvider implements LexicalProvider {
       try {
         if (raw != null && seconds == null) date = HttpDate.parse(raw);
       } on FormatException {/* fallback */}
+      on HttpException {/* malformed HTTP date: retain 429 classification */}
       _retryAt = date ??
           _clock().add(
               Duration(seconds: seconds == null || seconds < 0 ? 60 : seconds));
