@@ -38,6 +38,9 @@ class _StationQuizScreenState extends State<StationQuizScreen> with ProgressSess
   bool _loading = true;
   StationResult? _saved;
   int? _attemptStars;
+  ({int stars, int correct, int total, int combo, DateTime at})? _finalAttempt;
+  bool _saving = false;
+  bool _saveFailed = false;
 
   /// Her yanlış cevapta artar; `Shake` bunu tetikleyici olarak kullanır.
   int _wrongTick = 0;
@@ -118,24 +121,43 @@ class _StationQuizScreenState extends State<StationQuizScreen> with ProgressSess
         qs.length,
         widget.station.passRatio,
       );
-      await _app!.recordStation(
+      _finalAttempt = (stars: stars, correct: _correct, total: qs.length,
+          combo: _bestCombo, at: DateTime.now());
+      await _saveFinalAttempt();
+    });
+  }
+
+  Future<void> _saveFinalAttempt() async {
+    final attempt = _finalAttempt;
+    if (_saving || _saved != null || attempt == null || !progressReady) return;
+    setState(() {
+      _saving = true;
+      _saveFailed = false;
+    });
+    try {
+      await _app!.completeStationQuiz(
         stationId: widget.station.id,
-        stars: stars,
-        correct: _correct,
-        total: qs.length,
+        stars: attempt.stars,
+        correct: attempt.correct,
+        total: attempt.total,
+        combo: attempt.combo,
+        now: attempt.at,
       );
-      if (!progressReady) return;
-      await _app!.recordActivity(
-        quizTotal: qs.length,
-        quizCorrect: _correct,
-        combo: _bestCombo,
-      );
+    } catch (_) {
       if (!mounted) return;
       setState(() {
-        _attemptStars = stars;
-        _saved = _app!.journey.resultFor(widget.station.id);
-        _picked = null;
+        _saving = false;
+        _saveFailed = true;
       });
+      return;
+    }
+    if (!mounted) return;
+    setState(() => _saving = false);
+    if (!progressReady) return;
+    setState(() {
+      _attemptStars = attempt.stars;
+      _saved = _app!.journey.resultFor(widget.station.id);
+      _picked = null;
     });
   }
 
@@ -274,6 +296,15 @@ class _StationQuizScreenState extends State<StationQuizScreen> with ProgressSess
                   ),
                   const SizedBox(height: 10),
                 ],
+                if (_saving) const LinearProgressIndicator(),
+                if (_saveFailed) ...<Widget>[
+                  const Text('Sonuç kaydedilemedi. Tekrar deneyin.'),
+                  FilledButton(
+                    key: const ValueKey('station_save_retry'),
+                    onPressed: _saveFinalAttempt,
+                    child: const Text('Kaydetmeyi tekrar dene'),
+                  ),
+                ],
               ],
             ),
           ),
@@ -377,6 +408,8 @@ class _StationQuizScreenState extends State<StationQuizScreen> with ProgressSess
                     setState(() {
                       _saved = null;
                       _attemptStars = null;
+                      _finalAttempt = null;
+                      _saveFailed = false;
                       _index = 0;
                       _correct = 0;
                       _picked = null;

@@ -944,7 +944,7 @@ class JourneyStore with CoordinatedProgressStore {
   }
 
   Future<void> writeRecord(
-      DatabaseExecutor executor, JourneyRecordPlan plan) async {
+      DatabaseExecutor executor, JourneyRecordPlan plan, {DateTime? now}) async {
     final next = plan.next;
     await executor.insert(
       'journey_progress',
@@ -953,7 +953,7 @@ class JourneyStore with CoordinatedProgressStore {
         'stars': next.stars,
         'best_correct': next.bestCorrect,
         'best_total': next.bestTotal,
-        'updated_at': DateTime.now().millisecondsSinceEpoch,
+        'updated_at': (now ?? DateTime.now()).millisecondsSinceEpoch,
       },
       conflictAlgorithm: ConflictAlgorithm.replace,
     );

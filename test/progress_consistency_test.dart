@@ -13,6 +13,8 @@ import 'package:french_app/data/backup.dart';
 import 'package:french_app/data/progress_coordinator.dart';
 import 'package:french_app/data/repositories.dart';
 import 'package:french_app/domain/game.dart';
+import 'package:french_app/domain/journey.dart';
+import 'package:french_app/features/journey/station_quiz_screen.dart';
 import 'package:french_app/domain/level.dart';
 import 'package:french_app/domain/srs/box_scheduler.dart';
 import 'package:french_app/domain/srs/srs_card.dart';
@@ -679,6 +681,248 @@ void main() {
           'daily_quests', 'achievements'])
           table: await app.db.progress.query(table, orderBy: '1'),
       };
+
+
+  Future<void> stationFinalization(AppState app) async {
+    await app.completeStationQuiz(stationId: 'd2-station', stars: 3,
+        correct: 8, total: 8, combo: 8);
+  }
+
+  test('Step09 normal success preserves station and quiz reward events', () async {
+    final app = await boot();
+    final events = <Map<String, Object?>>[];
+    app.addListener(() => events.add(completionCaches(app)));
+    await stationFinalization(app);
+    final after = await completionSnapshot(app);
+    report('Step09_success', [], {'after': after, 'notifications': events});
+    expect(app.game.profile.xp, 256);
+    expect(app.game.profile.coins, 42);
+    expect(app.game.profile.stationsPassed, 1);
+    expect(app.game.profile.totalAnswers, 8);
+    expect(app.game.profile.totalCorrect, 8);
+    expect(app.game.profile.bestCombo, 8);
+    expect(app.stats.today()['quiz_total'], 8);
+    expect(app.game.quests.singleWhere((q) => q.id == 'quiz').claimed, isTrue);
+    expect(app.game.unlockedAchievements, isEmpty);
+    expect(events.map((e) => (e['reward']! as List).take(3).toList()).toList(),
+        [[1, 60, 24], [2, 196, 18]]);
+    final finalCaches = completionCaches(app)..remove('reward');
+    for (final event in events) {
+      expect(Map.of(event)..remove('reward'), finalCaches,
+          reason: 'every listener sees all committed caches');
+    }
+    aligned(await snapshot(app));
+  });
+
+  for (final failure in ['daily', 'late_game', 'journey', 'station_game']) {
+    test('Step09 $failure failure rolls back entire station finalization', () async {
+      final app = await boot();
+      final before = await completionSnapshot(app);
+      final target = switch (failure) {
+        'daily' => 'INSERT ON daily_stats',
+        'journey' => 'INSERT ON journey_progress',
+        'station_game' => 'UPDATE ON game_profile WHEN NEW.stations_passed > OLD.stations_passed',
+        _ => 'UPDATE ON game_profile WHEN NEW.total_answers > OLD.total_answers',
+      };
+      await app.db.progress.execute("CREATE TRIGGER step09_fail BEFORE $target "
+          "BEGIN SELECT RAISE(ABORT,'Step09_$failure'); END");
+      Object? caught;
+      try { await stationFinalization(app); } catch (error) { caught = error; }
+      expect(caught, isA<DatabaseException>());
+      expect(caught.toString(), contains('Step09_$failure'));
+      final after = await completionSnapshot(app);
+      report('Step09_$failure', [], {'exception': caught.toString(),
+          'before': before, 'after': after});
+      expect(after, before, reason: 'whole station attempt must roll back');
+      await app.db.progress.execute('DROP TRIGGER step09_fail');
+      final probe = probes[app]!;
+      var commits = 0;
+      probe.onTransactionCommitted = () {
+        commits++;
+        expect(completionCaches(app), before['caches'],
+            reason: 'no publication before the outer transaction returns');
+        probe.rejectReads = true;
+      };
+      await stationFinalization(app);
+      probe.onTransactionCommitted = null;
+      probe.rejectReads = false;
+      expect(commits, 1);
+      expect(app.game.profile.xp, 256);
+      expect(app.game.profile.coins, 42);
+      expect(app.game.profile.stationsPassed, 1);
+      expect(app.stats.today()['quiz_total'], 8);
+      expect(app.rewardSerial, 2);
+      final committed = await completionSnapshot(app);
+      await app.close();
+      final reopened = await boot();
+      final reloaded = await completionSnapshot(reopened);
+      for (final key in committed.keys.where((k) => k != 'caches')) {
+        expect(reloaded[key], committed[key], reason: '$key survives reopen');
+      }
+      expect(completionCaches(reopened)..remove('reward'),
+          (Map.of(committed['caches']! as Map)..remove('reward')));
+      await stationFinalization(reopened);
+      expect(reopened.game.profile.xp, 352); // Ordinary quiz reward only.
+      expect(reopened.game.profile.coins, 50);
+      expect(reopened.game.profile.stationsPassed, 1);
+      expect(reopened.stats.today()['quiz_total'], 16);
+      expect(reopened.rewardSerial, 1);
+      expect(await reopened.db.progress.query('journey_progress'), hasLength(1));
+      aligned(await snapshot(reopened));
+    });
+  }
+
+  testWidgets('Step09 station final save failure offers persistence-only retry', (tester) async {
+    final app = (await tester.runAsync(bootFreeQuiz))!;
+    const station = JourneyStation(id: 'd2-station', level: CefrLevel.a1,
+        indexInLevel: 0, kind: StationKind.verbs, title: 'Step09 station',
+        wordIds: [], verbRefIds: [], questionCount: 1);
+    final before = (await tester.runAsync(() => completionSnapshot(app)))!;
+    await show(tester, app, const SizedBox.shrink());
+    await tester.pumpWidget(AppScope(state: app, child: const MaterialApp(
+        home: StationQuizScreen(station: station))));
+    await driveUntil(tester, () => find.textContaining('tester ·').evaluate().isNotEmpty);
+    final person = tester.widget<Text>(find.textContaining('tester ·')).data!.split(' · ').last;
+    final answer = {'je': 'teste', 'tu': 'testes', 'nous': 'testons', 'vous': 'testez'}[person]!;
+    await tester.runAsync(() => app.db.progress.execute(
+        "CREATE TRIGGER step09_fail BEFORE INSERT ON daily_stats "
+        "BEGIN SELECT RAISE(ABORT,'Step09_widget'); END"));
+    await tester.tap(find.text(answer));
+    await tester.pump(const Duration(seconds: 2));
+    var drained = false;
+    unawaited(app.progress.run(() async {}).then((_) => drained = true));
+    await driveUntil(tester, () => drained);
+    await tester.pump(const Duration(seconds: 2));
+    final failed = (await tester.runAsync(() => completionSnapshot(app)))!;
+    report('Step09_widget', [], {'before': before, 'after': failed,
+      'result': find.text('Durak geçildi').evaluate().isNotEmpty,
+      'retry': find.byKey(const ValueKey('station_save_retry')).evaluate().isNotEmpty,
+      'exception': tester.takeException()?.toString()});
+    expect(failed, before, reason: 'UI finalization must leave no partial station');
+    expect(find.text('Durak geçildi'), findsNothing);
+    expect(find.byKey(const ValueKey('station_save_retry')), findsOneWidget);
+    expect(find.text('Sonuç kaydedilemedi. Tekrar deneyin.'), findsOneWidget);
+    // The final answer is retained; option taps cannot consume it again.
+    await tester.tap(find.text(answer));
+    await tester.pump(const Duration(seconds: 2));
+    expect(await tester.runAsync(() => completionSnapshot(app)), before);
+    await tester.runAsync(() => app.db.progress.execute('DROP TRIGGER step09_fail'));
+    final boundary = gate();
+    probes[app]!.transactionGate = boundary;
+    final retry = find.byKey(const ValueKey('station_save_retry'));
+    await tester.tap(retry);
+    await tester.tap(retry); // Same frame, before the retry button rebuilds.
+    await driveUntil(tester, () => boundary.entered.isCompleted);
+    expect(find.text('Durak geçildi'), findsNothing);
+    expect(await tester.runAsync(() => completionSnapshot(app)), before);
+    boundary.release();
+    await driveUntil(tester, () => find.text('Durak geçildi').evaluate().isNotEmpty);
+    await tester.pump(const Duration(seconds: 2));
+    expect(find.text('1 / 1 doğru'), findsOneWidget);
+    expect(app.game.profile.totalAnswers, 1);
+    expect(app.game.profile.totalCorrect, 1);
+    expect(app.game.profile.bestCombo, 1);
+    expect(app.game.profile.stationsPassed, 1);
+    expect(app.game.profile.xp, 72);
+    expect(app.game.profile.coins, 25);
+    expect(app.stats.today()['quiz_total'], 1);
+    expect(app.rewardSerial, 2);
+    expect(probes[app]!.events.where((e) => e == 'transaction.committed'), hasLength(1));
+    expect(tester.takeException(), isNull);
+    aligned((await tester.runAsync(() => snapshot(app)))!);
+  });
+
+  test('Step09 accepted finalization drains atomically before close', () async {
+    final app = await boot();
+    final before = await completionSnapshot(app);
+    final boundary = gate();
+    probes[app]!.transactionGate = boundary;
+    final action = stationFinalization(app);
+    await boundary.entered.future;
+    var closed = false;
+    final closing = app.close().then((_) => closed = true);
+    await expectLater(stationFinalization(app), throwsA(isA<ProgressUnavailable>()));
+    expect(closed, isFalse);
+    expect(await completionSnapshot(app), before);
+    boundary.release();
+    await action;
+    await closing;
+    final reopened = await boot();
+    expect(reopened.journey.resultFor('d2-station')!.stars, 3);
+    expect(reopened.game.profile.xp, 256);
+    expect(reopened.game.profile.coins, 42);
+    expect(reopened.game.profile.stationsPassed, 1);
+    expect(reopened.stats.today()['quiz_total'], 8);
+    aligned(await snapshot(reopened));
+  });
+
+  test('Step09 success parity includes replays improvements and achievements', () async {
+    final legacy = await boot('legacy');
+    final atomic = await boot('atomic');
+    final at = DateTime.now();
+    final attempts = [
+      (id: 'd2-station', stars: 0, correct: 2, total: 8, combo: 2),
+      (id: 'd2-station', stars: 2, correct: 7, total: 8, combo: 7),
+      (id: 'd2-station', stars: 3, correct: 8, total: 8, combo: 8),
+      (id: 'd2-station', stars: 3, correct: 8, total: 8, combo: 8),
+      for (var i = 0; i < 4; i++)
+        (id: 'extra-$i', stars: 3, correct: 10, total: 10, combo: 10),
+    ];
+    for (final attempt in attempts) {
+      final oldEvents = <List<Object?>>[];
+      final newEvents = <List<Object?>>[];
+      void oldListener() => oldEvents.add(List.of(completionCaches(legacy)['reward']! as List));
+      void newListener() => newEvents.add(List.of(completionCaches(atomic)['reward']! as List));
+      legacy.addListener(oldListener);
+      atomic.addListener(newListener);
+      await legacy.recordStation(stationId: attempt.id, stars: attempt.stars,
+          correct: attempt.correct, total: attempt.total);
+      await legacy.recordActivity(quizTotal: attempt.total,
+          quizCorrect: attempt.correct, combo: attempt.combo, now: at);
+      await atomic.completeStationQuiz(stationId: attempt.id, stars: attempt.stars,
+          correct: attempt.correct, total: attempt.total, combo: attempt.combo, now: at);
+      legacy.removeListener(oldListener);
+      atomic.removeListener(newListener);
+      expect(completionCaches(atomic), completionCaches(legacy));
+      expect(newEvents, oldEvents);
+      final oldDb = await completionSnapshot(legacy);
+      final newDb = await completionSnapshot(atomic);
+      for (final table in ['journey_progress', 'daily_stats', 'game_profile', 'daily_quests', 'achievements']) {
+        List<Map> withoutTimes(Object? rows) => (rows! as List)
+            .map((row) => Map.of(row as Map)..remove('updated_at')..remove('unlocked_at')).toList();
+        expect(withoutTimes(newDb[table]), withoutTimes(oldDb[table]), reason: table);
+      }
+    }
+    expect(atomic.game.unlockedAchievements, containsAll(['combo_10', 'station_5']));
+    final row = (await atomic.db.progress.query('journey_progress',
+        where: 'station_id = ?', whereArgs: ['d2-station'])).single;
+    expect(row['updated_at'], at.millisecondsSinceEpoch);
+  });
+
+  test('Step09 late failure rolls back both game operations achievements and claims', () async {
+    final app = await boot();
+    for (var i = 0; i < 4; i++) {
+      await app.recordStation(stationId: 'seed-$i', stars: 1, correct: 6, total: 8);
+    }
+    final before = await completionSnapshot(app);
+    await app.db.progress.execute(
+        'CREATE TRIGGER step09_fail BEFORE UPDATE ON game_profile '
+        'WHEN NEW.total_answers > OLD.total_answers '
+        "BEGIN SELECT RAISE(ABORT,'Step09_achievements'); END");
+    Future<void> complete() => app.completeStationQuiz(stationId: 'd2-station',
+        stars: 3, correct: 10, total: 10, combo: 10);
+    await expectLater(complete(), throwsA(isA<DatabaseException>()));
+    expect(await completionSnapshot(app), before);
+    await app.db.progress.execute('DROP TRIGGER step09_fail');
+    await complete();
+    expect(app.game.unlockedAchievements, containsAll(['combo_10', 'station_5']));
+    expect(app.game.profile.stationsPassed, 5);
+    expect(app.game.profile.totalAnswers, 10);
+    expect(app.stats.today()['quiz_total'], 10);
+    expect(app.game.quests.singleWhere((q) => q.id == 'quiz').claimed, isTrue);
+    expect(await app.db.progress.query('achievements'), hasLength(2));
+    aligned(await snapshot(app));
+  });
 
   Future<void> checkCompletionFailure(String kind, String failure) async {
     final app = await boot();

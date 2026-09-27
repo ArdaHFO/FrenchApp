@@ -426,6 +426,47 @@ class AppState extends ChangeNotifier {
         _notify();
       });
 
+  /// Final station attempt: result, station reward and quiz activity commit together.
+  Future<void> completeStationQuiz({
+    required String stationId,
+    required int stars,
+    required int correct,
+    required int total,
+    required int combo,
+    DateTime? now,
+  }) {
+    final DateTime at = (now ?? DateTime.now()).toLocal();
+    return _enqueueProgressWrite(() async {
+      final plan = journey.prepareRecord(
+        stationId: stationId, stars: stars, correct: correct, total: total,
+      );
+      final result = await game.transaction((txn) async {
+        await journey.writeRecord(txn, plan, now: at);
+        // Preserve the two existing game mutations and their reward ordering.
+        // The second reads the first's writes through this same transaction.
+        final station = await GameStore.writeRecord(txn,
+          now: at,
+          stationStars: (plan.next.stars - (plan.previous?.stars ?? 0))
+              .clamp(0, 3).toInt(),
+          stationPassed: !(plan.previous?.passed ?? false) && plan.next.passed,
+        );
+        final daily = await DailyStatsStore.writeAdd(txn,
+          now: at, quizTotal: total, quizCorrect: correct,
+        );
+        final quiz = await GameStore.writeRecord(txn,
+          now: at, quizTotal: total, quizCorrect: correct, combo: combo,
+        );
+        return (daily, station, quiz);
+      });
+      journey.publishRecord(plan);
+      stats.publish(at, result.$1);
+      game.publish(result.$3.snapshot);
+      // Both notifications see all final caches, including the final game state.
+      _publishReward(result.$2.reward);
+      _publishReward(result.$3.reward);
+    });
+  }
+
   void _publishReward(GameReward reward, {bool notify = true}) {
     if (!reward.isEmpty) {
       _lastReward = reward;
