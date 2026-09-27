@@ -14,6 +14,12 @@ class AboutScreen extends StatelessWidget {
   static const List<({String name, String what, String license, String url})>
       _sources = <({String name, String what, String license, String url})>[
     (
+      name: 'WiktApi / Wiktionary contributors',
+      what: 'İsteğe bağlı çevrimiçi ek anlamlar ve IPA; yerel öğrenme içeriğini değiştirmez',
+      license: 'Sözlük verisi: CC BY-SA / GFDL · servis yazılımı: MIT',
+      url: 'wiktapi.dev · en.wiktionary.org/wiki/Wiktionary:Copyrights',
+    ),
+    (
       name: 'Lexique 3.83',
       what: 'Kelime listesi, kelime türü, cinsiyet, fonetik, sıklık',
       license: 'CC BY-SA',

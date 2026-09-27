@@ -148,8 +148,14 @@ class _LexicalDetailScreenState extends State<LexicalDetailScreen> {
           const SizedBox(height: 16),
           Text(data.provenance.label),
           const Text(
+              'Wiktionary contributors · seçilmiş ve düzenlenmiş ek bilgiler'),
+          Text(
+              'Alınma zamanı: ${data.provenance.retrievedAt.toUtc().toIso8601String()}'),
+          const Text(
               'Wiktionary kaynaklı ek içerik · CC BY-SA; kaynak geçmişine bakın.'),
           SelectableText(data.provenance.sourceUrl),
+          const SelectableText(
+              'https://creativecommons.org/licenses/by-sa/4.0/'),
         ],
         const SizedBox(height: 16),
         if (!_pending)
