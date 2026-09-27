@@ -12,6 +12,7 @@ import '../domain/level.dart';
 import '../domain/srs/box_scheduler.dart';
 import '../domain/srs/srs_card.dart';
 import '../motion/motion_tokens.dart';
+import '../services/lexical/lexical_service.dart';
 
 enum AnswerCardType { word, conjugation }
 
@@ -120,6 +121,9 @@ class AppState extends ChangeNotifier {
     _practice = value;
   }
   final Map<String, String> contentMeta;
+  LexicalService? _lexical;
+  /// Optional, lazy and independent of learning/progress initialization.
+  LexicalService get lexical => _lexical ??= LexicalService.production();
 
   static const List<double> speeds = <double>[0.75, 1.0, 1.25];
 
@@ -630,7 +634,10 @@ class AppState extends ChangeNotifier {
   void dispose() {
     if (_disposed) return;
     _disposed = true;
-    _closeFuture = progress.close(db.close);
+    _closeFuture = Future.wait<void>([
+      progress.close(db.close),
+      if (_lexical != null) _lexical!.close(),
+    ]).then((_) {});
     unawaited(_closeFuture);
     super.dispose();
   }

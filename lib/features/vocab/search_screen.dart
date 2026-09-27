@@ -11,6 +11,7 @@ import '../../domain/word_search.dart';
 import '../../motion/motion_tokens.dart';
 import '../../services/tts_service.dart';
 import '../../ui/game_ui.dart';
+import 'lexical_detail_screen.dart';
 
 /// Sözlük araması.
 ///
@@ -133,6 +134,14 @@ class _SearchScreenState extends State<SearchScreen> {
                         onChanged: _scheduleSearch,
                       ),
                     ),
+                    if (_controller.text.trim().isNotEmpty)
+                      TextButton(
+                        key: const ValueKey('dictionary_online'),
+                        onPressed: () => Navigator.of(context).push(MaterialPageRoute<void>(
+                          builder: (_) => LexicalDetailScreen(lemma: _controller.text,
+                              provider: _app!.lexical))),
+                        child: const Text('Fransızca kelimeyi çevrimiçi ara'),
+                      ),
                     const SizedBox(height: 10),
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
@@ -476,6 +485,13 @@ class _WordSheet extends StatelessWidget {
           ),
           if (word.ipa != null)
             Text(word.ipa!, style: TextStyle(fontSize: 14, color: faint)),
+          TextButton(
+            key: const ValueKey('dictionary_enrichment'),
+            onPressed: () => Navigator.of(context).push(MaterialPageRoute<void>(
+              builder: (_) => LexicalDetailScreen(lemma: word.lemma, localWord: word,
+                  provider: AppScope.of(context).lexical))),
+            child: const Text('Daha fazla sözlük bilgisi'),
+          ),
           const SizedBox(height: 14),
           Text(
             word.meaningTr,
