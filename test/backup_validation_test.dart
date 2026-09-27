@@ -52,6 +52,23 @@ void main() {
         'app_settings': const <Object?>[],
       };
 
+  for (final corruption in ['null key', 'duplicate key', 'invalid boolean', 'impossible counters']) {
+    test('BUG-007 backup rejects $corruption before durable replacement', () async {
+      final row = <String, Object?>{'card_type': 'word', 'ref_id': 'restored',
+        'updated_at': 1, 'times_seen': 1, 'times_right': 1, 'starred': 0};
+      final data = backup(cards: [row]);
+      switch (corruption) {
+        case 'null key': data['app_settings'] = [{'key': null, 'value': 'x'}];
+        case 'duplicate key': data['card_state'] = [row, {...row, 'box': 4}];
+        case 'invalid boolean': row['starred'] = 9;
+        case 'impossible counters': row['times_right'] = 2;
+      }
+      await expectLater(ProgressBackup.import(db, jsonEncode(data)), throwsFormatException);
+      expect((await db.query('card_state')).single['ref_id'], 'keep-me');
+      expect(await db.query('app_settings'), isEmpty);
+    });
+  }
+
   test('kısmi yedeği hiçbir veriyi silmeden reddeder', () async {
     await expectLater(
       ProgressBackup.import(db, '{"format":1,"card_state":[]}'),

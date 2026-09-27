@@ -108,6 +108,9 @@ class ProgressBackup {
               (column['type'] as String? ?? '').toUpperCase(),
       };
       final List<Map<String, Object?>> rows = <Map<String, Object?>>[];
+      final primaryKeys = columns.where((c) => (c['pk'] as int) > 0)
+          .map((c) => c['name'] as String).toList();
+      final identities = <String>{};
       for (final Object? rawRow in (rawRows as List? ?? const <Object?>[])) {
         if (rawRow is! Map) {
           throw FormatException('Yedekte $table satırı bozuk.');
@@ -126,6 +129,18 @@ class ProgressBackup {
             throw FormatException('Yedekte alan türü bozuk: $table.$key.');
           }
           row[key] = value;
+        }
+        for (final column in columns) {
+          final name = column['name'] as String;
+          final required = (column['pk'] as int) > 0 ||
+              ((column['notnull'] as int) != 0 && column['dflt_value'] == null);
+          if ((required && row[name] == null) ||
+              (row.containsKey(name) && row[name] == null && (column['notnull'] as int) != 0)) {
+            throw FormatException('Yedekte zorunlu alan eksik: $table.$name.');
+          }
+        }
+        if (primaryKeys.isNotEmpty && !identities.add(jsonEncode(primaryKeys.map((k) => row[k]).toList()))) {
+          throw FormatException('Yedekte yinelenen kayıt var: $table.');
         }
         _validateValues(table, row);
         rows.add(row);
@@ -163,8 +178,22 @@ class ProgressBackup {
       }
     }
 
+    void boolean(String key) {
+      final value = integer(key);
+      if (value != null && value != 0 && value != 1) {
+        throw FormatException('Yedekte geçersiz işaret var: $table.$key.');
+      }
+    }
+    void paired(String correct, String total) {
+      if ((integer(correct) ?? 0) > (integer(total) ?? 0)) {
+        throw FormatException('Yedekte tutarsız sayaç var: $table.$correct.');
+      }
+    }
+
     switch (table) {
       case 'card_state':
+        boolean('starred');
+        paired('times_right', 'times_seen');
         final int? box = integer('box');
         if (box != null && (box < 0 || box > 5)) {
           throw const FormatException('Yedekte geçersiz SRS kutusu var.');
@@ -189,6 +218,7 @@ class ProgressBackup {
           nonNegative(key);
         }
       case 'daily_stats':
+        paired('quiz_correct', 'quiz_total');
         for (final String key in <String>[
           'cards_swiped',
           'new_learned',
@@ -198,6 +228,7 @@ class ProgressBackup {
           nonNegative(key);
         }
       case 'journey_progress':
+        paired('best_correct', 'best_total');
         final int? stars = integer('stars');
         if (stars != null && (stars < 0 || stars > 3)) {
           throw const FormatException('Yedekte geçersiz durak yıldızı var.');
@@ -205,6 +236,7 @@ class ProgressBackup {
         nonNegative('best_correct');
         nonNegative('best_total');
       case 'game_profile':
+        paired('total_correct', 'total_answers');
         for (final String key in <String>[
           'xp',
           'coins',
@@ -218,6 +250,7 @@ class ProgressBackup {
           nonNegative(key);
         }
       case 'daily_quests':
+        boolean('claimed');
         for (final String key in <String>[
           'target',
           'progress',
@@ -227,9 +260,12 @@ class ProgressBackup {
           nonNegative(key);
         }
       case 'story_progress':
+        boolean('completed');
+        paired('best_correct', 'best_total');
         nonNegative('best_correct');
         nonNegative('best_total');
       case 'sentence_progress':
+        boolean('solved');
         nonNegative('attempts');
         nonNegative('best_score');
     }
