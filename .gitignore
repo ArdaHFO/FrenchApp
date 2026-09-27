@@ -1,0 +1,66 @@
+# Flutter / Dart
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
+build/
+__pycache__/
+*.py[cod]
+*.iml
+.flutter-plugins
+.flutter-plugins-dependencies
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Android
+android/.gradle/
+android/local.properties
+android/key.properties
+*.jks
+*.keystore
+
+# İçerik boru hattı (büyük dosyalar, depoya girmez)
+content/sources/
+content/stages/
+content/out/
+assets/db/*.db.tmp
+assets/db/*.db-wal
+assets/db/*.db-shm
+
+# İşletim sistemi
+.DS_Store
+Thumbs.db
+
+# Yan yuklemek icin kok dizine kopyalanan cikti
+FrenchApp.apk
+
+# Local recovery and operational transfer material
+.checkpoints/
+.staging/
+deliveries/
+content/review_work/
+/*.zip
+
+# Generated builds, logs and machine state
+.gradle/
+.kotlin/
+*.apk
+*.aab
+*.log
+*.tmp
+*.swo
+*~
+
+# Local secrets (examples remain publishable)
+.env
+.env.*
+!.env.example
+*.pem
+*.p12
+*.pfx
+*.key
+credentials.json
+service-account*.json

@@ -1,0 +1,13 @@
+{
+  "lexique": "http://www.lexique.org/databases/Lexique383/Lexique383.tsv",
+  "freq_fr": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/fr/fr_50k.txt",
+  "freq_tr": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/tr/tr_50k.txt",
+  "tatoeba_sentences": "https://downloads.tatoeba.org/exports/sentences.tar.bz2",
+  "tatoeba_links": "https://downloads.tatoeba.org/exports/links.tar.bz2",
+  "tatoeba_audio": "https://downloads.tatoeba.org/exports/sentences_with_audio.tar.bz2",
+  "kaikki_fr": "https://kaikki.org/dictionary/French/kaikki.org-dictionary-French.jsonl",
+  "dbnary_fra": "http://kaiko.getalp.org/static/ontolex/latest/fr_dbnary_ontolex.ttl.bz2",
+  "dbnary_tur": "http://kaiko.getalp.org/static/ontolex/latest/tr_dbnary_ontolex.ttl.bz2",
+  "dbnary_eng": "http://kaiko.getalp.org/static/ontolex/latest/en_dbnary_ontolex.ttl.bz2",
+  "flelex": "https://cental.uclouvain.be/cefrlex/flelex/download/"
+}

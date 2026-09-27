@@ -1,0 +1,54 @@
+
+[lexique]
+  OK   HTTP 206  24.7 MB  application/octet-stream
+       http://www.lexique.org/databases/Lexique383/Lexique383.tsv
+
+[freq_fr]
+  OK   HTTP 206  638.1 KB  text/plain; charset=utf-8
+       https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/fr/fr_50k.txt
+
+[freq_tr]
+  OK   HTTP 206  695.2 KB  text/plain; charset=utf-8
+       https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/tr/tr_50k.txt
+
+[tatoeba_sentences]
+  OK   HTTP 206  207.7 MB  application/octet-stream
+       https://downloads.tatoeba.org/exports/sentences.tar.bz2
+
+[tatoeba_links]
+  OK   HTTP 206  142.2 MB  application/octet-stream
+       https://downloads.tatoeba.org/exports/links.tar.bz2
+
+[tatoeba_audio]
+  OK   HTTP 206  6.1 MB  application/octet-stream
+       https://downloads.tatoeba.org/exports/sentences_with_audio.tar.bz2
+
+[kaikki_fr]
+  OK   HTTP 206  547.1 MB  application/octet-stream
+       https://kaikki.org/dictionary/French/kaikki.org-dictionary-French.jsonl
+
+[dbnary_fra]
+  OK   HTTP 206  93.1 MB  application/x-bzip2
+       http://kaiko.getalp.org/static/ontolex/latest/fr_dbnary_ontolex.ttl.bz2
+
+[dbnary_tur]
+  OK   HTTP 206  13.7 MB  application/x-bzip2
+       http://kaiko.getalp.org/static/ontolex/latest/tr_dbnary_ontolex.ttl.bz2
+
+[dbnary_eng]
+  OK   HTTP 206  197.3 MB  application/x-bzip2
+       http://kaiko.getalp.org/static/ontolex/latest/en_dbnary_ontolex.ttl.bz2
+
+[verbiste]
+  FAIL URLError: <urlopen error [Errno 11001] getaddrinfo failed>
+       https://perso.b2b2c.ca/~sarrazip/dev/verbiste-0.1.48.tar.gz
+  FAIL HTTP 404 Not Found
+       http://sarrazip.com/dev/verbiste-0.1.48.tar.gz
+
+[flelex]
+  OK   HTTP 200  12.3 KB (aralik desteklenmiyor)  text/html; charset=utf-8
+       https://cental.uclouvain.be/cefrlex/flelex/download/
+
+============================================================
+cozulen : 11/12
+basarisiz: verbiste

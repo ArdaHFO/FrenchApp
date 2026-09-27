@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Simge arka planı ve açılış ekranı rengi.
+         Uygulama koyu temada açıldığı için açılışta beyaz parlama olmasın. -->
+    <color name="ic_launcher_background">#1B4F9C</color>
+    <color name="launch_background">#14161A</color>
+</resources>

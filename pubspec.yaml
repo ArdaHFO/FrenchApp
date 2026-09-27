@@ -1,0 +1,40 @@
+name: french_app
+description: Kaydırmalı kart mantığıyla Fransızca kelime, deyim, fiil çekimi ve dilbilgisi öğreten uygulama.
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: '>=3.4.0 <4.0.0'
+
+# Faz 0.5 hareket prototipi bilerek sıfır bağımlılıkla çalışır.
+# Kart destesi, sürükleme fizigi ve çevirme animasyonu elle yazıldı.
+# Sonraki fazlarda eklenecekler PLAN.md bölüm 10.1'de listeli.
+dependencies:
+  flutter:
+    sdk: flutter
+  # İçerik ve ilerleme veritabanları
+  sqflite: ^2.3.3
+  path: ^1.9.0
+  path_provider: ^2.1.4
+  # Fransızca seslendirme (cihazın kendi motoru)
+  flutter_tts: ^4.2.0
+  # İnternetten lisanslı / kamu malı şarkı kayıtlarını oynatma
+  just_audio: ^0.10.6
+  # Modern şarkıları resmî YouTube IFrame oynatıcısıyla uygulama içinde açma
+  youtube_player_iframe: ^6.0.2
+  # Dilbilgisi dersleri Markdown olarak saklaniyor
+  flutter_markdown: ^0.7.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  # Testte gercek content.db'yi acabilmek icin. Sadece test tarafinda
+  # kullanilir, APK'ya girmez.
+  sqflite_common_ffi: ^2.3.3
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/db/content.db
+    - assets/db/content.version

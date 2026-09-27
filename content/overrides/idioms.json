@@ -1,0 +1,278 @@
+{
+  "_aciklama": [
+    "Elle yazilan deyim ve kalip listesi.",
+    "",
+    "Neden gerekti: 09_idioms.py kaikki'den 526 kalip cikardi ama Turkcesi",
+    "sadece 60'ina ulasti ve ulasanlarin bir kismi yanlisti ('pas mal' ->",
+    "'ceza', 'en direct' -> 'yasamak'). Ustelik 06_english.py'nin deyim",
+    "sezgisi tek kelimelik lemmalari da isaretliyordu: 'avoir' fiilinin",
+    "deyimsel bir anlami oldugu icin 'avoir' kelimesi deyim sayiliyordu.",
+    "Sonuc: deyim destesi normal desteden farksiz gorunuyordu.",
+    "",
+    "Bu dosya 13_build_db.py tarafindan en son uygulanir:",
+    "  duzelt : var olan deyimin Turkcesini/seviyesini duzeltir",
+    "  ekle   : listede olmayan deyimi ekler",
+    "  cikar  : havuzdan tamamen atar",
+    "",
+    "literal_tr birebir cevirisidir; deyimin neden komik/mantiksiz",
+    "gorundugunu gosterir ve akilda kalmasini kolaylastirir."
+  ],
+
+  "cikar": [
+    "petite mort",
+    "en direct",
+    "se casser"
+  ],
+
+  "ogretim": {
+    "il y a": {
+      "literal_tr": "orada sahip",
+      "note_tr": "Bir şeyin varlığını söyler. Geçmişte il y avait, gelecekte il y aura olur.",
+      "register": "nötr",
+      "examples": [{ "fr": "Il y a une boulangerie près d’ici.", "tr": "Buraya yakın bir fırın var.", "en": "There is a bakery near here." }]
+    },
+    "ça va": {
+      "literal_tr": "o gidiyor",
+      "note_tr": "Hem “Nasılsın?” sorusu hem “İyiyim / olur” cevabı olabilir; tonlama anlamı belirler.",
+      "register": "günlük",
+      "examples": [{ "fr": "Salut, ça va aujourd’hui ?", "tr": "Selam, bugün nasılsın?", "en": "Hi, how are you today?" }]
+    },
+    "avoir besoin de": {
+      "literal_tr": "ihtiyaca sahip olmak",
+      "note_tr": "Ardından isim veya mastar gelir: besoin de temps, besoin de dormir.",
+      "register": "nötr",
+      "examples": [{ "fr": "J’ai besoin de pratiquer tous les jours.", "tr": "Her gün pratik yapmam gerekiyor.", "en": "I need to practise every day." }]
+    },
+    "avoir faim": {
+      "literal_tr": "açlığa sahip olmak",
+      "note_tr": "Türkçedeki “aç olmak” için être değil avoir kullanılır.",
+      "register": "nötr",
+      "examples": [{ "fr": "Nous avons faim après le cours.", "tr": "Dersten sonra acıktık.", "en": "We are hungry after class." }]
+    },
+    "avoir l'air": {
+      "literal_tr": "havaya sahip olmak",
+      "note_tr": "Bir izlenim belirtir. Sıfat özneyle uyumlu olur: elle a l’air fatiguée.",
+      "register": "nötr",
+      "examples": [{ "fr": "Tu as l’air content de ton résultat.", "tr": "Sonucundan memnun görünüyorsun.", "en": "You look happy with your result." }]
+    },
+    "être au courant": {
+      "literal_tr": "akımda olmak",
+      "note_tr": "Bir bilgiden haberdar olmayı anlatır; de ile kullanılır.",
+      "register": "nötr",
+      "examples": [{ "fr": "Je suis au courant de la nouvelle règle.", "tr": "Yeni kuraldan haberim var.", "en": "I am aware of the new rule." }]
+    },
+    "faire la queue": {
+      "literal_tr": "kuyruk yapmak",
+      "note_tr": "Mağaza, gişe veya durakta sırada beklemek için kullanılır.",
+      "register": "nötr",
+      "examples": [{ "fr": "On doit faire la queue devant le musée.", "tr": "Müzenin önünde sıraya girmemiz gerekiyor.", "en": "We have to queue in front of the museum." }]
+    },
+    "faire semblant": {
+      "literal_tr": "görünüş yapmak",
+      "note_tr": "De + mastar ile “-mış gibi yapmak” anlamına gelir.",
+      "register": "nötr",
+      "examples": [{ "fr": "Il fait semblant de ne pas comprendre.", "tr": "Anlamıyormuş gibi yapıyor.", "en": "He pretends not to understand." }]
+    },
+    "prendre son temps": {
+      "literal_tr": "zamanını almak",
+      "note_tr": "Acele etmeden, gereken zamanı kullanmayı anlatır.",
+      "register": "nötr",
+      "examples": [{ "fr": "Prends ton temps pour répondre.", "tr": "Cevap vermek için acele etme.", "en": "Take your time to answer." }]
+    },
+    "se rendre compte": {
+      "literal_tr": "kendine hesap vermek",
+      "note_tr": "Bir şeyi fark etmek için de veya que ile kullanılır.",
+      "register": "nötr",
+      "examples": [{ "fr": "Je me rends compte que j’ai fait une erreur.", "tr": "Bir hata yaptığımı fark ediyorum.", "en": "I realise that I made a mistake." }]
+    },
+    "ça marche": {
+      "literal_tr": "o yürüyor",
+      "note_tr": "Bir planı kabul ederken “Tamam, olur” anlamında çok yaygındır.",
+      "register": "günlük",
+      "examples": [{ "fr": "On se retrouve à huit heures ? — Ça marche !", "tr": "Saat sekizde buluşalım mı? — Tamam!", "en": "Shall we meet at eight? — Sounds good!" }]
+    },
+    "quand même": {
+      "literal_tr": "aynı zamanda",
+      "note_tr": "Beklenmeyen bir karşıtlığı vurgular: “yine de, buna rağmen”.",
+      "register": "günlük",
+      "examples": [{ "fr": "Il pleut, mais je vais sortir quand même.", "tr": "Yağmur yağıyor ama yine de dışarı çıkacağım.", "en": "It is raining, but I will go out anyway." }]
+    },
+    "n'importe quoi": {
+      "literal_tr": "herhangi bir şey",
+      "note_tr": "Bağlama göre “herhangi bir şey” veya tepki olarak “saçmalık” demektir.",
+      "register": "günlük",
+      "examples": [{ "fr": "Ne dis pas n’importe quoi !", "tr": "Saçma sapan konuşma!", "en": "Do not talk nonsense!" }]
+    },
+    "du coup": {
+      "literal_tr": "darbenin sonucunda",
+      "note_tr": "Konuşma dilinde sonuç bildirir. Resmî yazıda donc veya par conséquent tercih edilir.",
+      "register": "konuşma dili",
+      "examples": [{ "fr": "J’ai raté le bus, du coup je suis arrivé en retard.", "tr": "Otobüsü kaçırdım, bu yüzden geç geldim.", "en": "I missed the bus, so I arrived late." }]
+    },
+    "valoir le coup": {
+      "literal_tr": "darbeye değmek",
+      "note_tr": "Bir şeyin harcanan zamana, paraya veya çabaya değdiğini söyler.",
+      "register": "günlük",
+      "examples": [{ "fr": "Ce film vaut vraiment le coup.", "tr": "Bu film gerçekten izlemeye değer.", "en": "This film is really worth it." }]
+    },
+    "jeter un coup d'œil": {
+      "literal_tr": "bir göz darbesi atmak",
+      "note_tr": "Bir şeye kısa ve hızlı bakmak anlamındadır.",
+      "register": "nötr",
+      "examples": [{ "fr": "Peux-tu jeter un coup d’œil à mon texte ?", "tr": "Metnime bir göz atabilir misin?", "en": "Can you take a look at my text?" }]
+    },
+    "coup de foudre": {
+      "literal_tr": "yıldırım çarpması",
+      "note_tr": "Ani ve güçlü aşk için kullanılır; avoir le coup de foudre pour quelqu’un.",
+      "register": "nötr",
+      "examples": [{ "fr": "Ça a été le coup de foudre dès leur rencontre.", "tr": "Tanıştıkları anda ilk görüşte aşk oldu.", "en": "It was love at first sight when they met." }]
+    },
+    "avoir le cafard": {
+      "literal_tr": "hamam böceğine sahip olmak",
+      "note_tr": "Geçici olarak moralsiz veya keyifsiz hissetmeyi anlatır.",
+      "register": "günlük",
+      "examples": [{ "fr": "J’ai le cafard depuis son départ.", "tr": "O gittiğinden beri keyfim kaçık.", "en": "I have been feeling down since he left." }]
+    },
+    "avoir la pêche": {
+      "literal_tr": "şeftaliye sahip olmak",
+      "note_tr": "Enerjik ve formda hissetmek anlamında samimi bir ifadedir.",
+      "register": "samimi",
+      "examples": [{ "fr": "Ce matin, j’ai vraiment la pêche !", "tr": "Bu sabah gerçekten çok enerjik hissediyorum!", "en": "I feel full of energy this morning!" }]
+    },
+    "être dans la lune": {
+      "literal_tr": "ayda olmak",
+      "note_tr": "Dalgın olup çevresinde olanlara dikkat etmemeyi anlatır.",
+      "register": "günlük",
+      "examples": [{ "fr": "Tu n’écoutes pas, tu es dans la lune.", "tr": "Dinlemiyorsun, aklın başka yerde.", "en": "You are not listening; you are daydreaming." }]
+    },
+    "casser les pieds": {
+      "literal_tr": "ayakları kırmak",
+      "note_tr": "Birini çok rahatsız etmek veya canını sıkmak; samimi ortamda kullanılır.",
+      "register": "samimi",
+      "examples": [{ "fr": "Ce bruit me casse les pieds.", "tr": "Bu gürültü canımı çok sıkıyor.", "en": "This noise is really annoying me." }]
+    },
+    "il pleut des cordes": {
+      "literal_tr": "ipler yağıyor",
+      "note_tr": "Çok şiddetli yağmuru canlı ve günlük bir biçimde anlatır.",
+      "register": "günlük",
+      "examples": [{ "fr": "Prends un parapluie, il pleut des cordes.", "tr": "Şemsiye al, bardaktan boşanırcasına yağıyor.", "en": "Take an umbrella; it is pouring." }]
+    },
+    "poser un lapin": {
+      "literal_tr": "tavşan koymak",
+      "note_tr": "Kararlaştırılmış bir buluşmaya haber vermeden gitmemektir.",
+      "register": "günlük",
+      "examples": [{ "fr": "Il m’a posé un lapin hier soir.", "tr": "Dün akşam beni ekti.", "en": "He stood me up last night." }]
+    },
+    "tomber dans les pommes": {
+      "literal_tr": "elmaların içine düşmek",
+      "note_tr": "Bayılmak anlamında yaygın ve samimi bir deyimdir.",
+      "register": "günlük",
+      "examples": [{ "fr": "Elle est tombée dans les pommes à cause de la chaleur.", "tr": "Sıcaktan bayıldı.", "en": "She fainted because of the heat." }]
+    },
+    "mettre les pieds dans le plat": {
+      "literal_tr": "ayakları tabağa sokmak",
+      "note_tr": "Hassas bir konuyu düşünmeden açıp ortamı germek, pot kırmaktır.",
+      "register": "günlük",
+      "examples": [{ "fr": "J’ai mis les pieds dans le plat en parlant de son ex.", "tr": "Eski sevgilisinden söz ederek pot kırdım.", "en": "I put my foot in it by mentioning her ex." }]
+    },
+    "en faire tout un fromage": {
+      "literal_tr": "bundan koca bir peynir yapmak",
+      "note_tr": "Küçük bir meseleyi gereğinden fazla büyütmek anlamındadır.",
+      "register": "günlük",
+      "examples": [{ "fr": "Ce n’est qu’un retard, n’en fais pas tout un fromage.", "tr": "Sadece bir gecikme, pireyi deve yapma.", "en": "It is only a delay; do not make a big deal of it." }]
+    }
+  },
+
+  "duzelt": {
+    "pas mal": { "meaning_tr": "fena değil", "meaning_en": "not bad", "level": "A2" },
+    "métro, boulot, dodo": {
+      "meaning_tr": "iş güç döngüsü",
+      "meaning_en": "the daily grind",
+      "literal_tr": "metro, iş, uyku",
+      "level": "B1"
+    },
+    "en revenir": { "meaning_tr": "inanamamak", "meaning_en": "to get over it", "level": "B1" },
+    "mettre au monde": { "meaning_tr": "dünyaya getirmek", "meaning_en": "to give birth to", "level": "B1" },
+    "ça y est": { "meaning_tr": "işte oldu", "meaning_en": "that's it, it's done", "level": "A2" },
+    "de plus": { "meaning_tr": "üstelik", "meaning_en": "moreover", "level": "A2" },
+    "nez à nez": { "meaning_tr": "burun buruna", "meaning_en": "face to face", "literal_tr": "buruna burun", "level": "B1" },
+    "bon appétit": { "meaning_tr": "afiyet olsun", "meaning_en": "enjoy your meal", "level": "A1" },
+    "à la vôtre": { "meaning_tr": "şerefe", "meaning_en": "cheers", "literal_tr": "sizinkine", "level": "A2" },
+    "à votre santé": { "meaning_tr": "şerefe", "meaning_en": "to your health", "literal_tr": "sağlığınıza", "level": "A2" }
+  },
+
+  "ekle": {
+    "il y a": { "meaning_tr": "var", "meaning_en": "there is, there are", "literal_tr": "orada sahiptir", "level": "A1" },
+    "il faut": { "meaning_tr": "gerekir", "meaning_en": "it is necessary", "level": "A1" },
+    "s'il vous plaît": { "meaning_tr": "lütfen", "meaning_en": "please", "literal_tr": "size hoş gelirse", "level": "A1" },
+    "de rien": { "meaning_tr": "bir şey değil", "meaning_en": "you're welcome", "literal_tr": "hiçbir şeyden", "level": "A1" },
+    "ça va": { "meaning_tr": "iyiyim / nasılsın", "meaning_en": "it's going, I'm fine", "literal_tr": "o gidiyor", "level": "A1" },
+    "bonne nuit": { "meaning_tr": "iyi geceler", "meaning_en": "good night", "level": "A1" },
+    "à bientôt": { "meaning_tr": "yakında görüşürüz", "meaning_en": "see you soon", "level": "A1" },
+    "à tout à l'heure": { "meaning_tr": "birazdan görüşürüz", "meaning_en": "see you later", "level": "A1" },
+    "bien sûr": { "meaning_tr": "tabii ki", "meaning_en": "of course", "level": "A1" },
+    "tout le monde": { "meaning_tr": "herkes", "meaning_en": "everyone", "literal_tr": "bütün dünya", "level": "A1" },
+    "avoir besoin de": { "meaning_tr": "ihtiyacı olmak", "meaning_en": "to need", "literal_tr": "ihtiyaca sahip olmak", "level": "A1" },
+    "avoir faim": { "meaning_tr": "acıkmak", "meaning_en": "to be hungry", "literal_tr": "açlığa sahip olmak", "level": "A1" },
+    "avoir soif": { "meaning_tr": "susamak", "meaning_en": "to be thirsty", "literal_tr": "susuzluğa sahip olmak", "level": "A1" },
+    "avoir raison": { "meaning_tr": "haklı olmak", "meaning_en": "to be right", "literal_tr": "haklılığa sahip olmak", "level": "A1" },
+    "avoir tort": { "meaning_tr": "haksız olmak", "meaning_en": "to be wrong", "level": "A1" },
+    "avoir peur": { "meaning_tr": "korkmak", "meaning_en": "to be afraid", "literal_tr": "korkuya sahip olmak", "level": "A1" },
+    "avoir froid": { "meaning_tr": "üşümek", "meaning_en": "to be cold", "literal_tr": "soğuğa sahip olmak", "level": "A1" },
+    "avoir chaud": { "meaning_tr": "sıcaktan bunalmak", "meaning_en": "to be hot", "literal_tr": "sıcağa sahip olmak", "level": "A1" },
+    "avoir sommeil": { "meaning_tr": "uykusu gelmek", "meaning_en": "to be sleepy", "level": "A1" },
+    "avoir envie de": { "meaning_tr": "canı istemek", "meaning_en": "to feel like, to want", "level": "A1" },
+    "avoir mal à": { "meaning_tr": "ağrısı olmak", "meaning_en": "to have a pain in", "level": "A1" },
+    "avoir l'air": { "meaning_tr": "görünmek", "meaning_en": "to seem, to look", "literal_tr": "havaya sahip olmak", "level": "A2" },
+    "être en retard": { "meaning_tr": "geç kalmak", "meaning_en": "to be late", "level": "A1" },
+    "être d'accord": { "meaning_tr": "hemfikir olmak", "meaning_en": "to agree", "level": "A1" },
+    "être au courant": { "meaning_tr": "haberdar olmak", "meaning_en": "to be aware", "literal_tr": "akımda olmak", "level": "A2" },
+    "faire attention": { "meaning_tr": "dikkat etmek", "meaning_en": "to pay attention", "level": "A1" },
+    "faire les courses": { "meaning_tr": "alışveriş yapmak", "meaning_en": "to do the shopping", "level": "A1" },
+    "faire la cuisine": { "meaning_tr": "yemek yapmak", "meaning_en": "to cook", "level": "A1" },
+    "faire la queue": { "meaning_tr": "sıraya girmek", "meaning_en": "to queue up", "literal_tr": "kuyruk yapmak", "level": "A2" },
+    "faire semblant": { "meaning_tr": "-mış gibi yapmak", "meaning_en": "to pretend", "level": "A2" },
+    "faire la grasse matinée": { "meaning_tr": "geç saate kadar uyumak", "meaning_en": "to sleep in", "literal_tr": "yağlı sabah yapmak", "level": "B1" },
+    "faire la tête": { "meaning_tr": "surat asmak", "meaning_en": "to sulk", "literal_tr": "kafa yapmak", "level": "B1" },
+    "prendre son temps": { "meaning_tr": "acele etmemek", "meaning_en": "to take one's time", "level": "A2" },
+    "se rendre compte": { "meaning_tr": "fark etmek", "meaning_en": "to realize", "level": "A2" },
+    "en train de": { "meaning_tr": "-mekte olmak", "meaning_en": "in the process of", "level": "A1" },
+    "tout à fait": { "meaning_tr": "kesinlikle", "meaning_en": "absolutely", "level": "A2" },
+    "tout à coup": { "meaning_tr": "birdenbire", "meaning_en": "all of a sudden", "level": "A2" },
+    "petit à petit": { "meaning_tr": "azar azar", "meaning_en": "little by little", "level": "A2" },
+    "de temps en temps": { "meaning_tr": "ara sıra", "meaning_en": "from time to time", "level": "A1" },
+    "ça dépend": { "meaning_tr": "duruma bağlı", "meaning_en": "it depends", "level": "A1" },
+    "ça marche": { "meaning_tr": "tamam, anlaştık", "meaning_en": "that works, okay", "literal_tr": "o yürüyor", "level": "A2" },
+    "quand même": { "meaning_tr": "yine de", "meaning_en": "anyway, still", "level": "A2" },
+    "n'importe quoi": { "meaning_tr": "saçmalık", "meaning_en": "nonsense, anything", "literal_tr": "ne olursa olsun", "level": "A2" },
+    "par contre": { "meaning_tr": "buna karşılık", "meaning_en": "on the other hand", "level": "A2" },
+    "c'est-à-dire": { "meaning_tr": "yani", "meaning_en": "that is to say", "level": "A2" },
+    "de toute façon": { "meaning_tr": "her hâlükârda", "meaning_en": "anyway, in any case", "level": "A2" },
+    "à la fois": { "meaning_tr": "aynı anda", "meaning_en": "at the same time", "level": "A2" },
+    "en avoir marre": { "meaning_tr": "bıkmak", "meaning_en": "to be fed up", "level": "A2" },
+    "avoir du mal à": { "meaning_tr": "zorlanmak", "meaning_en": "to have trouble doing", "level": "A2" },
+    "du coup": { "meaning_tr": "bu yüzden", "meaning_en": "so, as a result", "level": "B1" },
+    "en effet": { "meaning_tr": "gerçekten de", "meaning_en": "indeed", "level": "B1" },
+    "au fur et à mesure": { "meaning_tr": "adım adım, ilerledikçe", "meaning_en": "gradually, as one goes", "level": "B2" },
+    "valoir le coup": { "meaning_tr": "değmek", "meaning_en": "to be worth it", "level": "B1" },
+    "ça vaut la peine": { "meaning_tr": "zahmete değer", "meaning_en": "it's worth the trouble", "level": "B1" },
+    "jeter un coup d'œil": { "meaning_tr": "göz atmak", "meaning_en": "to take a look", "literal_tr": "bir göz darbesi atmak", "level": "B1" },
+    "tenir au courant": { "meaning_tr": "haberdar etmek", "meaning_en": "to keep posted", "level": "B1" },
+    "coup de foudre": { "meaning_tr": "ilk görüşte aşk", "meaning_en": "love at first sight", "literal_tr": "yıldırım çarpması", "level": "B1" },
+    "avoir le cafard": { "meaning_tr": "keyfi kaçmak", "meaning_en": "to feel down", "literal_tr": "hamam böceğine sahip olmak", "level": "B1" },
+    "avoir la pêche": { "meaning_tr": "formda olmak", "meaning_en": "to feel great", "literal_tr": "şeftaliye sahip olmak", "level": "B1" },
+    "être dans la lune": { "meaning_tr": "dalgın olmak", "meaning_en": "to be daydreaming", "literal_tr": "ayda olmak", "level": "B1" },
+    "casser les pieds": { "meaning_tr": "canını sıkmak", "meaning_en": "to annoy someone", "literal_tr": "ayaklarını kırmak", "level": "B1" },
+    "il pleut des cordes": { "meaning_tr": "bardaktan boşanırcasına yağmak", "meaning_en": "it's pouring rain", "literal_tr": "ip yağıyor", "level": "B1" },
+    "poser un lapin": { "meaning_tr": "buluşmaya gitmemek, ekmek", "meaning_en": "to stand somebody up", "literal_tr": "tavşan koymak", "level": "B2" },
+    "tomber dans les pommes": { "meaning_tr": "bayılmak", "meaning_en": "to faint", "literal_tr": "elmaların içine düşmek", "level": "B2" },
+    "avoir un chat dans la gorge": { "meaning_tr": "sesi kısılmak", "meaning_en": "to have a frog in one's throat", "literal_tr": "boğazında kedi olmak", "level": "B2" },
+    "ce n'est pas la mer à boire": { "meaning_tr": "o kadar da zor değil", "meaning_en": "it's not that hard", "literal_tr": "içilecek bir deniz değil", "level": "B2" },
+    "mettre les pieds dans le plat": { "meaning_tr": "pot kırmak", "meaning_en": "to put one's foot in it", "literal_tr": "ayakları tabağa sokmak", "level": "B2" },
+    "revenons à nos moutons": { "meaning_tr": "konumuza dönelim", "meaning_en": "let's get back to the subject", "literal_tr": "koyunlarımıza dönelim", "level": "B2" },
+    "appeler un chat un chat": { "meaning_tr": "dobra konuşmak", "meaning_en": "to call a spade a spade", "literal_tr": "kediye kedi demek", "level": "B2" },
+    "avoir d'autres chats à fouetter": { "meaning_tr": "başka işi olmak", "meaning_en": "to have other fish to fry", "literal_tr": "kırbaçlayacak başka kedileri olmak", "level": "C1" },
+    "être à l'ouest": { "meaning_tr": "kafası basmamak", "meaning_en": "to be out of it", "literal_tr": "batıda olmak", "level": "C1" },
+    "en faire tout un fromage": { "meaning_tr": "pireyi deve yapmak", "meaning_en": "to make a big deal out of it", "literal_tr": "bundan koca bir peynir yapmak", "level": "C1" }
+  }
+}

@@ -1,0 +1,3678 @@
+{
+  "_aciklama": [
+    "Elle yapilan duzeltmeler ve eklemeler. Boru hatti kac kez calisirsa",
+    "calissin bu dosya en son uygulanir ve hicbir script uzerine yazmaz.",
+    "",
+    "Iki isi birden yapar:",
+    "  1) Var olan bir kelimenin yanlis Turkcesini duzeltir (13_build_db.py).",
+    "  2) Havuzda hic olmayan kelimeyi ekler (12_manual_tr.py). Seviye, tur,",
+    "     IPA ve ingilizce anlam s3_english.jsonl dosyasindan alinir.",
+    "",
+    "Duzeltilen/eklenen kelime reviewed=1 ve confidence=1.0 alir.",
+    "Sira numaralari 2026-08-10 tarihli havuza gore."
+  ],
+  "accompagner": {
+    "meaning_tr": "eşlik etmek",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "accomplir": {
+    "meaning_tr": "gerçekleştirmek",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "accorder": {
+    "meaning_tr": "vermek, tanımak",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "accrocher": {
+    "meaning_tr": "asmak, takmak",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "accueil": {
+    "meaning_tr": "karşılama",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "accueillant": {
+    "meaning_tr": "misafirperver",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "accueillir": {
+    "meaning_tr": "karşılamak",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "accès": {
+    "meaning_tr": "erişim",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "acharnement": {
+    "meaning_tr": "azim",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "actualité": {
+    "meaning_tr": "güncel olay",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "actuellement": {
+    "meaning_tr": "şu anda",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "ado": {
+    "meaning_tr": "ergen",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "adopter": {
+    "meaning_tr": "benimsemek",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "adorer": {
+    "meaning_tr": "bayılmak",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "adoubement": {
+    "meaning_tr": "şövalyelik töreni",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "adulte": {
+    "meaning_tr": "yetişkin",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "affoler": {
+    "meaning_tr": "paniğe kapılmak",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "affronter": {
+    "meaning_tr": "karşı koymak",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "agent": {
+    "meaning_tr": "görevli",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "agitation": {
+    "meaning_tr": "çalkantı",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "agrément": {
+    "meaning_tr": "onay",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "ailleurs": {
+    "meaning_tr": "başka yerde",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "aimable": {
+    "meaning_tr": "sevimli",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "ainsi": {
+    "meaning_tr": "böylece",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "album": {
+    "meaning_tr": "albüm",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "aliment": {
+    "meaning_tr": "besin",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "alimentation": {
+    "meaning_tr": "beslenme",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "aller": {
+    "meaning_tr": "gitmek",
+    "not": "sira 11. Otomatik 'uymak' vermisti, ikincil anlam."
+  },
+  "alors": {
+    "meaning_tr": "o zaman",
+    "not": "sira 40. Otomatik 'buradan' vermisti."
+  },
+  "ambiance": {
+    "meaning_tr": "ortam",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "an": {
+    "meaning_tr": "yıl",
+    "not": "sira 82. 'sene' de dogru, 'yil' daha yaygin."
+  },
+  "anchoïade": {
+    "meaning_tr": "ançüez ezmesi",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "ancien": {
+    "meaning_tr": "eski",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "angle": {
+    "meaning_tr": "açı",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "animer": {
+    "meaning_tr": "canlandırmak",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "annonce": {
+    "meaning_tr": "ilan",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "antillais": {
+    "meaning_tr": "Antilli",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "antiquité": {
+    "meaning_tr": "antik çağ",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "apparence": {
+    "meaning_tr": "görünüş",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "appartement": {
+    "meaning_tr": "daire",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "appeler": {
+    "meaning_tr": "çağırmak",
+    "not": "Otomatik 'seslenmek' vermisti."
+  },
+  "applaudir": {
+    "meaning_tr": "alkışlamak",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "apprenti": {
+    "meaning_tr": "çırak",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "approcher": {
+    "meaning_tr": "yaklaştırmak",
+    "not": "Donusluk hali eklenince temel fiilin gecissiz karsiligi kalmisti."
+  },
+  "archéologue": {
+    "meaning_tr": "arkeolog",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "arrestation": {
+    "meaning_tr": "tutuklama",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "arène": {
+    "meaning_tr": "arena",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "asseoir": {
+    "meaning_tr": "oturtmak",
+    "not": "Donusluk hali eklenince temel fiilin gecissiz karsiligi kalmisti."
+  },
+  "assiette": {
+    "meaning_tr": "tabak",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "assécher": {
+    "meaning_tr": "kurutmak",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "attente": {
+    "meaning_tr": "bekleyiş",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "attraction": {
+    "meaning_tr": "cazibe",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "au-dessus": {
+    "meaning_tr": "yukarısında",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "auberge": {
+    "meaning_tr": "pansiyon",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "aucun": {
+    "meaning_tr": "hiçbir",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "aussi": {
+    "meaning_tr": "de, ayrıca",
+    "not": "sira 41. Tek kelimeyle karsilanmiyor."
+  },
+  "autant": {
+    "meaning_tr": "o kadar çok",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "autour": {
+    "meaning_tr": "etrafında",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "avance": {
+    "meaning_tr": "ilerleme",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "avarice": {
+    "meaning_tr": "cimrilik",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "avec": {
+    "meaning_tr": "ile",
+    "not": "sira 21. Otomatik '-li' vermisti."
+  },
+  "aventurier": {
+    "meaning_tr": "maceracı",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "avouer": {
+    "meaning_tr": "itiraf etmek",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "axe": {
+    "meaning_tr": "eksen",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "aéroport": {
+    "meaning_tr": "havaalanı",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "aîné": {
+    "meaning_tr": "en büyük kardeş",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "bac": {
+    "meaning_tr": "feribot",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "bague": {
+    "meaning_tr": "yüzük",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "bal": {
+    "meaning_tr": "balo",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "balle": {
+    "meaning_tr": "top",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "bar": {
+    "meaning_tr": "bar",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "base": {
+    "meaning_tr": "temel",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "bateau": {
+    "meaning_tr": "tekne",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "bavard": {
+    "meaning_tr": "geveze",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "bel": {
+    "meaning_tr": "güzel",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "bientôt": {
+    "meaning_tr": "yakında",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "bille": {
+    "meaning_tr": "misket",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "biscotte": {
+    "meaning_tr": "gevrek ekmek",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "bière": {
+    "meaning_tr": "bira",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "blague": {
+    "meaning_tr": "şaka",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "blinder": {
+    "meaning_tr": "zırhlamak",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "blouson": {
+    "meaning_tr": "mont",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "blé": {
+    "meaning_tr": "buğday",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "bol": {
+    "meaning_tr": "kâse",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "bonbon": {
+    "meaning_tr": "şeker",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "bonjour": {
+    "meaning_tr": "merhaba",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "boucle": {
+    "meaning_tr": "halka",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "boudin": {
+    "meaning_tr": "kan sucuğu",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "bouger": {
+    "meaning_tr": "kımıldamak",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "boulangerie": {
+    "meaning_tr": "fırın",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "boule": {
+    "meaning_tr": "top",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "bouquin": {
+    "meaning_tr": "kitap",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "bout": {
+    "meaning_tr": "uç",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "branche": {
+    "meaning_tr": "dal",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "bras": {
+    "meaning_tr": "kol",
+    "not": "sira 310. Otomatik 'silah' vermisti, arm/arms karisikligi."
+  },
+  "bricoler": {
+    "meaning_tr": "el işi yapmak",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "broyer": {
+    "meaning_tr": "ezmek",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "brun": {
+    "meaning_tr": "kahverengi",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "brusque": {
+    "meaning_tr": "ani, sert",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "brûler": {
+    "meaning_tr": "yakmak",
+    "not": "Donusluk hali eklenince temel fiilin gecissiz karsiligi kalmisti."
+  },
+  "bénir": {
+    "meaning_tr": "kutsamak",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "bête": {
+    "meaning_tr": "aptal",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "bêtise": {
+    "meaning_tr": "aptallık",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "cabinet": {
+    "meaning_tr": "muayenehane",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "cadeau": {
+    "meaning_tr": "hediye",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "calanque": {
+    "meaning_tr": "koy",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "calmer": {
+    "meaning_tr": "sakinleştirmek",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "camarade": {
+    "meaning_tr": "arkadaş",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "candidature": {
+    "meaning_tr": "adaylık",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "canne": {
+    "meaning_tr": "baston",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "capable": {
+    "meaning_tr": "yetenekli",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "caresse": {
+    "meaning_tr": "okşama",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "centaine": {
+    "meaning_tr": "yüz civarı",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "centre": {
+    "meaning_tr": "merkez",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "centre-ville": {
+    "meaning_tr": "şehir merkezi",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "cependant": {
+    "meaning_tr": "ancak, bununla birlikte",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "certainement": {
+    "meaning_tr": "kesinlikle",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "chaleur": {
+    "meaning_tr": "sıcaklık",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "chambre": {
+    "meaning_tr": "oda",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "changer": {
+    "meaning_tr": "değiştirmek",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "charger": {
+    "meaning_tr": "yüklemek",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "charité": {
+    "meaning_tr": "hayırseverlik",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "charmant": {
+    "meaning_tr": "çekici",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "charme": {
+    "meaning_tr": "çekicilik",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "charrette": {
+    "meaning_tr": "el arabası",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "chasser": {
+    "meaning_tr": "avlamak",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "chaîne": {
+    "meaning_tr": "zincir; kanal",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "chemin": {
+    "meaning_tr": "yol",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "chevaucher": {
+    "meaning_tr": "ata binmek",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "chez": {
+    "meaning_tr": "-in evinde",
+    "not": "sira 92. Otomatik '-da' vermisti, belirsiz."
+  },
+  "chien": {
+    "meaning_tr": "köpek",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "chouette": {
+    "meaning_tr": "harika",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "châtain": {
+    "meaning_tr": "kumral",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "château": {
+    "meaning_tr": "şato",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "ciseau": {
+    "meaning_tr": "keski",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "citer": {
+    "meaning_tr": "alıntılamak",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "clair": {
+    "meaning_tr": "açık, net",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "classique": {
+    "meaning_tr": "klasik",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "cocher": {
+    "meaning_tr": "işaretlemek",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "cochon": {
+    "meaning_tr": "domuz",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "coeur": {
+    "meaning_tr": "kalp",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "coin": {
+    "meaning_tr": "köşe",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "colis": {
+    "meaning_tr": "koli, paket",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "collaborateur": {
+    "meaning_tr": "iş arkadaşı",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "coller": {
+    "meaning_tr": "yapıştırmak",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "collège": {
+    "meaning_tr": "ortaokul",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "collègue": {
+    "meaning_tr": "meslektaş",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "combat": {
+    "meaning_tr": "dövüş, mücadele",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "combien": {
+    "meaning_tr": "ne kadar",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "commande": {
+    "meaning_tr": "sipariş",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "comme": {
+    "meaning_tr": "gibi",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "commerçant": {
+    "meaning_tr": "esnaf",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "complet": {
+    "meaning_tr": "tam, dolu",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "complice": {
+    "meaning_tr": "suç ortağı",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "compliquer": {
+    "meaning_tr": "karmaşıklaştırmak",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "complètement": {
+    "meaning_tr": "tamamen",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "compléter": {
+    "meaning_tr": "tamamlamak",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "composer": {
+    "meaning_tr": "bestelemek",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "comédie": {
+    "meaning_tr": "komedi",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "concombre": {
+    "meaning_tr": "salatalık",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "concours": {
+    "meaning_tr": "yarışma",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "condamner": {
+    "meaning_tr": "mahkûm etmek",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "condition": {
+    "meaning_tr": "koşul",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "confidence": {
+    "meaning_tr": "sır",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "confier": {
+    "meaning_tr": "emanet etmek",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "connaissance": {
+    "meaning_tr": "bilgi",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "consacrer": {
+    "meaning_tr": "adamak",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "conseil": {
+    "meaning_tr": "öğüt, tavsiye",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "conseiller": {
+    "meaning_tr": "tavsiye etmek",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "conserver": {
+    "meaning_tr": "saklamak",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "considérer": {
+    "meaning_tr": "değerlendirmek",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "contact": {
+    "meaning_tr": "temas",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "contempler": {
+    "meaning_tr": "seyretmek",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "contre": {
+    "meaning_tr": "karşı",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "conversation": {
+    "meaning_tr": "sohbet",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "copier": {
+    "meaning_tr": "kopyalamak",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "corde": {
+    "meaning_tr": "ip",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "correspondre": {
+    "meaning_tr": "karşılık gelmek",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "costume": {
+    "meaning_tr": "takım elbise",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "coucher": {
+    "meaning_tr": "yatırmak",
+    "not": "sira 351. Otomatik 'koymak' vermisti."
+  },
+  "couler": {
+    "meaning_tr": "akmak",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "couleur": {
+    "meaning_tr": "renk",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "coup": {
+    "meaning_tr": "vuruş",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "coupable": {
+    "meaning_tr": "suçlu",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "couper": {
+    "meaning_tr": "kesmek",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "cour": {
+    "meaning_tr": "avlu",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "courageux": {
+    "meaning_tr": "cesur",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "courant": {
+    "meaning_tr": "güncel",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "courir": {
+    "meaning_tr": "koşmak",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "court": {
+    "meaning_tr": "kısa",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "cousin": {
+    "meaning_tr": "kuzen",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "couturier": {
+    "meaning_tr": "moda tasarımcısı",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "couvert": {
+    "meaning_tr": "kapalı",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "couvrir": {
+    "meaning_tr": "örtmek",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "cracher": {
+    "meaning_tr": "tükürmek",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "craquer": {
+    "meaning_tr": "çatlamak",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "crier": {
+    "meaning_tr": "bağırmak",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "crique": {
+    "meaning_tr": "koy",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "critique": {
+    "meaning_tr": "kritik",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "critiquer": {
+    "meaning_tr": "eleştirmek",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "croiser": {
+    "meaning_tr": "karşılaşmak",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "crosse": {
+    "meaning_tr": "dipçik",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "crème": {
+    "meaning_tr": "krema",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "cuire": {
+    "meaning_tr": "pişirmek",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "cuisine": {
+    "meaning_tr": "mutfak",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "cuisiner": {
+    "meaning_tr": "yemek pişirmek",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "culte": {
+    "meaning_tr": "ibadet",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "curieux": {
+    "meaning_tr": "meraklı",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "célibataire": {
+    "meaning_tr": "bekâr",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "côte": {
+    "meaning_tr": "kaburga",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "côté": {
+    "meaning_tr": "yan, taraf",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "dalle": {
+    "meaning_tr": "kaldırım taşı",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "dame": {
+    "meaning_tr": "hanım",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "danger": {
+    "meaning_tr": "tehlike",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "dans": {
+    "meaning_tr": "-de, içinde",
+    "not": "sira 14."
+  },
+  "danse": {
+    "meaning_tr": "dans",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "danser": {
+    "meaning_tr": "dans etmek",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "date": {
+    "meaning_tr": "tarih",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "de": {
+    "meaning_tr": "-den, -in",
+    "not": "sira 1."
+  },
+  "debout": {
+    "meaning_tr": "ayakta",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "dedans": {
+    "meaning_tr": "içeride",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "dehors": {
+    "meaning_tr": "dışarıda",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "depuis": {
+    "meaning_tr": "-den beri",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "dessinateur": {
+    "meaning_tr": "çizer",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "dessiner": {
+    "meaning_tr": "çizmek",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "dessus": {
+    "meaning_tr": "üstünde",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "devant": {
+    "meaning_tr": "önünde",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "devenir": {
+    "meaning_tr": "haline gelmek",
+    "not": "sira 127. 'olmak' etre ile karisiyordu."
+  },
+  "devoir": {
+    "meaning_tr": "zorunda olmak",
+    "not": "sira 26. Otomatik '-meli, -mali' vermisti."
+  },
+  "diamètre": {
+    "meaning_tr": "çap",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "difficile": {
+    "meaning_tr": "zor",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "différence": {
+    "meaning_tr": "fark",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "direct": {
+    "meaning_tr": "doğrudan",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "direction": {
+    "meaning_tr": "yön",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "diriger": {
+    "meaning_tr": "yönetmek",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "disparition": {
+    "meaning_tr": "kayboluş",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "disputer": {
+    "meaning_tr": "tartışmak",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "dizaine": {
+    "meaning_tr": "on civarı",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "dodo": {
+    "meaning_tr": "uyku (çocuk dili)",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "domaine": {
+    "meaning_tr": "alan",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "domestique": {
+    "meaning_tr": "evcil",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "donner": {
+    "meaning_tr": "vermek",
+    "not": "sira 76. Otomatik 'bagislamak' vermisti."
+  },
+  "double": {
+    "meaning_tr": "çift",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "douer": {
+    "meaning_tr": "bahşetmek",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "drap": {
+    "meaning_tr": "çarşaf",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "dressage": {
+    "meaning_tr": "terbiye",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "drôle": {
+    "meaning_tr": "komik",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "dur": {
+    "meaning_tr": "sert",
+    "not": "sira 295."
+  },
+  "dès": {
+    "meaning_tr": "-den itibaren",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "débarrasser": {
+    "meaning_tr": "toplamak, temizlemek",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "débrouiller": {
+    "meaning_tr": "üstesinden gelmek",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "début": {
+    "meaning_tr": "başlangıç",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "décider": {
+    "meaning_tr": "karar vermek",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "décoration": {
+    "meaning_tr": "süsleme",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "découvrir": {
+    "meaning_tr": "keşfetmek",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "décrocher": {
+    "meaning_tr": "telefonu açmak",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "défense": {
+    "meaning_tr": "savunma",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "déguster": {
+    "meaning_tr": "tatmak",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "déjeuner": {
+    "meaning_tr": "öğle yemeği yemek",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "déjà": {
+    "meaning_tr": "zaten, çoktan",
+    "not": "Otomatik 'daha simdiden' vermisti."
+  },
+  "délivrer": {
+    "meaning_tr": "kurtarmak",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "dépasser": {
+    "meaning_tr": "geçmek, aşmak",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "dépenser": {
+    "meaning_tr": "harcamak",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "déplacement": {
+    "meaning_tr": "yer değiştirme",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "déplacer": {
+    "meaning_tr": "yerini değiştirmek",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "dépouiller": {
+    "meaning_tr": "soymak",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "déranger": {
+    "meaning_tr": "rahatsız etmek",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "désespérer": {
+    "meaning_tr": "umudunu kesmek",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "désir": {
+    "meaning_tr": "arzu",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "détacher": {
+    "meaning_tr": "ayırmak",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "détendre": {
+    "meaning_tr": "gevşetmek",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "détester": {
+    "meaning_tr": "nefret etmek",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "développer": {
+    "meaning_tr": "geliştirmek",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "dévorer": {
+    "meaning_tr": "yiyip bitirmek",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "embêter": {
+    "meaning_tr": "canını sıkmak",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "emmener": {
+    "meaning_tr": "götürmek",
+    "not": "sira 384. Otomatik 'havalanmak' vermisti."
+  },
+  "empereur": {
+    "meaning_tr": "imparator",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "emporter": {
+    "meaning_tr": "alıp götürmek",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "enchanter": {
+    "meaning_tr": "büyülemek",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "encore": {
+    "meaning_tr": "hâlâ",
+    "not": "sira 52. 'daha' belirsizdi."
+  },
+  "endroit": {
+    "meaning_tr": "yer",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "enfance": {
+    "meaning_tr": "çocukluk",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "enfermer": {
+    "meaning_tr": "kilitlemek",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "enlever": {
+    "meaning_tr": "çıkarmak",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "enlèvement": {
+    "meaning_tr": "kaçırma",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "ennuyer": {
+    "meaning_tr": "sıkmak",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "enregistrer": {
+    "meaning_tr": "kaydetmek",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "enrouler": {
+    "meaning_tr": "sarmak",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "ensoleillement": {
+    "meaning_tr": "güneşlenme süresi",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "enthousiaste": {
+    "meaning_tr": "coşkulu",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "entièrement": {
+    "meaning_tr": "tamamen",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "entorse": {
+    "meaning_tr": "burkulma",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "entourer": {
+    "meaning_tr": "çevrelemek",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "entraîner": {
+    "meaning_tr": "antrenman yaptırmak",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "entretien": {
+    "meaning_tr": "bakım",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "entrée": {
+    "meaning_tr": "giriş",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "environnement": {
+    "meaning_tr": "çevre",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "escalier": {
+    "meaning_tr": "merdiven",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "espace": {
+    "meaning_tr": "alan",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "espagnol": {
+    "meaning_tr": "İspanyolca",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "exactement": {
+    "meaning_tr": "tam olarak",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "excellent": {
+    "meaning_tr": "mükemmel",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "exciter": {
+    "meaning_tr": "heyecanlandırmak",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "excuse": {
+    "meaning_tr": "bahane",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "exhorter": {
+    "meaning_tr": "teşvik etmek",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "exploser": {
+    "meaning_tr": "patlamak",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "exposition": {
+    "meaning_tr": "sergi",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "exprimer": {
+    "meaning_tr": "ifade etmek",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "extra": {
+    "meaning_tr": "ekstra",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "extérieur": {
+    "meaning_tr": "dış",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "faiblement": {
+    "meaning_tr": "zayıfça",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "falloir": {
+    "meaning_tr": "gerekmek",
+    "not": "sira 49."
+  },
+  "faute": {
+    "meaning_tr": "hata",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "faveur": {
+    "meaning_tr": "iyilik",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "façon": {
+    "meaning_tr": "biçim, tarz",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "femme": {
+    "meaning_tr": "kadın",
+    "not": "sira 65. Otomatik 'avrat' vermisti, kaba ve eskimis."
+  },
+  "ferme": {
+    "meaning_tr": "sağlam",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "fesse": {
+    "meaning_tr": "kalça",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "feu": {
+    "meaning_tr": "merhum",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "fidèle": {
+    "meaning_tr": "sadık",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "fidélité": {
+    "meaning_tr": "sadakat",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "fiel": {
+    "meaning_tr": "safra",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "fier": {
+    "meaning_tr": "gururlu",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "figurine": {
+    "meaning_tr": "biblo",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "file": {
+    "meaning_tr": "sıra, kuyruk",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "filer": {
+    "meaning_tr": "sıvışmak",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "fille": {
+    "meaning_tr": "kız",
+    "not": "sira 85. Otomatik 'kiz evlat' vermisti, dar anlam."
+  },
+  "filmer": {
+    "meaning_tr": "film çekmek",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "fin": {
+    "meaning_tr": "ince",
+    "not": "sira 381. Sifat hali; otomatik 'nice' vermisti."
+  },
+  "finlandais": {
+    "meaning_tr": "Finlandiyalı",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "fixer": {
+    "meaning_tr": "sabitlemek",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "flatter": {
+    "meaning_tr": "pohpohlamak",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "flic": {
+    "meaning_tr": "polis",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "flore": {
+    "meaning_tr": "bitki örtüsü",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "foncer": {
+    "meaning_tr": "hızla ilerlemek",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "foot": {
+    "meaning_tr": "futbol",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "forcer": {
+    "meaning_tr": "zorlamak",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "fouiller": {
+    "meaning_tr": "aramak",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "frais": {
+    "meaning_tr": "taze",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "franc": {
+    "meaning_tr": "açık sözlü",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "franchir": {
+    "meaning_tr": "aşmak",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "frire": {
+    "meaning_tr": "kızartmak",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "froid": {
+    "meaning_tr": "soğuk",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "frère": {
+    "meaning_tr": "erkek kardeş",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "fugue": {
+    "meaning_tr": "kaçış",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "fuite": {
+    "meaning_tr": "kaçış; sızıntı",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "fumer": {
+    "meaning_tr": "sigara içmek",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "furieux": {
+    "meaning_tr": "öfkeli",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "fâcher": {
+    "meaning_tr": "kızdırmak",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "fête": {
+    "meaning_tr": "bayram, kutlama",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "gamin": {
+    "meaning_tr": "çocuk",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "garage": {
+    "meaning_tr": "garaj",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "garer": {
+    "meaning_tr": "park etmek",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "garçon": {
+    "meaning_tr": "erkek çocuk",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "gens": {
+    "meaning_tr": "insanlar",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "gentil": {
+    "meaning_tr": "kibar",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "gentilhomme": {
+    "meaning_tr": "asilzade",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "goût": {
+    "meaning_tr": "tat",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "goûter": {
+    "meaning_tr": "tatmak",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "grand": {
+    "meaning_tr": "büyük",
+    "not": "sira 75. Otomatik 'ulu' vermisti, edebi."
+  },
+  "grand-mère": {
+    "meaning_tr": "büyükanne",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "grandir": {
+    "meaning_tr": "büyümek",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "gras": {
+    "meaning_tr": "yağlı",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "grave": {
+    "meaning_tr": "ciddi",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "grincement": {
+    "meaning_tr": "gıcırtı",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "gris": {
+    "meaning_tr": "gri",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "gros": {
+    "meaning_tr": "iri, şişman",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "grâce": {
+    "meaning_tr": "zarafet",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "guérir": {
+    "meaning_tr": "iyileşmek",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "gymnastique": {
+    "meaning_tr": "jimnastik",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "gâcher": {
+    "meaning_tr": "berbat etmek",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "gâteau": {
+    "meaning_tr": "pasta",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "génération": {
+    "meaning_tr": "kuşak",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "gêner": {
+    "meaning_tr": "rahatsız etmek",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "habitant": {
+    "meaning_tr": "bir yerde oturan",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "habituel": {
+    "meaning_tr": "alışılmış",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "habituer": {
+    "meaning_tr": "alıştırmak",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "halle": {
+    "meaning_tr": "kapalı çarşı",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "hasard": {
+    "meaning_tr": "tesadüf",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "haut": {
+    "meaning_tr": "yüksek",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "heaume": {
+    "meaning_tr": "miğfer",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "heureux": {
+    "meaning_tr": "mutlu",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "histoire": {
+    "meaning_tr": "hikâye",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "homme": {
+    "meaning_tr": "adam",
+    "not": "sira 56. 'erkek' de dogru, 'adam' daha yaygin."
+  },
+  "honnête": {
+    "meaning_tr": "dürüst",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "honorer": {
+    "meaning_tr": "onurlandırmak",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "honte": {
+    "meaning_tr": "utanç",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "humeur": {
+    "meaning_tr": "ruh hali",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "hurler": {
+    "meaning_tr": "haykırmak",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "hygiène": {
+    "meaning_tr": "hijyen",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "héler": {
+    "meaning_tr": "seslenerek çağırmak",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "hésiter": {
+    "meaning_tr": "tereddüt etmek",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "hôtellerie": {
+    "meaning_tr": "otelcilik",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "idiot": {
+    "meaning_tr": "aptal",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "idéal": {
+    "meaning_tr": "ideal",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "image": {
+    "meaning_tr": "resim",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "imaginer": {
+    "meaning_tr": "hayal etmek",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "implorer": {
+    "meaning_tr": "yalvarmak",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "important": {
+    "meaning_tr": "önemli",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "importer": {
+    "meaning_tr": "önemli olmak",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "impression": {
+    "meaning_tr": "izlenim",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "imprimerie": {
+    "meaning_tr": "matbaa",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "inauguration": {
+    "meaning_tr": "açılış",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "incapable": {
+    "meaning_tr": "yetersiz",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "inconnu": {
+    "meaning_tr": "bilinmeyen",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "indien": {
+    "meaning_tr": "Hint",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "indiquer": {
+    "meaning_tr": "göstermek",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "information": {
+    "meaning_tr": "bilgi",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "innocent": {
+    "meaning_tr": "masum",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "inquiet": {
+    "meaning_tr": "endişeli",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "inquiéter": {
+    "meaning_tr": "endişelendirmek",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "inscrire": {
+    "meaning_tr": "kaydetmek",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "insister": {
+    "meaning_tr": "ısrar etmek",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "inspirer": {
+    "meaning_tr": "ilham vermek",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "instant": {
+    "meaning_tr": "an",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "insupportable": {
+    "meaning_tr": "dayanılmaz",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "interdire": {
+    "meaning_tr": "yasaklamak",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "intermittent": {
+    "meaning_tr": "aralıklı",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "internet": {
+    "meaning_tr": "internet",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "interprète": {
+    "meaning_tr": "tercüman",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "interrompre": {
+    "meaning_tr": "sözünü kesmek",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "intervenir": {
+    "meaning_tr": "müdahale etmek",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "intimider": {
+    "meaning_tr": "gözünü korkutmak",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "intéresser": {
+    "meaning_tr": "ilgilendirmek",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "intérêt": {
+    "meaning_tr": "ilgi",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "invitation": {
+    "meaning_tr": "davet",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "jaune": {
+    "meaning_tr": "sarı",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "jean": {
+    "meaning_tr": "kot pantolon",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "jeton": {
+    "meaning_tr": "jeton",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "joie": {
+    "meaning_tr": "sevinç",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "joindre": {
+    "meaning_tr": "birleştirmek",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "joli": {
+    "meaning_tr": "güzel",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "jouet": {
+    "meaning_tr": "oyuncak",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "jour": {
+    "meaning_tr": "gün",
+    "not": "sira 60. Otomatik 'gunduz' vermisti, dar anlam."
+  },
+  "journée": {
+    "meaning_tr": "gün",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "juger": {
+    "meaning_tr": "yargılamak",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "jurer": {
+    "meaning_tr": "yemin etmek",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "jus": {
+    "meaning_tr": "meyve suyu",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "juste": {
+    "meaning_tr": "adil, doğru",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "kayak": {
+    "meaning_tr": "kano",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "kilo": {
+    "meaning_tr": "kilo",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "kilomètre": {
+    "meaning_tr": "kilometre",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "laid": {
+    "meaning_tr": "çirkin",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "laisser": {
+    "meaning_tr": "bırakmak",
+    "not": "sira 80. Otomatik 'unutmak' vermisti, yanlis."
+  },
+  "lamenter": {
+    "meaning_tr": "yakınmak",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "langage": {
+    "meaning_tr": "dil",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "langouste": {
+    "meaning_tr": "istakoz",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "lapin": {
+    "meaning_tr": "tavşan",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "le": {
+    "meaning_tr": "belirli tanımlık",
+    "not": "sira 9. Otomatik 'sizin' vermisti."
+  },
+  "lecture": {
+    "meaning_tr": "okuma",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "lendemain": {
+    "meaning_tr": "ertesi gün",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "libération": {
+    "meaning_tr": "kurtuluş",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "libérer": {
+    "meaning_tr": "serbest bırakmak",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "limpide": {
+    "meaning_tr": "berrak",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "loin": {
+    "meaning_tr": "uzak",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "loisir": {
+    "meaning_tr": "boş zaman",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "long": {
+    "meaning_tr": "uzun",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "longtemps": {
+    "meaning_tr": "uzun süre",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "losange": {
+    "meaning_tr": "eşkenar dörtgen",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "louer": {
+    "meaning_tr": "kiralamak",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "lourd": {
+    "meaning_tr": "ağır",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "là-dedans": {
+    "meaning_tr": "içinde",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "là-haut": {
+    "meaning_tr": "yukarıda",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "lâche": {
+    "meaning_tr": "korkak",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "légende": {
+    "meaning_tr": "efsane",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "léger": {
+    "meaning_tr": "hafif",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "madame": {
+    "meaning_tr": "hanımefendi",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "mademoiselle": {
+    "meaning_tr": "küçük hanım",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "mail": {
+    "meaning_tr": "e-posta",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "majesté": {
+    "meaning_tr": "majeste",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "mal": {
+    "meaning_tr": "kötü",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "malade": {
+    "meaning_tr": "hasta",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "malhonnête": {
+    "meaning_tr": "dürüst olmayan",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "manche": {
+    "meaning_tr": "kol (giysi)",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "manque": {
+    "meaning_tr": "eksiklik",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "manquer": {
+    "meaning_tr": "eksik olmak, özlemek",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "maquiller": {
+    "meaning_tr": "makyaj yapmak",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "marier": {
+    "meaning_tr": "evlendirmek",
+    "not": "Donusluk hali eklenince temel fiilin gecissiz karsiligi kalmisti."
+  },
+  "marquer": {
+    "meaning_tr": "işaretlemek",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "marrant": {
+    "meaning_tr": "komik",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "masque": {
+    "meaning_tr": "maske",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "mauvais": {
+    "meaning_tr": "kötü",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "mec": {
+    "meaning_tr": "herif, adam",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "meilleur": {
+    "meaning_tr": "daha iyi",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "mener": {
+    "meaning_tr": "götürmek",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "menu": {
+    "meaning_tr": "menü",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "merci": {
+    "meaning_tr": "teşekkürler",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "messe": {
+    "meaning_tr": "ayin",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "mets": {
+    "meaning_tr": "yemek",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "mettre": {
+    "meaning_tr": "koymak",
+    "not": "sira 69. Otomatik 'giymek' vermisti, ikincil anlam."
+  },
+  "meubler": {
+    "meaning_tr": "döşemek",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "meurtrier": {
+    "meaning_tr": "katil",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "micro": {
+    "meaning_tr": "mikrofon",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "mieux": {
+    "meaning_tr": "daha iyi",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "mignon": {
+    "meaning_tr": "sevimli",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "millier": {
+    "meaning_tr": "bin civarı",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "mince": {
+    "meaning_tr": "ince",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "misérable": {
+    "meaning_tr": "sefil",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "moment": {
+    "meaning_tr": "an",
+    "not": "Otomatik 'kolcuk' vermisti."
+  },
+  "monde": {
+    "meaning_tr": "dünya",
+    "not": "sira 74. Dogruydu, teyit icin sabitlendi."
+  },
+  "mondial": {
+    "meaning_tr": "dünya çapında",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "monnaie": {
+    "meaning_tr": "bozuk para",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "montage": {
+    "meaning_tr": "kurulum, montaj",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "monter": {
+    "meaning_tr": "çıkmak, yükselmek",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "mouiller": {
+    "meaning_tr": "ıslatmak",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "moulin": {
+    "meaning_tr": "değirmen",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "mouton": {
+    "meaning_tr": "koyun",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "moyenner": {
+    "meaning_tr": "ortalamasını almak",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "muguet": {
+    "meaning_tr": "inci çiçeği",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "mètre": {
+    "meaning_tr": "metre",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "méchamment": {
+    "meaning_tr": "kötü niyetle",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "méchant": {
+    "meaning_tr": "kötü, huysuz",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "médecin": {
+    "meaning_tr": "doktor",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "méfier": {
+    "meaning_tr": "güvenmemek",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "ménage": {
+    "meaning_tr": "ev işi",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "métal": {
+    "meaning_tr": "metal",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "métro": {
+    "meaning_tr": "metro",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "météo": {
+    "meaning_tr": "hava durumu",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "même": {
+    "meaning_tr": "aynı",
+    "not": "sira 58. Otomatik 'esit' vermisti."
+  },
+  "nager": {
+    "meaning_tr": "yüzmek",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "nature": {
+    "meaning_tr": "doğa",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "ne": {
+    "meaning_tr": "olumsuzluk eki",
+    "not": "sira 6. Tek basina cevrilmez, 'ne ... pas' kalibinin parcasi."
+  },
+  "nettoyer": {
+    "meaning_tr": "temizlemek",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "ni": {
+    "meaning_tr": "ne ... ne",
+    "not": "sira 168."
+  },
+  "nocturne": {
+    "meaning_tr": "geceye ait",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "nommer": {
+    "meaning_tr": "adlandırmak",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "noter": {
+    "meaning_tr": "not etmek",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "nouveau": {
+    "meaning_tr": "yeni",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "nu": {
+    "meaning_tr": "çıplak",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "nuit": {
+    "meaning_tr": "gece",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "nuitée": {
+    "meaning_tr": "konaklama gecesi",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "nul": {
+    "meaning_tr": "hiç",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "obliger": {
+    "meaning_tr": "zorunda bırakmak",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "observer": {
+    "meaning_tr": "gözlemlemek",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "obéir": {
+    "meaning_tr": "itaat etmek",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "occasion": {
+    "meaning_tr": "fırsat",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "occuper": {
+    "meaning_tr": "işgal etmek",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "océanique": {
+    "meaning_tr": "okyanusa ait",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "odorat": {
+    "meaning_tr": "koku alma duyusu",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "oeil": {
+    "meaning_tr": "göz",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "oeuf": {
+    "meaning_tr": "yumurta",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "oeuvre": {
+    "meaning_tr": "eser",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "office": {
+    "meaning_tr": "görev",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "opération": {
+    "meaning_tr": "ameliyat, işlem",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "organiser": {
+    "meaning_tr": "düzenlemek",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "oser": {
+    "meaning_tr": "cesaret etmek",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "oublie": {
+    "meaning_tr": "gofret",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "oui": {
+    "meaning_tr": "evet",
+    "not": "sira 42. Otomatik 'efendim' vermisti."
+  },
+  "ouvert": {
+    "meaning_tr": "açık",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "ouvrier": {
+    "meaning_tr": "işçi",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "pagaille": {
+    "meaning_tr": "dağınıklık",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "page": {
+    "meaning_tr": "sayfa",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "paire": {
+    "meaning_tr": "çift",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "palier": {
+    "meaning_tr": "sahanlık",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "palmier": {
+    "meaning_tr": "palmiye",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "pan": {
+    "meaning_tr": "parça",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "papi": {
+    "meaning_tr": "dede",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "par-dessus": {
+    "meaning_tr": "üzerinden",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "paradisiaque": {
+    "meaning_tr": "cennet gibi",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "parcourir": {
+    "meaning_tr": "baştan sona gezmek",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "pardon": {
+    "meaning_tr": "af",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "parent": {
+    "meaning_tr": "akraba",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "parfait": {
+    "meaning_tr": "mükemmel",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "parfaitement": {
+    "meaning_tr": "mükemmel şekilde",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "parfum": {
+    "meaning_tr": "parfüm",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "partager": {
+    "meaning_tr": "paylaşmak",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "particulier": {
+    "meaning_tr": "özel",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "partir": {
+    "meaning_tr": "ayrılmak",
+    "not": "Otomatik 'birakmak' vermisti; partager ile karismis."
+  },
+  "pas": {
+    "meaning_tr": "değil",
+    "not": "sira 3. Olumsuzluk zarfi; 'yok' yaniltici."
+  },
+  "passe": {
+    "meaning_tr": "geçiş",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "passer": {
+    "meaning_tr": "geçmek",
+    "not": "sira 55. Otomatik 'ugramak' vermisti, dar anlam."
+  },
+  "patience": {
+    "meaning_tr": "sabır",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "patient": {
+    "meaning_tr": "sabırlı",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "patte": {
+    "meaning_tr": "pençe",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "paume": {
+    "meaning_tr": "avuç içi",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "paysage": {
+    "meaning_tr": "manzara",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "peine": {
+    "meaning_tr": "zahmet",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "peinture": {
+    "meaning_tr": "resim",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "pelote": {
+    "meaning_tr": "yumak",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "pencher": {
+    "meaning_tr": "eğilmek",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "pendre": {
+    "meaning_tr": "asmak",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "personnage": {
+    "meaning_tr": "karakter",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "petit": {
+    "meaning_tr": "küçük",
+    "not": "sira 51. 'ufak' da dogru ama 'kucuk' standart."
+  },
+  "peu": {
+    "meaning_tr": "az",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "peur": {
+    "meaning_tr": "korku",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "pionnier": {
+    "meaning_tr": "öncü",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "piquet": {
+    "meaning_tr": "kazık",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "pire": {
+    "meaning_tr": "daha kötü",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "placard": {
+    "meaning_tr": "dolap",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "place": {
+    "meaning_tr": "yer, meydan",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "plage": {
+    "meaning_tr": "plaj",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "plaindre": {
+    "meaning_tr": "acımak",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "plaisanter": {
+    "meaning_tr": "şaka yapmak",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "planter": {
+    "meaning_tr": "dikmek",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "plaque": {
+    "meaning_tr": "levha",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "plat": {
+    "meaning_tr": "düz",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "pleuvoir": {
+    "meaning_tr": "yağmur yağmak",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "plier": {
+    "meaning_tr": "katlamak",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "plutôt": {
+    "meaning_tr": "daha ziyade",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "pointure": {
+    "meaning_tr": "ayakkabı numarası",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "polonais": {
+    "meaning_tr": "Polonyalı",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "populaire": {
+    "meaning_tr": "halka ait",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "portable": {
+    "meaning_tr": "cep telefonu",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "porter": {
+    "meaning_tr": "taşımak, giymek",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "pose": {
+    "meaning_tr": "poz",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "poser": {
+    "meaning_tr": "koymak",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "possession": {
+    "meaning_tr": "sahiplik",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "pot": {
+    "meaning_tr": "kavanoz, saksı",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "pote": {
+    "meaning_tr": "arkadaş",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "poubelle": {
+    "meaning_tr": "çöp kutusu",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "poursuivre": {
+    "meaning_tr": "sürdürmek",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "pourtant": {
+    "meaning_tr": "yine de",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "pouvoir": {
+    "meaning_tr": "-ebilmek",
+    "not": "sira 17. Otomatik 'may' vermisti; ingilizce pivot sizmis."
+  },
+  "pratique": {
+    "meaning_tr": "pratik",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "presse": {
+    "meaning_tr": "basın",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "prix": {
+    "meaning_tr": "fiyat",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "prière": {
+    "meaning_tr": "dua",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "prochain": {
+    "meaning_tr": "gelecek, sonraki",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "proche": {
+    "meaning_tr": "yakın",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "profil": {
+    "meaning_tr": "profil",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "profondément": {
+    "meaning_tr": "derinden",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "projecteur": {
+    "meaning_tr": "projektör",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "promener": {
+    "meaning_tr": "gezdirmek",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "promettre": {
+    "meaning_tr": "söz vermek",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "propager": {
+    "meaning_tr": "yaymak",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "proposition": {
+    "meaning_tr": "öneri",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "province": {
+    "meaning_tr": "taşra",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "provocateur": {
+    "meaning_tr": "kışkırtıcı",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "près": {
+    "meaning_tr": "yakın",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "prénom": {
+    "meaning_tr": "ilk isim",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "présent": {
+    "meaning_tr": "şimdiki",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "présentateur": {
+    "meaning_tr": "sunucu",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "prêt": {
+    "meaning_tr": "hazır",
+    "not": "sira 277. Otomatik 'razi' vermisti."
+  },
+  "psy": {
+    "meaning_tr": "psikolog",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "publier": {
+    "meaning_tr": "yayımlamak",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "pureté": {
+    "meaning_tr": "saflık",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "pâle": {
+    "meaning_tr": "solgun",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "pâtisserie": {
+    "meaning_tr": "pastane",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "quart": {
+    "meaning_tr": "çeyrek",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "quelquefois": {
+    "meaning_tr": "bazen",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "quille": {
+    "meaning_tr": "labut",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "quitter": {
+    "meaning_tr": "ayrılmak, terk etmek",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "quoi": {
+    "meaning_tr": "ne",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "rachat": {
+    "meaning_tr": "geri satın alma",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "racket": {
+    "meaning_tr": "haraç",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "raid": {
+    "meaning_tr": "baskın",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "raide": {
+    "meaning_tr": "dik, sert",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "rallye": {
+    "meaning_tr": "ralli",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "ranger": {
+    "meaning_tr": "düzenlemek",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "rapprocher": {
+    "meaning_tr": "yaklaştırmak",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "raquette": {
+    "meaning_tr": "raket",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "rassurer": {
+    "meaning_tr": "içini rahatlatmak",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "rater": {
+    "meaning_tr": "kaçırmak",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "recevoir": {
+    "meaning_tr": "almak",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "recherche": {
+    "meaning_tr": "araştırma",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "reconduire": {
+    "meaning_tr": "geri götürmek",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "reconnaître": {
+    "meaning_tr": "tanımak",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "recouvrir": {
+    "meaning_tr": "kaplamak",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "reculer": {
+    "meaning_tr": "geri çekilmek",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "redevenir": {
+    "meaning_tr": "tekrar olmak",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "regarder": {
+    "meaning_tr": "bakmak",
+    "not": "sira 63. Otomatik 'incelemek' vermisti."
+  },
+  "rejeter": {
+    "meaning_tr": "reddetmek",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "rejoindre": {
+    "meaning_tr": "katılmak",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "relaxer": {
+    "meaning_tr": "rahatlamak",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "relever": {
+    "meaning_tr": "kaldırmak",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "remarque": {
+    "meaning_tr": "yorum",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "remarquer": {
+    "meaning_tr": "fark etmek",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "remonter": {
+    "meaning_tr": "tekrar çıkmak",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "remplacer": {
+    "meaning_tr": "yerine koymak",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "remplir": {
+    "meaning_tr": "doldurmak",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "remporter": {
+    "meaning_tr": "kazanmak",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "renaissance": {
+    "meaning_tr": "yeniden doğuş",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "rencontre": {
+    "meaning_tr": "karşılaşma",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "rencontrer": {
+    "meaning_tr": "karşılaşmak",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "rendre": {
+    "meaning_tr": "geri vermek",
+    "not": "sira 131. Otomatik 'onarmak' vermisti."
+  },
+  "renseignement": {
+    "meaning_tr": "bilgi",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "rentrer": {
+    "meaning_tr": "eve dönmek",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "renverser": {
+    "meaning_tr": "devirmek",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "renvoyer": {
+    "meaning_tr": "geri göndermek",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "repartir": {
+    "meaning_tr": "tekrar yola çıkmak",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "repas": {
+    "meaning_tr": "yemek, öğün",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "repasser": {
+    "meaning_tr": "ütülemek",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "reposer": {
+    "meaning_tr": "koymak, bırakmak",
+    "not": "Donusluk hali eklenince temel fiilin gecissiz karsiligi kalmisti."
+  },
+  "reprendre": {
+    "meaning_tr": "yeniden almak",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "reproche": {
+    "meaning_tr": "sitem",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "respect": {
+    "meaning_tr": "saygı",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "respecter": {
+    "meaning_tr": "saygı duymak",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "respirer": {
+    "meaning_tr": "nefes almak",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "responsabilité": {
+    "meaning_tr": "sorumluluk",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "restaurer": {
+    "meaning_tr": "onarmak",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "retard": {
+    "meaning_tr": "gecikme",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "retarder": {
+    "meaning_tr": "geciktirmek",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "retirer": {
+    "meaning_tr": "geri çekmek",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "retourner": {
+    "meaning_tr": "geri dönmek",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "revenir": {
+    "meaning_tr": "geri dönmek",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "revivre": {
+    "meaning_tr": "yeniden yaşamak",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "revoir": {
+    "meaning_tr": "tekrar görmek",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "rez-de-chaussée": {
+    "meaning_tr": "zemin kat",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "rideau": {
+    "meaning_tr": "perde",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "rien": {
+    "meaning_tr": "hiçbir şey",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "rigide": {
+    "meaning_tr": "katı",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "rive": {
+    "meaning_tr": "kıyı",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "rock": {
+    "meaning_tr": "rock",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "romain": {
+    "meaning_tr": "Roma'ya ait",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "ronde": {
+    "meaning_tr": "devriye",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "rouge": {
+    "meaning_tr": "kırmızı",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "route": {
+    "meaning_tr": "yol",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "royal": {
+    "meaning_tr": "kraliyete ait",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "royaume": {
+    "meaning_tr": "krallık",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "rue": {
+    "meaning_tr": "sokak",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "ruelle": {
+    "meaning_tr": "ara sokak",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "règle": {
+    "meaning_tr": "kural",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "réaction": {
+    "meaning_tr": "tepki",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "réagir": {
+    "meaning_tr": "tepki vermek",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "réaliser": {
+    "meaning_tr": "gerçekleştirmek",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "récent": {
+    "meaning_tr": "yeni",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "réception": {
+    "meaning_tr": "resepsiyon",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "récupérer": {
+    "meaning_tr": "geri almak",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "rédiger": {
+    "meaning_tr": "kaleme almak",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "réduire": {
+    "meaning_tr": "azaltmak",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "réfléchir": {
+    "meaning_tr": "düşünmek",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "régaler": {
+    "meaning_tr": "ziyafet çekmek",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "régler": {
+    "meaning_tr": "halletmek",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "répandre": {
+    "meaning_tr": "yaymak",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "réparer": {
+    "meaning_tr": "tamir etmek",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "répondre": {
+    "meaning_tr": "cevap vermek",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "réputation": {
+    "meaning_tr": "itibar",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "réserve": {
+    "meaning_tr": "yedek",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "réserver": {
+    "meaning_tr": "yer ayırtmak",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "résidence": {
+    "meaning_tr": "konut",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "réunir": {
+    "meaning_tr": "bir araya getirmek",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "réussir": {
+    "meaning_tr": "başarmak",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "réveil": {
+    "meaning_tr": "uyanış",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "réveillon": {
+    "meaning_tr": "yılbaşı gecesi yemeği",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "rêver": {
+    "meaning_tr": "rüya görmek",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "rôtir": {
+    "meaning_tr": "kızartmak",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "sacrifier": {
+    "meaning_tr": "feda etmek",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "saint": {
+    "meaning_tr": "kutsal",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "saisir": {
+    "meaning_tr": "yakalamak",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "salle": {
+    "meaning_tr": "salon",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "salope": {
+    "meaning_tr": "sürtük",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "sanitaire": {
+    "meaning_tr": "sağlıkla ilgili",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "sans": {
+    "meaning_tr": "olmadan",
+    "not": "sira 59. Otomatik '-siz' vermisti."
+  },
+  "sapin": {
+    "meaning_tr": "çam",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "sauver": {
+    "meaning_tr": "kurtarmak",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "sculpture": {
+    "meaning_tr": "heykel",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "secouer": {
+    "meaning_tr": "sallamak",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "secret": {
+    "meaning_tr": "gizli",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "secrétariat": {
+    "meaning_tr": "sekreterlik",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "selon": {
+    "meaning_tr": "-e göre",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "semblant": {
+    "meaning_tr": "-mış gibi",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "sentiment": {
+    "meaning_tr": "duygu",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "sentir": {
+    "meaning_tr": "hissetmek",
+    "not": "Otomatik sadece 'koku almak' vermisti, dar anlam."
+  },
+  "servir": {
+    "meaning_tr": "hizmet etmek",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "seul": {
+    "meaning_tr": "tek, yalnız",
+    "not": "sira 68. Iki anlami da sik kullaniliyor."
+  },
+  "seulement": {
+    "meaning_tr": "sadece",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "si": {
+    "meaning_tr": "o kadar",
+    "not": "sira 29. Pekistirme zarfi; otomatik 'boyle' vermisti."
+  },
+  "sifflement": {
+    "meaning_tr": "ıslık sesi",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "signer": {
+    "meaning_tr": "imzalamak",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "silence": {
+    "meaning_tr": "sessizlik",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "silencieux": {
+    "meaning_tr": "sessiz",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "sincère": {
+    "meaning_tr": "içten",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "sinon": {
+    "meaning_tr": "yoksa, aksi hâlde",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "sirop": {
+    "meaning_tr": "şurup",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "siège": {
+    "meaning_tr": "koltuk",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "skier": {
+    "meaning_tr": "kayak yapmak",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "soeur": {
+    "meaning_tr": "kız kardeş",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "soif": {
+    "meaning_tr": "susuzluk",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "soirée": {
+    "meaning_tr": "akşam",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "solide": {
+    "meaning_tr": "sağlam",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "son": {
+    "meaning_tr": "ses",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "sorcellerie": {
+    "meaning_tr": "büyücülük",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "souhaiter": {
+    "meaning_tr": "dilemek",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "soulager": {
+    "meaning_tr": "rahatlatmak",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "sourire": {
+    "meaning_tr": "gülümsemek",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "souvenir": {
+    "meaning_tr": "hatıra, anı",
+    "not": "Donusluk hali eklenince temel fiilin gecissiz karsiligi kalmisti."
+  },
+  "spacieux": {
+    "meaning_tr": "ferah",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "spécialité": {
+    "meaning_tr": "uzmanlık",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "stand": {
+    "meaning_tr": "stant",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "star": {
+    "meaning_tr": "yıldız",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "statue": {
+    "meaning_tr": "heykel",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "stupide": {
+    "meaning_tr": "aptal",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "succession": {
+    "meaning_tr": "ardı ardına geliş",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "sucrer": {
+    "meaning_tr": "şeker katmak",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "suffire": {
+    "meaning_tr": "yeterli olmak",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "suite": {
+    "meaning_tr": "devam",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "suivant": {
+    "meaning_tr": "sonraki",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "sujet": {
+    "meaning_tr": "konu",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "super": {
+    "meaning_tr": "süper",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "superbe": {
+    "meaning_tr": "muhteşem",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "supporter": {
+    "meaning_tr": "katlanmak",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "supposer": {
+    "meaning_tr": "varsaymak",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "supérieur": {
+    "meaning_tr": "üstün",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "sur": {
+    "meaning_tr": "ekşi",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "sursauter": {
+    "meaning_tr": "irkilmek",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "surveillant": {
+    "meaning_tr": "gözetmen",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "surveiller": {
+    "meaning_tr": "gözetlemek",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "sympa": {
+    "meaning_tr": "cana yakın",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "sympathique": {
+    "meaning_tr": "cana yakın",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "séduire": {
+    "meaning_tr": "baştan çıkarmak",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "séjour": {
+    "meaning_tr": "kalış, konaklama",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "sénéchal": {
+    "meaning_tr": "vali",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "sérieusement": {
+    "meaning_tr": "ciddi biçimde",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "sérieux": {
+    "meaning_tr": "ciddi",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "sévère": {
+    "meaning_tr": "sert, katı",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "taire": {
+    "meaning_tr": "susturmak",
+    "not": "se taire susmak; temel fiil gecisli."
+  },
+  "tant": {
+    "meaning_tr": "o kadar",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "tapis": {
+    "meaning_tr": "halı",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "tartine": {
+    "meaning_tr": "tereyağlı ekmek",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "tas": {
+    "meaning_tr": "yığın",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "tellement": {
+    "meaning_tr": "o kadar",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "temps": {
+    "meaning_tr": "zaman",
+    "not": "sira 53. Dogruydu, teyit icin sabitlendi."
+  },
+  "tempête": {
+    "meaning_tr": "fırtına",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "tenter": {
+    "meaning_tr": "denemek",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "terrain": {
+    "meaning_tr": "arazi",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "territoire": {
+    "meaning_tr": "toprak, bölge",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "ticket": {
+    "meaning_tr": "bilet",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "tirage": {
+    "meaning_tr": "çekiliş",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "tiroir": {
+    "meaning_tr": "çekmece",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "titre": {
+    "meaning_tr": "başlık",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "toile": {
+    "meaning_tr": "tuval",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "ton": {
+    "meaning_tr": "ton",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "total": {
+    "meaning_tr": "toplam",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "totalement": {
+    "meaning_tr": "tamamen",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "touche": {
+    "meaning_tr": "tuş",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "toujours": {
+    "meaning_tr": "her zaman",
+    "not": "sira 57. 'daima' edebi kaciyor."
+  },
+  "tourisme": {
+    "meaning_tr": "turizm",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "tout": {
+    "meaning_tr": "hepsi",
+    "not": "sira 20."
+  },
+  "trahison": {
+    "meaning_tr": "ihanet",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "tranchant": {
+    "meaning_tr": "keskin",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "tranquillement": {
+    "meaning_tr": "sakince",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "transformer": {
+    "meaning_tr": "dönüştürmek",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "transporter": {
+    "meaning_tr": "taşımak",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "travers": {
+    "meaning_tr": "boyunca",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "traverser": {
+    "meaning_tr": "geçmek",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "traîner": {
+    "meaning_tr": "sürüklemek",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "trimestre": {
+    "meaning_tr": "üç aylık dönem",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "triste": {
+    "meaning_tr": "üzgün",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "trompe": {
+    "meaning_tr": "hortum",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "trop": {
+    "meaning_tr": "çok fazla",
+    "not": "sira 77. Otomatik 'pek' vermisti."
+  },
+  "troupe": {
+    "meaning_tr": "birlik",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "truffe": {
+    "meaning_tr": "trüf mantarı",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "tunique": {
+    "meaning_tr": "tunik",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "témoigner": {
+    "meaning_tr": "tanıklık etmek",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "téter": {
+    "meaning_tr": "emmek",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "unique": {
+    "meaning_tr": "tek, benzersiz",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "user": {
+    "meaning_tr": "eskitmek",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "utiliser": {
+    "meaning_tr": "kullanmak",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "vague": {
+    "meaning_tr": "belirsiz",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "vain": {
+    "meaning_tr": "boş, beyhude",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "vaisseau": {
+    "meaning_tr": "gemi",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "vaisselle": {
+    "meaning_tr": "bulaşık",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "valeur": {
+    "meaning_tr": "değer",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "valoir": {
+    "meaning_tr": "değerinde olmak",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "vassal": {
+    "meaning_tr": "vasal",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "vendre": {
+    "meaning_tr": "satmak",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "vente": {
+    "meaning_tr": "satış",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "vermeil": {
+    "meaning_tr": "parlak kırmızı",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "vers": {
+    "meaning_tr": "dize",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "version": {
+    "meaning_tr": "sürüm",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "vert": {
+    "meaning_tr": "yeşil",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "veste": {
+    "meaning_tr": "ceket",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "vide": {
+    "meaning_tr": "boş",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "vieil": {
+    "meaning_tr": "yaşlı",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "viennois": {
+    "meaning_tr": "Viyanalı",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "vif": {
+    "meaning_tr": "canlı",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "villa": {
+    "meaning_tr": "villa",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "violet": {
+    "meaning_tr": "mor",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "visiteur": {
+    "meaning_tr": "ziyaretçi",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "vitre": {
+    "meaning_tr": "cam",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "vivable": {
+    "meaning_tr": "yaşanabilir",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "voeu": {
+    "meaning_tr": "dilek",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "voici": {
+    "meaning_tr": "işte",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "voie": {
+    "meaning_tr": "yol",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "voilà": {
+    "meaning_tr": "işte",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "voiturer": {
+    "meaning_tr": "arabayla taşımak",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "voix": {
+    "meaning_tr": "ses",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "vol": {
+    "meaning_tr": "uçuş",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "volumineux": {
+    "meaning_tr": "hacimli",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "voyager": {
+    "meaning_tr": "seyahat etmek",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "vraiment": {
+    "meaning_tr": "gerçekten",
+    "not": "Otomatik 'hakikat' (isim) vermisti."
+  },
+  "vérifier": {
+    "meaning_tr": "kontrol etmek",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "vérité": {
+    "meaning_tr": "gerçek",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "zéro": {
+    "meaning_tr": "sıfır",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "échanger": {
+    "meaning_tr": "değiş tokuş etmek",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "écharpe": {
+    "meaning_tr": "atkı",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "échec": {
+    "meaning_tr": "başarısızlık",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "éclaircir": {
+    "meaning_tr": "aydınlatmak",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "économie": {
+    "meaning_tr": "ekonomi",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "écoute": {
+    "meaning_tr": "dinleme",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "écraser": {
+    "meaning_tr": "ezmek",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "écrire": {
+    "meaning_tr": "yazmak",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "écuyer": {
+    "meaning_tr": "seyis",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "élancer": {
+    "meaning_tr": "atılmak",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "éloigner": {
+    "meaning_tr": "uzaklaştırmak",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "émerveillement": {
+    "meaning_tr": "hayranlık",
+    "not": "Elle denetim turu 5 (A1 kuyruk)."
+  },
+  "énerver": {
+    "meaning_tr": "sinirlendirmek",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "épice": {
+    "meaning_tr": "baharat",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "épisode": {
+    "meaning_tr": "bölüm",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "époque": {
+    "meaning_tr": "dönem",
+    "not": "Elle denetim turu 1 (A1 ilk 400)."
+  },
+  "étable": {
+    "meaning_tr": "ahır",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "étoffe": {
+    "meaning_tr": "kumaş",
+    "not": "Elle denetim turu 4 (A1)."
+  },
+  "étonnant": {
+    "meaning_tr": "şaşırtıcı",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "étouffer": {
+    "meaning_tr": "boğmak",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "étranger": {
+    "meaning_tr": "yabancı",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  },
+  "étude": {
+    "meaning_tr": "çalışma, inceleme",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "étudier": {
+    "meaning_tr": "ders çalışmak",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "éveiller": {
+    "meaning_tr": "uyandırmak",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "évidemment": {
+    "meaning_tr": "elbette",
+    "not": "Elle denetim turu 2 (A1 401-800)."
+  },
+  "éviter": {
+    "meaning_tr": "kaçınmak",
+    "not": "Elle denetim turu 6 (A2 ilk 400)."
+  },
+  "évoluer": {
+    "meaning_tr": "gelişmek",
+    "not": "Elle denetim turu 3 (A1 801-1180)."
+  },
+  "être": {
+    "meaning_tr": "olmak",
+    "not": "sira 4. Fransizcanin en sik fiili; sozlukte hic yoktu."
+  },
+  "mort": {
+    "meaning_tr": "ölü",
+    "not": "ADJ anlamıyla uyumlu elle düzeltme."
+  },
+  "chanson": {
+    "meaning_tr": "şarkı",
+    "not": "A1 song anlamı ve chanter kelime ailesi için elle doğrulandı."
+  },
+  "propre": {
+    "meaning_tr": "kendi",
+    "not": "İngilizce ilk anlam own ile uyumlu elle düzeltme."
+  },
+  "île": {
+    "meaning_tr": "ada",
+    "not": "A1/A2 havuzda karsiliksizdi, elle eklendi."
+  }
+}
