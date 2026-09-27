@@ -63,8 +63,13 @@ class QuizEngine {
       final List<Word> distractors = app.words.distractorsFor(w);
       if (distractors.length < 3) continue;
 
-      final bool canCloze = w.hasExample &&
-          w.sentenceFr!.toLowerCase().contains(w.lemma.toLowerCase());
+      // Unicode letter boundaries keep "an" from blanking the middle of "mange".
+      final clozeMatch = RegExp(
+        '(?<![\\p{L}\\p{M}\\p{N}_])${RegExp.escape(w.lemma)}(?![\\p{L}\\p{M}\\p{N}_])',
+        caseSensitive: false,
+        unicode: true,
+      );
+      final bool canCloze = w.hasExample && clozeMatch.hasMatch(w.sentenceFr!);
       final List<QuizKind> kinds = <QuizKind>[
         QuizKind.frToTr,
         QuizKind.trToFr,
@@ -105,16 +110,12 @@ class QuizEngine {
             ),
           );
         case QuizKind.cloze:
-          final RegExp re = RegExp(
-            RegExp.escape(w.lemma),
-            caseSensitive: false,
-          );
           out.add(
             QuizQuestion(
               kind: kind,
               refId: refId,
               isVerbCard: false,
-              prompt: w.sentenceFr!.replaceFirst(re, '_____'),
+              prompt: w.sentenceFr!.replaceFirst(clozeMatch, '_____'),
               subPrompt: w.sentenceTr ?? w.sentenceEn,
               correct: w.lemma,
               options: <String>[

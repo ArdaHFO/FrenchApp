@@ -73,7 +73,8 @@ void main() {
     await temp.delete(recursive: true);
   });
 
-  Future<AppState> boot(List<Map<String, Object?>> rows) async {
+  Future<AppState> boot(List<Map<String, Object?>> rows,
+      {Map<String, String> sentences = const {}}) async {
     final String path = '${temp.path}/fixture.db';
     final Database db = await databaseFactoryFfi.openDatabase(path);
     try {
@@ -97,7 +98,7 @@ void main() {
         await db.insert('examples', <String, Object?>{
           'word_id': id,
           'ordinal': 0,
-          'sentence_fr': 'Voici fr_$id.',
+          'sentence_fr': sentences[id] ?? 'Voici fr_$id.',
           'sentence_en': 'Example en_$id.',
           'sentence_tr': 'Örnek tr_$id.',
         });
@@ -465,6 +466,31 @@ void main() {
     expect(find.textContaining('Soru üretilemedi.'), findsOneWidget);
     expect(await tester.runAsync(() => progressSnapshot(app)), before);
     expect(tester.takeException(), isNull);
+  });
+
+  test('BUG-010 cloze must match a complete word rather than another word fragment', () async {
+    final app = await boot([
+      wordRow('target')..['lemma_fr'] = 'an',
+      for (int i = 0; i < 4; i++) wordRow('safe$i'),
+    ], sentences: {'target': 'Il mange.'});
+    for (int seed = 0; seed < 30; seed++) {
+      final questions = await QuizEngine.build(app: app, wordIds: ['target'],
+          verbRefIds: [], count: 1, rng: Random(seed));
+      expect(questions.single.kind, isNot(QuizKind.cloze));
+    }
+  });
+
+  test('BUG-011 quiz options remain unique for distinct senses of the same lemma', () async {
+    final app = await boot([
+      wordRow('target')..['lemma_fr'] = 'tour',
+      wordRow('homograph')..['lemma_fr'] = 'tour',
+      for (int i = 0; i < 4; i++) wordRow('safe$i'),
+    ]);
+    for (int seed = 0; seed < 30; seed++) {
+      final questions = await QuizEngine.build(app: app, wordIds: ['target'],
+          verbRefIds: [], count: 1, rng: Random(seed));
+      expect(questions.single.options.toSet().length, questions.single.options.length);
+    }
   });
 
   testWidgets('FA-002: uygunsuz ve eksik eski kartlar quiz sayisini sisirmez',

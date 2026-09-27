@@ -256,9 +256,18 @@ class SqliteWordRepository implements WordRepository {
 
     final List<Word> out = <Word>[];
     final Set<String> seen = <String>{word.meaningTr};
+    final Set<String> lemmas = <String>{word.lemma.toLowerCase()};
+    final Set<String> displays = <String>{word.display.toLowerCase()};
     for (final Word w in tiered) {
       if (out.length >= count) break;
-      if (seen.add(w.meaningTr)) out.add(w);
+      if (seen.contains(w.meaningTr) || lemmas.contains(w.lemma.toLowerCase()) ||
+          displays.contains(w.display.toLowerCase())) {
+        continue;
+      }
+      seen.add(w.meaningTr);
+      lemmas.add(w.lemma.toLowerCase());
+      displays.add(w.display.toLowerCase());
+      out.add(w);
     }
     return out;
   }
