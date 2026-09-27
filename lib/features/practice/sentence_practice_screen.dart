@@ -32,6 +32,8 @@ class _SentencePracticeScreenState extends State<SentencePracticeScreen> with Pr
   int _correct = 0;
   SentenceEvaluation? _evaluation;
   bool _saving = false;
+  bool _saveFailed = false;
+  ({String promptId, SentenceEvaluation evaluation, int correct, int combo, int bestCombo})? _pending;
 
   @override
   void didChangeDependencies() {
@@ -51,35 +53,47 @@ class _SentencePracticeScreenState extends State<SentencePracticeScreen> with Pr
     final SentencePrompt prompt = _prompts[_index];
     final SentenceEvaluation evaluation =
         SentenceEvaluator.evaluate(_controller.text, prompt);
-    setState(() {
-      _evaluation = evaluation;
-      _saving = true;
-      if (evaluation.correct) {
-        _correct++;
-        _combo++;
-        if (_combo > _bestCombo) _bestCombo = _combo;
-      } else {
-        _combo = 0;
-      }
-    });
+    final combo = evaluation.correct ? _combo + 1 : 0;
+    _pending = (promptId: prompt.id, evaluation: evaluation,
+        correct: _correct + (evaluation.correct ? 1 : 0), combo: combo,
+        bestCombo: combo > _bestCombo ? combo : _bestCombo);
+    setState(() => _evaluation = evaluation);
     evaluation.correct
         ? HapticFeedback.lightImpact()
         : HapticFeedback.heavyImpact();
-    await _app!.recordSentenceAttempt(
-      promptId: prompt.id,
-      correct: evaluation.correct,
-      score: evaluation.score,
-      combo: _bestCombo,
-    );
+    await _saveEvaluation();
+  }
+
+  Future<void> _saveEvaluation() async {
+    final pending = _pending;
+    if (_saving || pending == null || !progressReady) return;
+    setState(() { _saving = true; _saveFailed = false; });
+    try {
+      await _app!.recordSentenceAttempt(promptId: pending.promptId,
+          correct: pending.evaluation.correct, score: pending.evaluation.score,
+          combo: pending.bestCombo);
+    } catch (_) {
+      if (mounted) setState(() { _saving = false; _saveFailed = true; });
+      return;
+    }
     if (!mounted) return;
     setState(() => _saving = false);
+    if (!progressReady) return;
+    setState(() {
+      _correct = pending.correct;
+      _combo = pending.combo;
+      _bestCombo = pending.bestCombo;
+      _pending = null;
+    });
   }
 
   void _retry() {
+    if (!progressReady || _pending != null) return;
     setState(() => _evaluation = null);
   }
 
   void _next() {
+    if (!progressReady || _pending != null) return;
     if (_index + 1 >= _prompts.length) {
       setState(() => _index = _prompts.length);
       return;
@@ -352,15 +366,21 @@ class _SentencePracticeScreenState extends State<SentencePracticeScreen> with Pr
               const SizedBox(height: 5),
               SelectableText(prompt.modelAnswer),
               const SizedBox(height: 16),
+              if (_saving) const LinearProgressIndicator(),
+              if (_saveFailed) ...<Widget>[
+                const Text('Sonuç kaydedilemedi. Tekrar deneyin.'),
+                FilledButton(key: const ValueKey('sentence_save_retry'),
+                    onPressed: _saveEvaluation, child: const Text('Kaydetmeyi tekrar dene')),
+              ],
               if (!evaluation.correct)
                 FilledButton.tonalIcon(
-                  onPressed: _saving ? null : _retry,
+                  onPressed: _saving || _pending != null ? null : _retry,
                   icon: const Icon(Icons.edit_rounded),
                   label: const Text('Düzelt ve yeniden dene'),
                 ),
               const SizedBox(height: 6),
               TextButton.icon(
-                onPressed: _saving ? null : _next,
+                onPressed: _saving || _pending != null ? null : _next,
                 icon: const Icon(Icons.arrow_forward_rounded),
                 label: Text(_index + 1 == _prompts.length
                     ? 'Sonucu gör'

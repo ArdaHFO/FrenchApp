@@ -29,6 +29,9 @@ class _ReflexiveArenaScreenState extends State<ReflexiveArenaScreen> with Progre
   int _bestCombo = 0;
   int _wrongTick = 0;
   String? _picked;
+  bool _saving = false;
+  bool _saveFailed = false;
+  ({bool right, int correct, int combo, int bestCombo, int wrongTick})? _pending;
   int _startXp = 0;
   int _startCoins = 0;
 
@@ -100,26 +103,38 @@ class _ReflexiveArenaScreenState extends State<ReflexiveArenaScreen> with Progre
       return;
     }
     final bool right = option == questions[_index].correct;
-    setState(() {
-      _picked = option;
-      if (right) {
-        _correct++;
-        _combo++;
-        if (_combo > _bestCombo) _bestCombo = _combo;
-      } else {
-        _combo = 0;
-        _wrongTick++;
-      }
-    });
+    final combo = right ? _combo + 1 : 0;
+    _pending = (right: right, correct: _correct + (right ? 1 : 0),
+        combo: combo, bestCombo: combo > _bestCombo ? combo : _bestCombo,
+        wrongTick: _wrongTick + (right ? 0 : 1));
+    setState(() => _picked = option);
     right ? HapticFeedback.lightImpact() : HapticFeedback.heavyImpact();
-    await _app!.recordActivity(
-      quizTotal: 1,
-      quizCorrect: right ? 1 : 0,
-      verbSwiped: 1,
-      combo: _bestCombo,
-    );
-    await Future<void>.delayed(MotionTokens.quizReveal);
+    await _saveAnswer();
+  }
+
+  Future<void> _saveAnswer() async {
+    final pending = _pending;
+    if (_saving || pending == null || !progressReady) return;
+    setState(() { _saving = true; _saveFailed = false; });
+    try {
+      await _app!.recordActivity(quizTotal: 1, quizCorrect: pending.right ? 1 : 0,
+          verbSwiped: 1, combo: pending.bestCombo);
+    } catch (_) {
+      if (mounted) setState(() { _saving = false; _saveFailed = true; });
+      return;
+    }
     if (!mounted) return;
+    setState(() => _saving = false);
+    if (!progressReady) return;
+    setState(() {
+      _correct = pending.correct;
+      _combo = pending.combo;
+      _bestCombo = pending.bestCombo;
+      _wrongTick = pending.wrongTick;
+      _pending = null;
+    });
+    await Future<void>.delayed(MotionTokens.quizReveal);
+    if (!progressReady) return;
     setState(() {
       _index++;
       _picked = null;
@@ -252,6 +267,12 @@ class _ReflexiveArenaScreenState extends State<ReflexiveArenaScreen> with Progre
                       ),
                     ),
                     const SizedBox(height: 9),
+                  ],
+                  if (_saving) const LinearProgressIndicator(),
+                  if (_saveFailed) ...<Widget>[
+                    const Text('Sonuç kaydedilemedi. Tekrar deneyin.'),
+                    FilledButton(key: const ValueKey('arena_save_retry'),
+                        onPressed: _saveAnswer, child: const Text('Kaydetmeyi tekrar dene')),
                   ],
                 ],
               ),

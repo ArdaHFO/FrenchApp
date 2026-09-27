@@ -14,6 +14,12 @@ import 'package:french_app/data/progress_coordinator.dart';
 import 'package:french_app/data/repositories.dart';
 import 'package:french_app/domain/game.dart';
 import 'package:french_app/domain/journey.dart';
+import 'package:french_app/domain/sentence_practice.dart';
+import 'package:french_app/domain/song.dart';
+import 'package:french_app/domain/verb.dart';
+import 'package:french_app/features/practice/sentence_practice_screen.dart';
+import 'package:french_app/features/songs/song_quiz_screen.dart';
+import 'package:french_app/features/verbs/reflexive_arena_screen.dart';
 import 'package:french_app/features/journey/station_quiz_screen.dart';
 import 'package:french_app/domain/level.dart';
 import 'package:french_app/domain/srs/box_scheduler.dart';
@@ -686,6 +692,85 @@ void main() {
   Future<void> stationFinalization(AppState app) async {
     await app.completeStationQuiz(stationId: 'd2-station', stars: 3,
         correct: 8, total: 8, combo: 8);
+  }
+
+  for (final kind in ['sentence', 'song', 'arena']) {
+    testWidgets('Step10 $kind persistence failure retains attempt and retries once', (tester) async {
+      final app = (await tester.runAsync(() async {
+        if (kind != 'arena') return boot();
+        final content = await databaseFactoryFfi.openDatabase('${temp.path}/synthetic-content.db');
+        await content.execute('ALTER TABLE verbs ADD COLUMN is_reflexive INTEGER DEFAULT 1');
+        await content.close();
+        return bootFreeQuiz();
+      }))!;
+      const song = LearningSong(id: 'retry-song', title: 'Retry song', artist: '',
+          level: CefrLevel.a1, duration: Duration.zero, audioUrl: '', sourcePageUrl: '',
+          licenseLabel: '', attribution: '', colorValue: 0xff224466,
+          lyrics: [SongLyricLine(start: Duration.zero, translationTr: '',
+              words: [SongWord('bonjour', 'merhaba')])]);
+      final Widget screen = switch (kind) {
+        'sentence' => const SentencePracticeScreen(level: CefrLevel.a1),
+        'song' => const SongQuizScreen(song: song),
+        _ => const ReflexiveArenaScreen(tense: VerbTense.present),
+      };
+      await show(tester, app, const SizedBox.shrink());
+      await tester.pumpWidget(AppScope(state: app, child: MaterialApp(home: screen)));
+      if (kind == 'arena') {
+        await driveUntil(tester, () => find.textContaining('için doğru çekimi seç').evaluate().isNotEmpty);
+      }
+      final before = (await tester.runAsync(() => completionSnapshot(app)))!;
+      await tester.runAsync(() => app.db.progress.execute(
+          "CREATE TRIGGER step10_fail BEFORE UPDATE ON game_profile BEGIN SELECT RAISE(ABORT,'Step10_$kind'); END"));
+      if (kind == 'sentence') {
+        await tester.enterText(find.byKey(const ValueKey('sentence_input')), promptsForLevel(CefrLevel.a1).first.modelAnswer);
+        await tester.ensureVisible(find.byKey(const ValueKey('check_sentence')));
+        await tester.tap(find.byKey(const ValueKey('check_sentence')));
+      } else if (kind == 'song') {
+        await tester.tap(find.text('merhaba'));
+        await tester.pump();
+        await tester.ensureVisible(find.byKey(const ValueKey('song_quiz_next')));
+        await tester.tap(find.byKey(const ValueKey('song_quiz_next')));
+      } else {
+        final label = tester.widget<Text>(find.textContaining('için doğru çekimi seç')).data!;
+        final person = label.split('“')[1].split('”')[0];
+        final form = {'je':'teste','tu':'testes','nous':'testons','vous':'testez'}[person]!;
+        await tester.tap(find.text(conjugationDisplay(person, form, tense: VerbTense.present)));
+      }
+      var drained = false;
+      unawaited(app.progress.run(() async {}).then((_) => drained = true));
+      await driveUntil(tester, () => drained);
+      await tester.pump(const Duration(seconds: 2));
+      expect(await tester.runAsync(() => completionSnapshot(app)), before);
+      final key = switch(kind) {'sentence'=>'sentence_save_retry','song'=>'song_quiz_save_retry',_=>'arena_save_retry'};
+      final retry = find.byKey(ValueKey(key));
+      report('Step10_$kind', [], {'unchanged': true, 'retryVisible': retry.evaluate().isNotEmpty});
+      expect(retry, findsOneWidget);
+      await tester.ensureVisible(retry);
+      if (kind == 'sentence') expect(find.text('Combo 0'), findsOneWidget);
+      await tester.runAsync(() => app.db.progress.execute('DROP TRIGGER step10_fail'));
+      final boundary = gate();
+      probes[app]!.transactionGate = boundary;
+      await tester.tap(retry);
+      await tester.tap(retry);
+      await driveUntil(tester, () => boundary.entered.isCompleted);
+      expect(await tester.runAsync(() => completionSnapshot(app)), before);
+      boundary.release();
+      await driveUntil(tester, () => app.game.profile.totalAnswers == 1);
+      await tester.pump(const Duration(seconds: 2));
+      expect(app.game.profile.totalAnswers, 1);
+      expect(app.game.profile.totalCorrect, 1);
+      expect(app.game.profile.bestCombo, 1);
+      expect(app.stats.today()['quiz_total'], 1);
+      expect(app.rewardSerial, 1);
+      expect(probes[app]!.events.where((e) => e == 'transaction.committed'), hasLength(1));
+      if (kind == 'sentence') {
+        expect(app.practice.sentence(promptsForLevel(CefrLevel.a1).first.id)!.attempts, 1);
+        expect(find.text('Combo 1'), findsOneWidget);
+      }
+      if (kind == 'arena') expect(find.text('1 / 1 doğru · en iyi seri 1'), findsOneWidget);
+      expect(tester.takeException(), isNull);
+      aligned((await tester.runAsync(() => snapshot(app)))!);
+    });
   }
 
   test('Step09 normal success preserves station and quiz reward events', () async {

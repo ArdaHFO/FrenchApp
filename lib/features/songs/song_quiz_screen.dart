@@ -26,6 +26,7 @@ class _SongQuizScreenState extends State<SongQuizScreen> with ProgressSession<So
   int? _selected;
   bool _finished = false;
   bool _recording = false;
+  bool _saveFailed = false;
 
   void _answer(int option) {
     if (_selected != null) return;
@@ -45,13 +46,19 @@ class _SongQuizScreenState extends State<SongQuizScreen> with ProgressSession<So
       });
       return;
     }
-    setState(() => _recording = true);
-    await AppScope.of(context).recordActivity(
-      quizTotal: _questions.length,
-      quizCorrect: _correct,
-      combo: _correct,
-    );
+    setState(() { _recording = true; _saveFailed = false; });
+    try {
+      await AppScope.of(context).recordActivity(
+        quizTotal: _questions.length,
+        quizCorrect: _correct,
+        combo: _correct,
+      );
+    } catch (_) {
+      if (mounted) setState(() { _recording = false; _saveFailed = true; });
+      return;
+    }
     if (!mounted) return;
+    if (!progressReady) { setState(() => _recording = false); return; }
     setState(() {
       _recording = false;
       _finished = true;
@@ -81,6 +88,7 @@ class _SongQuizScreenState extends State<SongQuizScreen> with ProgressSession<So
                 selected: _selected,
                 color: color,
                 recording: _recording,
+                saveFailed: _saveFailed,
                 onAnswer: _answer,
                 onNext: _next,
               ),
@@ -97,6 +105,7 @@ class _QuestionView extends StatelessWidget {
     required this.selected,
     required this.color,
     required this.recording,
+    required this.saveFailed,
     required this.onAnswer,
     required this.onNext,
   });
@@ -107,6 +116,7 @@ class _QuestionView extends StatelessWidget {
   final int? selected;
   final Color color;
   final bool recording;
+  final bool saveFailed;
   final ValueChanged<int> onAnswer;
   final VoidCallback onNext;
 
@@ -196,8 +206,9 @@ class _QuestionView extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
+          if (saveFailed) const Text('Sonuç kaydedilemedi. Tekrar deneyin.'),
           FilledButton.icon(
-            key: const ValueKey<String>('song_quiz_next'),
+            key: ValueKey<String>(saveFailed ? 'song_quiz_save_retry' : 'song_quiz_next'),
             style: FilledButton.styleFrom(
               backgroundColor: color,
               padding: const EdgeInsets.symmetric(vertical: 15),
@@ -214,7 +225,7 @@ class _QuestionView extends StatelessWidget {
                 : Icon(index == total - 1
                     ? Icons.emoji_events_rounded
                     : Icons.arrow_forward_rounded),
-            label: Text(index == total - 1 ? 'Sonucu gör' : 'Sıradaki'),
+            label: Text(saveFailed ? 'Kaydetmeyi tekrar dene' : index == total - 1 ? 'Sonucu gör' : 'Sıradaki'),
           ),
         ],
       ],
