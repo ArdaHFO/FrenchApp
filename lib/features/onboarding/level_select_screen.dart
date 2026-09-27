@@ -56,12 +56,16 @@ class _LevelSelectScreenState extends State<LevelSelectScreen> {
     setState(() => _saving = true);
     final state = AppScope.of(context);
     try {
-      await state.setLevel(_selected ?? CefrLevel.a1);
-      await state.setDailyGoal(_goal);
+      await state.confirmLearningSettings(level: _selected ?? CefrLevel.a1,
+          goal: _goal, finishOnboarding: !widget.isSettingsMode);
       if (widget.isSettingsMode) {
         if (mounted) Navigator.of(context).pop();
-      } else {
-        await state.completeOnboarding();
+      }
+    } catch (_) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text('Sonuç kaydedilemedi. Tekrar deneyin.'),
+        ));
       }
     } finally {
       if (mounted) setState(() => _saving = false);

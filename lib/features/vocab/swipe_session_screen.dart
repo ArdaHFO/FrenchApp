@@ -58,9 +58,11 @@ class _SwipeSessionScreenState extends State<SwipeSessionScreen> with ProgressSe
     try {
       await _app.toggleFlag(refId: word.id, cardType: 'word', lemma: word.lemma);
     } catch (_) {
-      if (mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('Sonuç kaydedilemedi. Tekrar deneyin.'),
-      ));
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text('Sonuç kaydedilemedi. Tekrar deneyin.'),
+        ));
+      }
     } finally {
       _flagPending.remove(word.id);
       if (mounted) setState(() {});

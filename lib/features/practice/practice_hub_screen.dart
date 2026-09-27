@@ -12,6 +12,7 @@ import '../../motion/motion_tokens.dart';
 import '../../motion/transitions.dart';
 import '../../ui/game_companion.dart';
 import '../../ui/game_ui.dart';
+import '../../ui/preference_action.dart';
 import '../journey/journey_map_screen.dart';
 import '../game/companion_studio_screen.dart';
 import 'sentence_practice_screen.dart';
@@ -122,7 +123,7 @@ class _PracticeHubScreenState extends State<PracticeHubScreen> {
                                 key: ValueKey<String>('practice_${level.code}'),
                                 level: level,
                                 selected: level == app.level,
-                                onTap: () => app.setLevel(level),
+                                onTap: () => persistPreference(context, 'level', () => app.setLevel(level)),
                               ),
                             ),
                         ],

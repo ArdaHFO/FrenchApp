@@ -217,6 +217,24 @@ class AppState extends ChangeNotifier {
   
   });
 
+  /// One confirmation owns level/goal and optional first-run completion.
+  Future<void> confirmLearningSettings({required CefrLevel level,
+    required int goal, bool finishOnboarding = false}) => _enqueueProgressWrite(() async {
+    final safeGoal = goal.clamp(5, 100);
+    final values = <String, String>{_kLevel: level.code, _kGoal: '$safeGoal',
+      if (finishOnboarding) _kOnboarding: '1'};
+    await game.transaction((txn) async {
+      for (final entry in values.entries) {
+        await settings.write(txn, entry.key, entry.value);
+      }
+    });
+    settings.publish(values);
+    _level = level;
+    _dailyGoal = safeGoal;
+    if (finishOnboarding) _onboardingDone = true;
+    _notify();
+  });
+
   Future<void> setDailyGoal(int value) => _enqueueProgressWrite(() async {
     final int safeValue = value.clamp(5, 100);
     if (_dailyGoal == safeValue) return;

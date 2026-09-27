@@ -652,13 +652,19 @@ class SettingsStore with CoordinatedProgressStore {
   }
 
   Future<void> set(String key, String value) => coordinate(() async {
-    await _db.insert(
+    await write(_db, key, value);
+    publish({key: value});
+  });
+
+  Future<void> write(DatabaseExecutor executor, String key, String value) async {
+    await executor.insert(
       'app_settings',
       <String, Object?>{'key': key, 'value': value},
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
-    _cache[key] = value;
-  });
+  }
+
+  void publish(Map<String, String> values) => _cache.addAll(values);
 
   Future<void> setBool(String key, bool value) => set(key, value ? '1' : '0');
 

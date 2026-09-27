@@ -11,6 +11,7 @@ import '../../domain/srs/srs_card.dart';
 import '../../motion/motion_tokens.dart';
 import '../../motion/transitions.dart';
 import '../../ui/game_companion.dart';
+import '../../ui/preference_action.dart';
 import '../game/companion_studio_screen.dart';
 import '../onboarding/level_select_screen.dart';
 import '../prototype/prototype_screen.dart';
@@ -198,7 +199,7 @@ class ProgressScreen extends StatelessWidget {
               leading: const Icon(Icons.speed_rounded),
               title: const Text('Animasyon hızı'),
               subtitle: Text(app.speedLabel),
-              onTap: app.cycleSpeed,
+              onTap: () => persistPreference(context, 'speed', app.cycleSpeed),
             ),
             SwitchListTile(
               contentPadding: EdgeInsets.zero,
@@ -208,7 +209,7 @@ class ProgressScreen extends StatelessWidget {
                 'Uzun yol ve parçacık efektlerini azaltır',
               ),
               value: app.reducedMotion,
-              onChanged: app.setReducedMotion,
+              onChanged: (value) => persistPreference(context, 'motion', () => app.setReducedMotion(value)),
             ),
             // Hareket laboratuvarı ayarların yanında duruyor. Kelimeler
             // sekmesindeyken normal bir deste sanılıyordu; oysa işi

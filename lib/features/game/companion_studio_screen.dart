@@ -5,6 +5,7 @@ import '../../app/app_state.dart';
 import '../../domain/companion.dart';
 import '../../motion/motion_tokens.dart';
 import '../../ui/game_companion.dart';
+import '../../ui/preference_action.dart';
 import '../../ui/game_ui.dart';
 
 /// Oyuncunun yol arkadaşını, rengini ve aksesuarını değiştirdiği alan.
@@ -136,7 +137,7 @@ class CompanionStudioScreen extends StatelessWidget {
                       selected: kind == app.companion,
                       unlocked: playerLevel >= kind.unlockLevel,
                       onTap: () => playerLevel >= kind.unlockLevel
-                          ? app.setCompanion(kind)
+                          ? persistPreference(context, 'companion', () => app.setCompanion(kind))
                           : _locked(context, kind.unlockLevel),
                     ),
                 ],
@@ -159,7 +160,7 @@ class CompanionStudioScreen extends StatelessWidget {
                       selected: palette == app.companionPalette,
                       child: InkWell(
                         key: ValueKey<String>('palette_${palette.name}'),
-                        onTap: () => app.setCompanionPalette(palette),
+                        onTap: () => persistPreference(context, 'palette', () => app.setCompanionPalette(palette)),
                         borderRadius: BorderRadius.circular(99),
                         child: AnimatedContainer(
                           duration: MotionTokens.selection,
@@ -206,7 +207,7 @@ class CompanionStudioScreen extends StatelessWidget {
                     unlocked: playerLevel >= accessory.unlockLevel,
                     color: accent,
                     onTap: () => playerLevel >= accessory.unlockLevel
-                        ? app.setCompanionAccessory(accessory)
+                        ? persistPreference(context, 'accessory', () => app.setCompanionAccessory(accessory))
                         : _locked(context, accessory.unlockLevel),
                   ),
                 ),

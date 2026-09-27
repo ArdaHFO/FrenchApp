@@ -81,8 +81,8 @@ class LexicalCache {
       await _db.delete('lexical_entries', where: 'cache_key = ?', whereArgs: [key.cacheKey]);
       return;
     }
-    if ((outcome.status != LexicalStatus.found &&
-            outcome.status != LexicalStatus.notFound)) {
+    if (outcome.status != LexicalStatus.found &&
+            outcome.status != LexicalStatus.notFound) {
       return;
     }
     final fresh = now.add(outcome.maxAge);

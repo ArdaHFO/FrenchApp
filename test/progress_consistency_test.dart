@@ -28,6 +28,8 @@ import 'package:french_app/domain/level.dart';
 import 'package:french_app/domain/srs/box_scheduler.dart';
 import 'package:french_app/domain/srs/srs_card.dart';
 import 'package:french_app/features/progress/backup_screen.dart';
+import 'package:french_app/features/progress/progress_screen.dart';
+import 'package:french_app/features/onboarding/level_select_screen.dart';
 import 'package:french_app/features/quiz/quiz_screen.dart';
 import 'package:french_app/features/verbs/verb_screens.dart';
 import 'package:french_app/features/vocab/swipe_session_screen.dart';
@@ -396,7 +398,7 @@ void main() {
       expect(source, isNot(contains('.save(')));
       expect(source, isNot(contains('copyWith(starred:')));
       expect(source, matches(RegExp(
-          r'if \(!allowProgress\(context, app, generation\)\) return;\s*await app.cards.star\(matchedWord.id\);\s*app.notifyProgressChanged\(\);')));
+          r'if \(saving \|\| !allowProgress\(context, app, generation\)\) return;[\s\S]*?await app.cards.star\(matchedWord.id\);\s*app.notifyProgressChanged\(\);')));
     }
   });
 
@@ -794,6 +796,58 @@ void main() {
       expect(app.rewardSerial, 0);
       expect(tester.takeException(), isNull);
     });
+  testWidgets('BUG-004 level and goal confirmation is atomic and reports failure', (tester) async {
+    final app = (await tester.runAsync(boot))!;
+    await show(tester, app, const LevelSelectScreen(isSettingsMode: true));
+    await tester.ensureVisible(find.text('A2')); await tester.tap(find.text('A2'));
+    await tester.scrollUntilVisible(find.text('40 kart'), 250, scrollable: find.byType(Scrollable).first);
+    await tester.tap(find.text('40 kart')); await tester.pump();
+    final before = await tester.runAsync(() => app.db.progress.query('app_settings', orderBy: 'key'));
+    await tester.runAsync(() => app.db.progress.execute(
+        "CREATE TRIGGER sweep_settings BEFORE INSERT ON app_settings WHEN NEW.key = 'daily_goal' BEGIN SELECT RAISE(ABORT,'BUG004'); END"));
+    await tester.tap(find.text('Kaydet'));
+    var drained = false;
+    unawaited(app.progress.run(() async {}).then((_) => drained = true));
+    await driveUntil(tester, () => drained); await tester.pump();
+    expect(await tester.runAsync(() => app.db.progress.query('app_settings', orderBy: 'key')), before);
+    expect(app.level, CefrLevel.a1);
+    expect(app.dailyGoal, 20);
+    expect(tester.takeException(), isNull);
+    expect(find.text('Sonuç kaydedilemedi. Tekrar deneyin.'), findsOneWidget);
+    await tester.runAsync(() => app.db.progress.execute('DROP TRIGGER sweep_settings'));
+    await tester.tap(find.text('Kaydet')); await tester.tap(find.text('Kaydet'));
+    drained = false;
+    unawaited(app.progress.run(() async {}).then((_) => drained = true));
+    await driveUntil(tester, () => drained); await tester.pumpAndSettle();
+    expect(app.level, CefrLevel.a2);
+    expect(app.dailyGoal, 40);
+    expect(app.settings.get('level'), 'A2');
+    expect(app.settings.getInt('daily_goal'), 40);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('BUG-004 preference failure is surfaced and can retry', (tester) async {
+    final app = (await tester.runAsync(boot))!;
+    await show(tester, app, const ProgressScreen());
+    await tester.scrollUntilVisible(find.text('Animasyon hızı'), 250, scrollable: find.byType(Scrollable).first);
+    final speed = app.speed;
+    await tester.runAsync(() => app.db.progress.execute(
+        "CREATE TRIGGER sweep_settings BEFORE INSERT ON app_settings BEGIN SELECT RAISE(ABORT,'BUG004'); END"));
+    await tester.tap(find.text('Animasyon hızı'));
+    var drained = false;
+    unawaited(app.progress.run(() async {}).then((_) => drained = true));
+    await driveUntil(tester, () => drained); await tester.pump();
+    expect(app.speed, speed);
+    expect(tester.takeException(), isNull);
+    expect(find.text('Sonuç kaydedilemedi. Tekrar deneyin.'), findsOneWidget);
+    await tester.runAsync(() => app.db.progress.execute('DROP TRIGGER sweep_settings'));
+    await tester.tap(find.text('Animasyon hızı')); await tester.tap(find.text('Animasyon hızı'));
+    drained = false;
+    unawaited(app.progress.run(() async {}).then((_) => drained = true));
+    await driveUntil(tester, () => drained); await tester.pump();
+    expect(app.speed, AppState.speeds[(AppState.speeds.indexOf(speed) + 1) % AppState.speeds.length]);
+  });
+
   testWidgets('BUG-005 empty song quiz is an empty state without reward', (tester) async {
     final app = (await tester.runAsync(boot))!;
     const song = LearningSong(id: 'empty', title: 'Empty', artist: '', level: CefrLevel.a1,
